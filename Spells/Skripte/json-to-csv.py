@@ -38,7 +38,7 @@ def prepare_data(data):
 
 def into_csv(data):
     '''converts data into csv'''
-    with open("../Data/Spells.csv", "w") as csvfile:
+    with open("../Data/spells.csv", "w") as csvfile:
 
         writer = csv.writer(csvfile)
 

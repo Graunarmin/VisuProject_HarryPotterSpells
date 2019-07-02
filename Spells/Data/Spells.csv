@@ -1,226 +1,136 @@
-Spell,Effect,Type,Category,Dangerousness
-Aberto,Opens objects,Charm, , 
-Accio,Summons an object,Charm, , 
-Age Line,Hides things from younger people,Enchanment, , 
-Aguamenti,Shoots water from wand.,Charm, , 
-Alarte Ascendare,Shoots things high in the air,Spell, , 
-Alohomora,Opens locked objects,Charm, , 
-Anapneo,Clears the target’s airway.,Spell, , 
-Anteoculatia,Turns head hair into antlers,Hex, , 
-Anti-Cheating,Prevents Cheating on Exams,Spell, , 
-Aparecium,Reveals invisible ink,Spell, , 
-Apparate,Teleportation Spell,Spell, , 
-Appare Vestigium,Shows traces of recently used spells in the area,Spell, , 
-Arania Exumai,Blasts away Spiders,Spell, , 
-Aqua Eructo,Shoots water from wand,Spell, , 
-Arresto Momentum,Slows down objects,Spell, , 
-Ascendio,Moves an object upward,Spell, , 
-Avada Kedavra,Murders opponent – Unforgivable,Curse, , 
-Avenseguim,Tracking Spell,Curse, , 
-Avifors,Turns small objects into birds,Charm, , 
-Avis,Launches birds from your wand,Spell, , 
-—,—,—, , 
-Babbling Curse,Makes a person babble,Curse, , 
-Baubillious,Damages Opponent or Creatures,Spell, , 
-Bluebell Flames,Shoots blue flames at opponent,Spell, , 
-Bombarda,Causes explosions,Spell, , 
-Bombarda Maxima,Causes Large Explosions,Spell, , 
-Bubble Head,Puts a persons head in a protective air bubble,Charm, , 
-—,—,—, , 
-Calvario,Causes Hair Loss,Spell, , 
-Cantis,Forces a person to sing,Spell, , 
-Carpe Retractum,Shoots a rope from wand to snag things,Spell, , 
-Cascading,Damages opponents,Jinx, , 
-Caterwauling,Detects enemies and emits a scream,Charm, , 
-Cave Inimicum,Detects enemies and emits an alarm,Charm, , 
-Cheering,Makes a person happy and giddy,Charm, , 
-Cistem Aperio,Opens things,Spell, , 
-Colloportus,Locks Doors,Spell, , 
-Colloshoo,Makes a person’s shoes stick to the ground,Spell, , 
-Colovaria,Makes an object change color,Charm, , 
-Confringo,Explode Flames on target,Curse, , 
-Confundus,Used to confuse opponent,Charm, , 
-Conjunctivitis,Damages opponents eyesight,Curse, , 
-Cornflake Skin,Give a person cereal skin,Curse, , 
-Crucio,Tortures opponent – Unforgivable,Curse, , 
-Cushioning,Helps cushion a fall,Charm, , 
-—,—,—, , 
-Defodio,Dig out materials,Spell, , 
-Deletrius,Counters “Prior Incatato”,Spell, , 
-Densaugeo,Enlarges Teeth,Spell, , 
-Deprimo,Wind Damaging Spell,Spell, , 
-Depulso,Drives an object away,Charm, , 
-Descendo,Moves an object downwards,Spell, , 
-Diffindo,Splits seams,Spell, , 
-Diminuendo,Shrinks the target,Spell, , 
-Dissendium,Opens passageways,Spell, , 
-Disillusionment,Makes the target blend in to the surroundings,Charm, , 
-Duro,Makes Objects Hard,Spell, , 
-Draconifors,Turns target into a dragon,Spell, , 
-Drought,Dries up puddles,Charm, , 
-Ducklifors,Turns things into ducks,Spell, , 
-—,—,—, , 
-Ears to Kumquats,Give a person kumquat ears,Spell, , 
-Ear Shriveling,Cause a person’s ears to shrivel,Curse, , 
-Ebublio,Puts an object in a large bubble,Jinx, , 
-Engorgio,Enlarges and item,Charm, , 
-Engorgio Skullus,Engorges a skull,Hex, , 
-Ennervate,Counters Stupefy,Spell, , 
-Entomorphis,Makes target an insect,Hex, , 
-Entrail-Expelling,Expel entrails from a body,Curse, , 
-Episkey,Heals minor injuries,Spell, , 
-Epoximise,Binds objects together,Spell, , 
-Erecto,Builds things,Spell, , 
-Evanesce,Makes things disappear,Spell, , 
-Evanesco,Makes things vanish,Spell, , 
-Everte Statum,Throws a victim backwards,Spell, , 
-Expecto Patronum,Creates a Patronus – A Defensive Guardian,Charm, , 
-Expelliarmus,Disarms your opponent,Charm, , 
-Expulso,Makes Objects Explode,Spell, , 
-Extinguishing,Puts out fires,Spell, , 
-—,—,—, , 
-Ferula,Creates bandages,Spell, , 
-Fianto Duri,Defensive Charm,Charm, , 
-Fidelius,Hides a secret within someone,Charm, , 
-Fiendfyre,"Difficult to control, large fire curse – Dark Magic",Curse, , 
-Finestra,Turns windows to dust,Spell, , 
-Finite,Finishes spells in the casters area,Spell, , 
-Finite Incantatum,Stops any current spells,Spell, , 
-Flagrante,Multiplies and burns objects upon touch,Curse, , 
-Flagrate,Allows user to write on objects,Spell, , 
-Flame Freezing,Makes flames cool,Charm, , 
-Flipendo,Knocks an object backwards,Jinx, , 
-Flipendo Duo,More Powerful Jinx than Flipendo,Jinx, , 
-Flipendo Tria,A tornado-like jinx,Jinx, , 
-Flying,Makes objects fly,Charm, , 
-Fumos,A defensive cloud of smoke,Spell, , 
-Furnunculus,Produces boils on opponent,Curse, , 
-—,—,—, , 
-Geminio,Duplicates an Object,Spell, , 
-Glacius,Freezing Spell,Spell, , 
-Glacius Tria,More power than Glacius,Spell, , 
-Glisseo,Turns stairs into ramps,Spell, , 
-Gripping,Makes it easier to hold things,Charm, , 
-—,—,—, , 
-Harmonia Nectere Passus,Mends broken things,Spell, , 
-Herbifors,Makes a person grow flowers,Spell, , 
-Herbivicus,Makes plants grow faster,Charm, , 
-Homenum Revelio,Reveals humans nearby,Spell, , 
-Homonculous,Lets a person track others movements on a map,Charm, , 
-Homorphus,Lockhart’s Werewolf “cure”,Charm, , 
-Horcrux,Allows a wizard to put his soul into an object,Curse, , 
-—,—,—, , 
-Illegibilus,Makes text unreadable,Spell, , 
-Immobulus,Renders target immobile,Charm, , 
-Impedimenta,Slows an advancing object,Charm, , 
-Imperio,Controls a person – Unforgivable,Curse, , 
-Impervius,Makes an object repel water,Charm, , 
-Incarcerous,Ties someone up,Spell, , 
-Incendio,Starts a fire,Spell, , 
-Incendio Duo,Stronger version of Incendio,Spell, , 
-Incendio Tria,Even stronger thanIncendio Duo,Spell, , 
-Inflatus,Inflates objects,Spell, , 
-Informous,Gives caster information on beasts,Spell, , 
-—,—,—, , 
-Lacarnum Inflamarae,Shoots a fireball from caster’s wand,Spell, , 
-Langlock,Glues opponent’s tongue to roof of mouth,Spell, , 
-Lapifors,Turns target into a rabbit,Spell, , 
-Legilimens,Allows the caster to read minds of victims,Spell, , 
-Levicorpus,Hangs victim upside down by feet,Spell, , 
-Liberacorpus,Counterspell,Spell, , 
-Locomotor Mortis,Locks opponents legs,Curse, , 
-Lumos,Creates light at wand tip,Spell, , 
-Lumos Duo,Stronger version of Lumos,Spell, , 
-Lumos Maxima,Creates a Ball of Light that can brighten a room for a long period time,Spell, , 
-Lumos Solem,Creates a strong beam of light from the wand,Spell, , 
-—,—,—, , 
-Maledictus,"Human can shapeshift into a snake, but one day won’t be able to shift back into human form",Curse, , 
-Magicus Extremos,Makes spells stronger,Spell, , 
-Melofors,Gives someone a pumpkin head,Jinx, , 
-Meteolojinx Recanto,Causes weather effect spells to stop,Spell, , 
-Mimblewimble,Tongue Ties it’s victim,Curse, , 
-Mobiliarbus,Moves objects with wand,Charm, , 
-Mobilicorpus,Moves unconscious bodies,Spell, , 
-Morsmorde,Conjures the Dark Mark,Spell, , 
-Muffliato,Prevents nearby people from listening to conversations,Spell, , 
-Multicorfors,Changes colors of objects,Spell, , 
-—,—,—, , 
-Nebulus,Creates dense fog for many blocks,Spell, , 
-Nox,Counter to Lumos – turns off lights,Spell, , 
-—,—,—, , 
-Oculus Reparo,Repairs Eyeglasses,Spell, , 
-Obliteration,Removes things like footprints,Charm, , 
-Obliviate,Erases memories,Charm, , 
-Obscuro,Blindfolds the victim,Spell, , 
-Oppugno,Makes conjured items attack,Spell, , 
-Orbis,Sticks the target into the ground,Jinx, , 
-Orchideous,Conjures a bunch of flowers,Spell, , 
-—,—,—, , 
-Pack,Packs a trunk (suitcase),Spell, , 
-Partis Temporus,causes a gap in charmed barriers,Spell, , 
-Periculum,Makes fireworks from the wand tip,Spell, , 
-Permanent Sticking,Causes items to permanently stick to things,Charm, , 
-Peskipiksi Pesternomi,Removes Pixies (maybe),Spell, , 
-Petrificus Totalus,Body – Bind,Spell, , 
-Piertotum Locomotor,Animates statues and armor suits,Spell, , 
-Point Me,Wand acts like a compass,Charm, , 
-Portus,Makes an object a Portkey for traveling,Charm, , 
-Priori Incantatem,"Result when brother wands duel, the loser’s wand shows all spells it recently cast",Spell, , 
-Prior Incantato,Reveals a wands last spell / cast,Spell, , 
-Protego,Cause spells to reflect back to the sender.,Charm, , 
-Protego Diabolica,Creates “Black Fire” – Protective Fire,Charm, , 
-Protego Horribilis,Protects one from Dark Magic,Charm, , 
-Protego Maxima,More powerful version of Protego Horribilis,Charm, , 
-Protego Totalum,Area Protection Spell,Charm, , 
-—,—,—, , 
-Quietus,Counter spell for Sonorus,Spell, , 
-—,—,—, , 
-Redactum Skullus,Shrinks Heads,Hex, , 
-Reducio,Returns items to original size. Counters Engorgio,Spell, , 
-Reducto,Blasts solid objects aside,Spell, , 
-Relashio,Releases user from binding,Spell, , 
-Rennervate,Cures unconsciousness,Spell, , 
-Reparo,Repairs Things,Spell, , 
-Repello Muggletum,Keeps Muggles away,Charm, , 
-Repello Inimicum,Keeps evil beings away. Wide Area Protection,Charm, , 
-Revelio,Reveals Hidden objects,Spell, , 
-Rictusempra,Tickles opponent,Charm, , 
-Riddikulus,Use this spell and laugh to defeat a boggart,Spell, , 
-—,—,—, , 
-Salvio Hexia,Protection against hexes,Spell, , 
-Scourgify,A Cleaning Charm,Charm, , 
-Scurge,Destroys the remains of ghosts,Charm, , 
-Sectumsempra,"Causes wounds, as if slashed by a sword",Spell, , 
-Serpensortia,Produces Snake,Spell, , 
-Silencio,Silences victim,Spell, , 
-Slugulus Eructo,Makes victim vomit up slugs,Charm, , 
-Sonorus,Amplifies voice,Spell, , 
-Specialis Revelio,Reveals Hidden secrets or magical properties,Spell, , 
-Spongify,Softens things,Charm, , 
-Steleus,Makes victim sneeze for a period,Hex, , 
-Stinging Jinx,Makes victim feel stinging and get a rash,Jinx, , 
-Stupefy,Knocks out opponent,Spell, , 
-Surgito,Removes a Love Enchantment from someone,Spell, , 
-Switching Spell,Switches objects,Spell, , 
-—,—,—, , 
-Tarantallegra,Forces opponent to dance,Spell, , 
-Tentaclifors,Gives victim a tentacle head,Jinx, , 
-Tergeo,Cleans up messes,Spell, , 
-Titillando,Tickles target and weakens,Hex, , 
-Transmogrify,Deforms the body of the target,Spell, , 
-—,—,—, , 
-Unbreakable Vow,"If you break the vow you make, you die",Spell, , 
-—,—,—, , 
-Ventus,Shoots a gust of hurricane force wind from wand,Spell, , 
-Ventus Duo,Stronger than Ventus,Spell, , 
-Vera Verto,turns animals into water,Spell, , 
-Verdillious,Causes wand damage foe,Spell, , 
-Vermillious,Causes wand damage foe,Charm, , 
-Verdimillious,Reveals objects and damages,Spell, , 
-Verdimillious Duo,More powerful thanVerdimillious,Spell, , 
-Vipera Evanesca,Makes Snakes Vanish,Spell, , 
-—,—,—, , 
-Vulnera Sanentur,Heals victims,Spell, , 
-—,—,—, , 
-Waddiwasi,Unsticks an object,Spell, , 
-Wingardium Leviosa,Makes on object fly,Charm, , 
+Short;Spell;Effect;Type;Category;Dangerousness;Anmerkung
+Accio;Accio;Summons an object;Charm; ;; 
+Aguamenti;Aguamenti;Shoots water from wand.;Charm; ;; 
+Alarte;Alarte Ascendare;Shoots things high in the air;Spell; ;; 
+Alohomora;Alohomora;Opens locked objects;Charm; ;; 
+Anapneo;Anapneo;Clears the target’s airway.;Spell; ;; 
+Aparecium;Aparecium;Reveals invisible ink;Spell; ;; 
+Apparate;Apparate;Teleportation Spell;Spell; ;; 
+Appare;Appare Vestigium;Shows traces of recently used spells in the area;Spell; ;; 
+Arania;Arania Exumai;Blasts away Spiders;Spell; ;; 
+Aqua Eructo;Aqua Eructo;Shoots water from wand;Spell; ;; 
+Arresto;Arresto Momentum;Slows down objects;Spell; ;; 
+Ascendio;Ascendio;Moves an object upward;Spell; ;; 
+Avada;Avada Kedavra;Murders opponent – Unforgivable;Curse; ;; 
+Avenseguim;Avenseguim;Tracking Spell;Curse; ;; 
+Avis;Avis;Launches birds from your wand;Spell; ;; 
+Baubillious;Baubillious;Damages Opponent or Creatures;Spell; ;; 
+Bombarda;Bombarda;Causes explosions;Spell; ;; und Bombarda Maxima (für große Explosionen)
+Calvario;Calvario;Causes Hair Loss;Spell; ;; 
+Cantis;Cantis;Forces a person to sing;Spell; ;; 
+Carpe;Carpe Retractum;Shoots a rope from wand to snag things;Spell; ;; 
+Cascading;Cascading;Damages opponents;Jinx; ;; 
+Caterwauling;Caterwauling;Detects enemies and emits a scream;Charm; ;; 
+Cave;Cave Inimicum;Detects enemies and emits an alarm;Charm; ;; 
+Cistem;Cistem Aperio;Opens things;Spell; ;; 
+Colloportus;Colloportus;Locks Doors;Spell; ;; 
+Colovaria;Colovaria;Makes an object change color;Charm; ;; 
+Confringo;Confringo;Explode Flames on target;Curse; ;; 
+Confundus;Confundus;Used to confuse opponent;Charm; ;; 
+Conjunctivitis;Conjunctivitis;Damages opponents eyesight;Curse; ;; 
+Crucio;Crucio;Tortures opponent – Unforgivable;Curse; ;; 
+Deletrius;Deletrius;Counters “Prior Incatato”;Spell; ;; 
+Densaugeo;Densaugeo;Enlarges Teeth;Spell; ;; 
+Deprimo;Deprimo;Wind Damaging Spell;Spell; ;; 
+Depulso;Depulso;Drives an object away;Charm; ;; 
+Descendo;Descendo;Moves an object downwards;Spell; ;; 
+Diffindo;Diffindo;Splits seams;Spell; ;; 
+Diminuendo;Diminuendo;Shrinks the target;Spell; ;; 
+Dissendium;Dissendium;Opens passageways;Spell; ;; 
+Disillusionment;Disillusionment;Makes the target blend in to the surroundings;Charm; ;; 
+Duro;Duro;Makes Objects Hard;Spell; ;; 
+Engorgio;Engorgio;Enlarges and item;Charm; ;; 
+Ennervate;Ennervate;Counters Stupefy;Spell; ;; 
+Entomorphis;Entomorphis;Makes target an insect;Hex; ;; 
+Episkey;Episkey;Heals minor injuries;Spell; ;; 
+Epoximise;Epoximise;Binds objects together;Spell; ;; 
+Erecto;Erecto;Builds things;Spell; ;; 
+Evanesco;Evanesco;Makes things vanish;Spell; ;; 
+Everte;Everte Statum;Throws a victim backwards;Spell; ;; 
+Expecto;Expecto Patronum;Creates a Patronus – A Defensive Guardian;Charm; ;; 
+Expelliarmus;Expelliarmus;Disarms your opponent;Charm; ;; 
+Expulso;Expulso;Makes Objects Explode;Spell; ;; 
+Ferula;Ferula;Creates bandages;Spell; ;; 
+Fianto;Fianto Duri;Defensive Charm;Charm; ;; 
+Fidelius;Fidelius;Hides a secret within someone;Charm; ;; 
+Fiendfyre;Fiendfyre;Difficult to control, large fire curse – Dark Magic;Curse; ;; 
+Finestra;Finestra;Turns windows to dust;Spell; ;; 
+Finite;Finite;Finishes spells in the casters area;Spell; ;; and Finite Incantatum (Stops any current spells)
+Flagrante;Flagrante;Multiplies and burns objects upon touch;Curse; ;; 
+Flagrate;Flagrate;Allows user to write on objects;Spell; ;; 
+Flipendo;Flipendo;Knocks an object backwards;Jinx; ;; 
+Fumos;Fumos;A defensive cloud of smoke;Spell; ;; 
+Furnunculus;Furnunculus;Produces boils on opponent;Curse; ;; 
+Geminio;Geminio;Duplicates an Object;Spell; ;; 
+Glacius;Glacius;Freezing Spell;Spell; ;; 
+Glisseo;Glisseo;Turns stairs into ramps;Spell; ;; 
+Harmonia;Harmonia Nectere Passus;Mends broken things;Spell; ;; 
+Herbifors;Herbifors;Makes a person grow flowers;Spell; ;; 
+Herbivicus;Herbivicus;Makes plants grow faster;Charm; ;; 
+Homenum;Homenum Revelio;Reveals humans nearby;Spell; ;; 
+Homonculous;Homonculous;Lets a person track others movements on a map;Charm; ;; 
+Homorphus;Homorphus;Lockhart’s Werewolf “cure”;Charm; ;; 
+Illegibilus;Illegibilus;Makes text unreadable;Spell; ;; 
+Immobulus;Immobulus;Renders target immobile;Charm; ;; 
+Impedimenta;Impedimenta;Slows an advancing object;Charm; ;; 
+Imperio;Imperio;Controls a person – Unforgivable;Curse; ;; 
+Impervius;Impervius;Makes an object repel water;Charm; ;; 
+Incarcerous;Incarcerous;Ties someone up;Spell; ;; 
+Incendio;Incendio;Starts a fire;Spell; ;; 
+Inflatus;Inflatus;Inflates objects;Spell; ;; 
+Lacarnum;Lacarnum Inflamarae;Shoots a fireball from caster’s wand;Spell; ;; 
+Langlock;Langlock;Glues opponent’s tongue to roof of mouth;Spell; ;; 
+Legilimens;Legilimens;Allows the caster to read minds of victims;Spell; ;; 
+Levicorpus;Levicorpus;Hangs victim upside down by feet;Spell; ;; 
+Liberacorpus;Liberacorpus;Counterspell to Liberacorpus;Spell; ;; 
+Locomotor;Locomotor Mortis;Locks opponents legs;Curse; ;; 
+Lumos;Lumos;Creates light at wand tip;Spell; ;;and Lumos Maxima (Creates a Ball of Light that can brighten a room for a long period time)
+Mobiliarbus;Mobiliarbus;Moves objects with wand;Charm; ;; 
+Mobilicorpus;Mobilicorpus;Moves unconscious bodies;Spell; ;; 
+Morsmorde;Morsmorde;Conjures the Dark Mark;Spell; ;; 
+Muffliato;Muffliato;Prevents nearby people from listening to conversations;Spell; ;; 
+Nebulus;Nebulus;Creates dense fog for many blocks;Spell; ;; 
+Nox;Nox;Counter to Lumos – turns off lights;Spell; ;; 
+Obliviate;Obliviate;Erases memories;Charm; ;; 
+Obscuro;Obscuro;Blindfolds the victim;Spell; ;; 
+Oppugno;Oppugno;Makes conjured items attack;Spell; ;; 
+Orbis;Orbis;Sticks the target into the ground;Jinx; ;; 
+Orchideous;Orchideous;Conjures a bunch of flowers;Spell; ;; 
+Partis;Partis Temporus;causes a gap in charmed barriers;Spell; ;; 
+Periculum;Periculum;Makes fireworks from the wand tip;Spell; ;; 
+Peskipiksi;Peskipiksi Pesternomi;Removes Pixies (maybe);Spell; ;; 
+Petrificus;Petrificus Totalus;Body – Bind;Spell; ;; 
+Piertotum;Piertotum Locomotor;Animates statues and armor suits;Spell; ;; 
+Portus;Portus;Makes an object a Portkey for traveling;Charm; ;; 
+Priori;Priori Incantatem;Result when brother wands duel, the loser’s wand shows all spells it recently cast;Spell; ;; 
+Prior;Prior Incantato;Reveals a wands last spell / cast;Spell; ;; 
+Protego;Protego;Cause spells to reflect back to the sender.;Charm; ;; and Protego Maxima (Protects one from Dark Magic) and Protego Totalem (Area Protection Spell)
+Reducio;Reducio;Returns items to original size. Counters Engorgio;Spell; ;; 
+Reducto;Reducto;Blasts solid objects aside;Spell; ;; 
+Relashio;Relashio;Releases user from binding;Spell; ;; 
+Rennervate;Rennervate;Cures unconsciousness;Spell; ;; 
+Reparo;Reparo;Repairs Things;Spell; ;; 
+Repello;Repello Muggletum;Keeps Muggles away;Charm; ;; 
+Revelio;Revelio;Reveals Hidden objects;Spell; ;; 
+Rictusempra;Rictusempra;Tickles opponent;Charm; ;; 
+Riddikulus;Riddikulus;Use this spell and laugh to defeat a boggart;Spell; ;; 
+Salvio;Salvio Hexia;Protection against hexes;Spell; ;; 
+Scourgify;Scourgify;A Cleaning Charm;Charm; ;; 
+Scurge;Scurge;Destroys the remains of ghosts;Charm; ;; 
+Sectumsempra;Sectumsempra;Causes wounds, as if slashed by a sword;Spell; ;; 
+Serpensortia;Serpensortia;Produces Snake;Spell; ;; 
+Silencio;Silencio;Silences victim;Spell; ;; 
+Slugulus;Slugulus Eructo;Makes victim vomit up slugs;Charm; ;; 
+Sonorus;Sonorus;Amplifies voice;Spell; ;; 
+Specialis;Specialis Revelio;Reveals Hidden secrets or magical properties;Spell; ;; 
+Steleus;Steleus;Makes victim sneeze for a period;Hex; ;; 
+Stupefy;Stupefy;Knocks out opponent;Spell; ;; 
+Surgito;Surgito;Removes a Love Enchantment from someone;Spell; ;; 
+Tarantallegra;Tarantallegra;Forces opponent to dance;Spell; ;; 
+Tergeo;Tergeo;Cleans up messes;Spell; ;; 
+Titillando;Titillando;Tickles target and weakens;Hex; ;; 
+Transmogrify;Transmogrify;Deforms the body of the target;Spell; ;; 
+Verdimillious;Verdimillious;Reveals objects and damages;Spell; ;; 
+Vulnera;Vulnera Sanentur;Heals victims;Spell; ;; 
+Waddiwasi;Waddiwasi;Unsticks an object;Spell; ;; 
+Wingardium;Wingardium Leviosa;Makes on object fly;Charm; ;; 
