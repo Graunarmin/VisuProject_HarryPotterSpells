@@ -12,26 +12,42 @@ def load_spells_from_books():
     No need to convert them to lower case btw, they always start with an upper case letter
     in the books"""
     
-    spells = []
+    spells = {}
+    spell_data = {}
     books = ['HP_01.txt', 'HP_02.txt', 'HP_03.txt', 'HP_04.txt', 'HP_05.txt', 'HP_06.txt', 'HP_07.txt']
+    book_data = {}
 
     #load all spells (just pre-filtered by Hand and added the one-word version)
     spell_json = load_all_spells()
     all_spells = pickle.load(open("../Pickles/all_spells.p", "rb"))
 
     #filter the spells so the list only contains those that appear in the books
-    # for book in books:
-    #     book_spells = spells_in_this_book(book, all_spells)
-    #     for spell in book_spells:
-    #         if spell not in spells:
-    #             spells.append(spell)
+    for book in books:
+        data = spells_in_this_book(book, all_spells)
+        book_spells = data[0]
+        spellcounter = data[1]
+        for spell in book_spells:
+            #check wheather spell is already in list
+            if spell not in spells:
+                spells[spell] = {}
+                spells[spell]["overall"] = 0
+            
+            # create spell data - Data for each spell, how often it appears in every book and in all books together
+            spells[spell][book.replace(".txt", "")] = book_spells[spell] #Häufigkeit des Vorkommens dieses Spruches in diesem Buch
+            spells[spell]["overall"] += book_spells[spell] # insgesamte Häufigkeit hinzufügen
 
-    # pickle.dump(spells, open("../Pickles/spells_in_books.p", "wb"))
+        # create book data - For each book which spells it contains (and how often) and how many spells alltogether
+        book_spells["overall"] = spellcounter
+        book_data[book.replace(".txt", "")] = book_spells
+
+    pickle.dump(spells, open("../Pickles/spells_in_books.p", "wb"))
     # print(len(spells))
     # print(spells)
+    # print(book_data)
+
     
-    spells = pickle.load(open("../Pickles/spells_in_books.p", "rb"))
-    filter_spell_json(spells, spell_json)
+    #spells = pickle.load(open("../Pickles/spells_in_books.p", "rb"))
+    build_spell_json(spells, spell_json)
 
 def load_all_spells():
     '''load all spells from the website (pre filtered by hand from us) and dump them as pickle'''
@@ -53,27 +69,41 @@ def load_all_spells():
 def  spells_in_this_book(book, spell_list):
     """filter spell-list so only those spells that are in the books remain"""
 
-    spells = []
+    spells = {}
     path = "../../Books/" + book
     f = open(path, 'r')
     raw = f.read()
     tokens = word_tokenize(raw)
+    spellcounter = 0
 
-    for spell in spell_list:
-        if (spell not in spells) and (spell in tokens):
-            spells.append(spell)
+    for word in tokens:
+        if word in spell_list:
+            spell = word
+            if spell not in spells:
+                spells[spell] = 0
+        
+            spells[spell] += 1
+            spellcounter += 1
     
-    return spells
+    return spells, spellcounter
 
-def filter_spell_json(spells, spell_json):
-
+def build_spell_json(spells, spell_json):
+    
     new_json = []
-    for s in spell_json:
-        if s['Short'] in spells:
-            new_json.append(s)
-
-    # print(len(new_json))
-    # print(new_json)  
+    for line in spell_json:
+        if line['Short'] in spells:
+            spell = line['Short']
+            new_line = {"Spell":0, "Short":0, "Effect": 0, "Type": 0, "Category":0, "Danger":0, "Unforgivable": 0,
+                        "HP_01":0, "HP_02":0 ,"HP_03":0, "HP_04":0, "HP_05":0, "HP_06":0, "HP_07":0, 
+                        "overall": 0, "Anmerkung":0}
+            for key in new_line:
+                if key in line:
+                    new_line[key] = line[key]
+                elif key in spells[spell]:
+                    new_line[key] = spells[spell][key]
+            
+        new_json.append(new_line)    
+    #print(new_json)      
 
     pickle.dump(new_json, open("../Pickles/spells.p", "wb"))
 
@@ -83,7 +113,8 @@ def filter_spell_json(spells, spell_json):
     tmp = pandas.read_json('../Data/spells.json')
     spell_csv = tmp.to_csv()
 
-    tmp.to_csv("../Data/spells_01.csv", encoding='utf-8', index=False)
+    tmp.to_csv("../Data/spells_01.csv", encoding='utf-8', index=False)  
+
       
 
 def main():

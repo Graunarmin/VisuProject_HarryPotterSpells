@@ -1,83 +1,136 @@
-Anmerkung,Category,Dangerousness,Effect,Short,Spell,Type
- , ,,Summons an object,Accio,Accio,Charm
- , ,,Shoots water from wand.,Aguamenti,Aguamenti,Charm
- , ,,Opens locked objects,Alohomora,Alohomora,Charm
- , ,,Clears the target’s airway.,Anapneo,Anapneo,Spell
- , ,,Reveals invisible ink,Aparecium,Aparecium,Spell
- , ,,Teleportation Spell,Apparate,Apparate,Spell
- , ,,Murders opponent – Unforgivable,Avada,Avada Kedavra,Curse
- , ,,Launches birds from your wand,Avis,Avis,Spell
- , ,,Detects enemies and emits a scream,Caterwauling,Caterwauling,Charm
- , ,,Detects enemies and emits an alarm,Cave,Cave Inimicum,Charm
- , ,,Explode Flames on target,Confringo,Confringo,Curse
- , ,,Used to confuse opponent,Confundus,Confundus,Charm
- , ,,Tortures opponent – Unforgivable,Crucio,Crucio,Curse
- , ,,Counters “Prior Incatato”,Deletrius,Deletrius,Spell
- , ,,Enlarges Teeth,Densaugeo,Densaugeo,Spell
- , ,,Wind Damaging Spell,Deprimo,Deprimo,Spell
- , ,,Moves an object downwards,Descendo,Descendo,Spell
- , ,,Splits seams,Diffindo,Diffindo,Spell
- , ,,Opens passageways,Dissendium,Dissendium,Spell
- , ,,Makes the target blend in to the surroundings,Disillusionment,Disillusionment,Charm
- , ,,Makes Objects Hard,Duro,Duro,Spell
- , ,,Enlarges and item,Engorgio,Engorgio,Charm
- , ,,Counters Stupefy,Ennervate,Ennervate,Spell
- , ,,Heals minor injuries,Episkey,Episkey,Spell
- , ,,Builds things,Erecto,Erecto,Spell
- , ,,Creates a Patronus – A Defensive Guardian,Expecto,Expecto Patronum,Charm
- , ,,Disarms your opponent,Expelliarmus,Expelliarmus,Charm
- , ,,Makes Objects Explode,Expulso,Expulso,Spell
- , ,,Creates bandages,Ferula,Ferula,Spell
- , ,,Hides a secret within someone,Fidelius,Fidelius,Charm
- , ,,"Difficult to control, large fire curse – Dark Magic",Fiendfyre,Fiendfyre,Curse
- and Finite Incantatum (Stops any current spells), ,,Finishes spells in the casters area,Finite,Finite,Spell
- , ,,Multiplies and burns objects upon touch,Flagrante,Flagrante,Curse
- , ,,Produces boils on opponent,Furnunculus,Furnunculus,Curse
- , ,,Duplicates an Object,Geminio,Geminio,Spell
- , ,,Turns stairs into ramps,Glisseo,Glisseo,Spell
- , ,,Reveals humans nearby,Homenum,Homenum Revelio,Spell
- , ,,Lockhart’s Werewolf “cure”,Homorphus,Homorphus,Charm
- , ,,Slows an advancing object,Impedimenta,Impedimenta,Charm
- , ,,Controls a person – Unforgivable,Imperio,Imperio,Curse
- , ,,Makes an object repel water,Impervius,Impervius,Charm
- , ,,Ties someone up,Incarcerous,Incarcerous,Spell
- , ,,Starts a fire,Incendio,Incendio,Spell
- , ,,Glues opponent’s tongue to roof of mouth,Langlock,Langlock,Spell
- , ,,Allows the caster to read minds of victims,Legilimens,Legilimens,Spell
- , ,,Hangs victim upside down by feet,Levicorpus,Levicorpus,Spell
- , ,,Counterspell to Liberacorpus,Liberacorpus,Liberacorpus,Spell
- , ,,Locks opponents legs,Locomotor,Locomotor Mortis,Curse
-and Lumos Maxima (Creates a Ball of Light that can brighten a room for a long period time), ,,Creates light at wand tip,Lumos,Lumos,Spell
- , ,,Moves objects with wand,Mobiliarbus,Mobiliarbus,Charm
- , ,,Moves unconscious bodies,Mobilicorpus,Mobilicorpus,Spell
- , ,,Prevents nearby people from listening to conversations,Muffliato,Muffliato,Spell
- , ,,Counter to Lumos – turns off lights,Nox,Nox,Spell
- , ,,Erases memories,Obliviate,Obliviate,Charm
- , ,,Makes conjured items attack,Oppugno,Oppugno,Spell
- , ,,Conjures a bunch of flowers,Orchideous,Orchideous,Spell
- , ,,Removes Pixies (maybe),Peskipiksi,Peskipiksi Pesternomi,Spell
- , ,,Body – Bind,Petrificus,Petrificus Totalus,Spell
- , ,,Animates statues and armor suits,Piertotum,Piertotum Locomotor,Spell
- , ,,"Result when brother wands duel, the loser’s wand shows all spells it recently cast",Priori,Priori Incantatem,Spell
- , ,,Reveals a wands last spell / cast,Prior,Prior Incantato,Spell
- and Protego Maxima (Protects one from Dark Magic) and Protego Totalem (Area Protection Spell), ,,Cause spells to reflect back to the sender.,Protego,Protego,Charm
- , ,,Returns items to original size. Counters Engorgio,Reducio,Reducio,Spell
- , ,,Blasts solid objects aside,Reducto,Reducto,Spell
- , ,,Releases user from binding,Relashio,Relashio,Spell
- , ,,Cures unconsciousness,Rennervate,Rennervate,Spell
- , ,,Repairs Things,Reparo,Reparo,Spell
- , ,,Keeps Muggles away,Repello,Repello Muggletum,Charm
- , ,,Reveals Hidden objects,Revelio,Revelio,Spell
- , ,,Tickles opponent,Rictusempra,Rictusempra,Charm
- , ,,Use this spell and laugh to defeat a boggart,Riddikulus,Riddikulus,Spell
- , ,,Protection against hexes,Salvio,Salvio Hexia,Spell
- , ,,"Causes wounds, as if slashed by a sword",Sectumsempra,Sectumsempra,Spell
- , ,,Produces Snake,Serpensortia,Serpensortia,Spell
- , ,,Silences victim,Silencio,Silencio,Spell
- , ,,Amplifies voice,Sonorus,Sonorus,Spell
- , ,,Reveals Hidden secrets or magical properties,Specialis,Specialis Revelio,Spell
- , ,,Knocks out opponent,Stupefy,Stupefy,Spell
- , ,,Forces opponent to dance,Tarantallegra,Tarantallegra,Spell
- , ,,Cleans up messes,Tergeo,Tergeo,Spell
- , ,,Unsticks an object,Waddiwasi,Waddiwasi,Spell
- , ,,Makes on object fly,Wingardium,Wingardium Leviosa,Charm
+Anmerkung,Category,Danger,Effect,HP_01,HP_02,HP_03,HP_04,HP_05,HP_06,HP_07,Short,Spell,Type,Unforgivable,overall
+ , ,0,Summons an object,0,0,0,8,4,2,12,Accio,Accio,Charm,0,26
+ , ,0,Shoots water from wand.,0,0,0,0,0,6,1,Aguamenti,Aguamenti,Charm,0,7
+ , ,0,Shoots water from wand.,0,0,0,0,0,6,1,Aguamenti,Aguamenti,Charm,0,7
+ , ,0,Opens locked objects,1,0,1,0,0,1,0,Alohomora,Alohomora,Charm,0,3
+ , ,0,Clears the target’s airway.,0,0,0,0,0,1,0,Anapneo,Anapneo,Spell,0,1
+ , ,0,Reveals invisible ink,0,1,0,0,0,0,0,Aparecium,Aparecium,Spell,0,1
+ , ,0,Teleportation Spell,0,0,3,7,6,17,6,Apparate,Apparate,Spell,0,39
+ , ,0,Teleportation Spell,0,0,3,7,6,17,6,Apparate,Apparate,Spell,0,39
+ , ,0,Teleportation Spell,0,0,3,7,6,17,6,Apparate,Apparate,Spell,0,39
+ , ,0,Teleportation Spell,0,0,3,7,6,17,6,Apparate,Apparate,Spell,0,39
+ , ,0,Teleportation Spell,0,0,3,7,6,17,6,Apparate,Apparate,Spell,0,39
+ , ,0,Teleportation Spell,0,0,3,7,6,17,6,Apparate,Apparate,Spell,0,39
+ , ,0,Murders opponent – Unforgivable,0,0,0,9,2,1,8,Avada,Avada Kedavra,Curse,0,20
+ , ,0,Murders opponent – Unforgivable,0,0,0,9,2,1,8,Avada,Avada Kedavra,Curse,0,20
+ , ,0,Launches birds from your wand,0,0,0,1,0,0,0,Avis,Avis,Spell,0,1
+ , ,0,Launches birds from your wand,0,0,0,1,0,0,0,Avis,Avis,Spell,0,1
+ , ,0,Launches birds from your wand,0,0,0,1,0,0,0,Avis,Avis,Spell,0,1
+ , ,0,Launches birds from your wand,0,0,0,1,0,0,0,Avis,Avis,Spell,0,1
+ , ,0,Launches birds from your wand,0,0,0,1,0,0,0,Avis,Avis,Spell,0,1
+ , ,0,Launches birds from your wand,0,0,0,1,0,0,0,Avis,Avis,Spell,0,1
+ , ,0,Launches birds from your wand,0,0,0,1,0,0,0,Avis,Avis,Spell,0,1
+ , ,0,Detects enemies and emits a scream,0,0,0,0,0,0,2,Caterwauling,Caterwauling,Charm,0,2
+ , ,0,Detects enemies and emits an alarm,0,0,0,0,0,1,2,Cave,Cave Inimicum,Charm,0,3
+ , ,0,Detects enemies and emits an alarm,0,0,0,0,0,1,2,Cave,Cave Inimicum,Charm,0,3
+ , ,0,Detects enemies and emits an alarm,0,0,0,0,0,1,2,Cave,Cave Inimicum,Charm,0,3
+ , ,0,Detects enemies and emits an alarm,0,0,0,0,0,1,2,Cave,Cave Inimicum,Charm,0,3
+ , ,0,Explode Flames on target,0,0,0,0,0,0,2,Confringo,Confringo,Curse,0,2
+ , ,0,Used to confuse opponent,0,0,1,1,0,0,1,Confundus,Confundus,Charm,0,3
+ , ,0,Used to confuse opponent,0,0,1,1,0,0,1,Confundus,Confundus,Charm,0,3
+ , ,0,Tortures opponent – Unforgivable,0,0,0,5,0,2,3,Crucio,Crucio,Curse,0,10
+ , ,0,Counters “Prior Incatato”,0,0,0,1,0,0,0,Deletrius,Deletrius,Spell,0,1
+ , ,0,Enlarges Teeth,0,0,0,1,0,0,0,Densaugeo,Densaugeo,Spell,0,1
+ , ,0,Wind Damaging Spell,0,0,0,0,0,0,1,Deprimo,Deprimo,Spell,0,1
+ , ,0,Wind Damaging Spell,0,0,0,0,0,0,1,Deprimo,Deprimo,Spell,0,1
+ , ,0,Moves an object downwards,0,0,0,0,0,0,2,Descendo,Descendo,Spell,0,2
+ , ,0,Splits seams,0,0,0,1,0,0,3,Diffindo,Diffindo,Spell,0,4
+ , ,0,Splits seams,0,0,0,1,0,0,3,Diffindo,Diffindo,Spell,0,4
+ , ,0,Opens passageways,0,0,3,0,0,0,0,Dissendium,Dissendium,Spell,0,3
+ , ,0,Makes the target blend in to the surroundings,0,0,0,0,2,1,6,Disillusionment,Disillusionment,Charm,0,9
+ , ,0,Makes Objects Hard,0,0,0,0,0,0,1,Duro,Duro,Spell,0,1
+ , ,0,Enlarges and item,0,0,0,1,0,0,0,Engorgio,Engorgio,Charm,0,1
+ , ,0,Counters Stupefy,0,0,0,3,0,0,0,Ennervate,Ennervate,Spell,0,3
+ , ,0,Counters Stupefy,0,0,0,3,0,0,0,Ennervate,Ennervate,Spell,0,3
+ , ,0,Heals minor injuries,0,0,0,0,0,2,0,Episkey,Episkey,Spell,0,2
+ , ,0,Heals minor injuries,0,0,0,0,0,2,0,Episkey,Episkey,Spell,0,2
+ , ,0,Builds things,0,0,0,0,0,0,1,Erecto,Erecto,Spell,0,1
+ , ,0,Builds things,0,0,0,0,0,0,1,Erecto,Erecto,Spell,0,1
+ , ,0,Builds things,0,0,0,0,0,0,1,Erecto,Erecto,Spell,0,1
+ , ,0,Creates a Patronus – A Defensive Guardian,0,0,16,1,0,0,5,Expecto,Expecto Patronum,Charm,0,22
+ , ,0,Disarms your opponent,0,3,4,3,3,1,8,Expelliarmus,Expelliarmus,Charm,0,22
+ , ,0,Makes Objects Explode,0,0,0,0,0,0,1,Expulso,Expulso,Spell,0,1
+ , ,0,Creates bandages,0,0,1,0,0,0,0,Ferula,Ferula,Spell,0,1
+ , ,0,Creates bandages,0,0,1,0,0,0,0,Ferula,Ferula,Spell,0,1
+ , ,0,Hides a secret within someone,0,0,2,0,0,0,7,Fidelius,Fidelius,Charm,0,9
+ , ,0,"Difficult to control, large fire curse – Dark Magic",0,0,0,0,0,0,2,Fiendfyre,Fiendfyre,Curse,0,2
+ , ,0,"Difficult to control, large fire curse – Dark Magic",0,0,0,0,0,0,2,Fiendfyre,Fiendfyre,Curse,0,2
+ and Finite Incantatum (Stops any current spells), ,0,Finishes spells in the casters area,0,1,0,0,0,0,2,Finite,Finite,Spell,0,3
+ , ,0,Multiplies and burns objects upon touch,0,0,0,0,0,0,1,Flagrante,Flagrante,Curse,0,1
+ , ,0,Multiplies and burns objects upon touch,0,0,0,0,0,0,1,Flagrante,Flagrante,Curse,0,1
+ , ,0,Multiplies and burns objects upon touch,0,0,0,0,0,0,1,Flagrante,Flagrante,Curse,0,1
+ , ,0,Multiplies and burns objects upon touch,0,0,0,0,0,0,1,Flagrante,Flagrante,Curse,0,1
+ , ,0,Produces boils on opponent,0,0,0,1,0,0,0,Furnunculus,Furnunculus,Curse,0,1
+ , ,0,Duplicates an Object,0,0,0,0,0,0,1,Geminio,Geminio,Spell,0,1
+ , ,0,Duplicates an Object,0,0,0,0,0,0,1,Geminio,Geminio,Spell,0,1
+ , ,0,Turns stairs into ramps,0,0,0,0,0,0,1,Glisseo,Glisseo,Spell,0,1
+ , ,0,Turns stairs into ramps,0,0,0,0,0,0,1,Glisseo,Glisseo,Spell,0,1
+ , ,0,Turns stairs into ramps,0,0,0,0,0,0,1,Glisseo,Glisseo,Spell,0,1
+ , ,0,Turns stairs into ramps,0,0,0,0,0,0,1,Glisseo,Glisseo,Spell,0,1
+ , ,0,Reveals humans nearby,0,0,0,0,0,0,2,Homenum,Homenum Revelio,Spell,0,2
+ , ,0,Reveals humans nearby,0,0,0,0,0,0,2,Homenum,Homenum Revelio,Spell,0,2
+ , ,0,Lockhart’s Werewolf “cure”,0,1,0,0,0,0,0,Homorphus,Homorphus,Charm,0,1
+ , ,0,Lockhart’s Werewolf “cure”,0,1,0,0,0,0,0,Homorphus,Homorphus,Charm,0,1
+ , ,0,Lockhart’s Werewolf “cure”,0,1,0,0,0,0,0,Homorphus,Homorphus,Charm,0,1
+ , ,0,Slows an advancing object,0,0,0,3,0,3,1,Impedimenta,Impedimenta,Charm,0,7
+ , ,0,Controls a person – Unforgivable,0,0,0,1,0,0,4,Imperio,Imperio,Curse,0,5
+ , ,0,Makes an object repel water,0,0,1,0,1,0,2,Impervius,Impervius,Charm,0,4
+ , ,0,Ties someone up,0,0,0,0,0,1,0,Incarcerous,Incarcerous,Spell,0,1
+ , ,0,Starts a fire,0,0,0,1,0,2,0,Incendio,Incendio,Spell,0,3
+ , ,0,Starts a fire,0,0,0,1,0,2,0,Incendio,Incendio,Spell,0,3
+ , ,0,Starts a fire,0,0,0,1,0,2,0,Incendio,Incendio,Spell,0,3
+ , ,0,Glues opponent’s tongue to roof of mouth,0,0,0,0,0,1,0,Langlock,Langlock,Spell,0,1
+ , ,0,Allows the caster to read minds of victims,0,0,0,0,4,1,0,Legilimens,Legilimens,Spell,0,5
+ , ,0,Hangs victim upside down by feet,0,0,0,0,0,4,0,Levicorpus,Levicorpus,Spell,0,4
+ , ,0,Counterspell to Liberacorpus,0,0,0,0,0,1,0,Liberacorpus,Liberacorpus,Spell,0,1
+ , ,0,Locks opponents legs,1,0,0,0,1,0,0,Locomotor,Locomotor Mortis,Curse,0,2
+and Lumos Maxima (Creates a Ball of Light that can brighten a room for a long period time), ,0,Creates light at wand tip,0,2,4,3,0,3,5,Lumos,Lumos,Spell,0,17
+ , ,0,Moves objects with wand,0,0,1,0,0,0,0,Mobiliarbus,Mobiliarbus,Charm,0,1
+ , ,0,Moves unconscious bodies,0,0,1,0,0,0,0,Mobilicorpus,Mobilicorpus,Spell,0,1
+ , ,0,Moves unconscious bodies,0,0,1,0,0,0,0,Mobilicorpus,Mobilicorpus,Spell,0,1
+ , ,0,Prevents nearby people from listening to conversations,0,0,0,0,0,6,5,Muffliato,Muffliato,Spell,0,11
+ , ,0,Prevents nearby people from listening to conversations,0,0,0,0,0,6,5,Muffliato,Muffliato,Spell,0,11
+ , ,0,Counter to Lumos – turns off lights,0,0,1,0,0,0,1,Nox,Nox,Spell,0,2
+ , ,0,Erases memories,0,1,0,1,0,0,1,Obliviate,Obliviate,Charm,0,3
+ , ,0,Erases memories,0,1,0,1,0,0,1,Obliviate,Obliviate,Charm,0,3
+ , ,0,Makes conjured items attack,0,0,0,0,0,1,0,Oppugno,Oppugno,Spell,0,1
+ , ,0,Makes conjured items attack,0,0,0,0,0,1,0,Oppugno,Oppugno,Spell,0,1
+ , ,0,Conjures a bunch of flowers,0,0,0,1,0,0,0,Orchideous,Orchideous,Spell,0,1
+ , ,0,Conjures a bunch of flowers,0,0,0,1,0,0,0,Orchideous,Orchideous,Spell,0,1
+ , ,0,Conjures a bunch of flowers,0,0,0,1,0,0,0,Orchideous,Orchideous,Spell,0,1
+ , ,0,Removes Pixies (maybe),0,1,0,0,0,0,0,Peskipiksi,Peskipiksi Pesternomi,Spell,0,1
+ , ,0,Body – Bind,1,0,0,0,0,5,1,Petrificus,Petrificus Totalus,Spell,0,7
+ , ,0,Animates statues and armor suits,0,0,0,0,0,0,1,Piertotum,Piertotum Locomotor,Spell,0,1
+ , ,0,Animates statues and armor suits,0,0,0,0,0,0,1,Piertotum,Piertotum Locomotor,Spell,0,1
+ , ,0,"Result when brother wands duel, the loser’s wand shows all spells it recently cast",0,0,0,1,0,0,1,Priori,Priori Incantatem,Spell,0,2
+ , ,0,Reveals a wands last spell / cast,0,0,0,1,0,0,0,Prior,Prior Incantato,Spell,0,1
+ and Protego Maxima (Protects one from Dark Magic) and Protego Totalem (Area Protection Spell), ,0,Cause spells to reflect back to the sender.,0,0,0,0,0,1,6,Protego,Protego,Charm,0,7
+ , ,0,Returns items to original size. Counters Engorgio,0,0,0,2,0,0,0,Reducio,Reducio,Spell,0,2
+ , ,0,Blasts solid objects aside,0,0,0,0,0,1,0,Reducto,Reducto,Spell,0,1
+ , ,0,Releases user from binding,0,0,0,1,0,0,3,Relashio,Relashio,Spell,0,4
+ , ,0,Cures unconsciousness,0,0,0,0,0,2,0,Rennervate,Rennervate,Spell,0,2
+ , ,0,Repairs Things,0,0,0,1,0,3,0,Reparo,Reparo,Spell,0,4
+ , ,0,Keeps Muggles away,0,0,0,0,0,0,1,Repello,Repello Muggletum,Charm,0,1
+ , ,0,Reveals Hidden objects,0,0,0,0,0,1,0,Revelio,Revelio,Spell,0,1
+ , ,0,Tickles opponent,0,1,0,0,0,0,0,Rictusempra,Rictusempra,Charm,0,1
+ , ,0,Use this spell and laugh to defeat a boggart,0,0,8,1,1,0,0,Riddikulus,Riddikulus,Spell,0,10
+ , ,0,Protection against hexes,0,0,0,0,0,0,1,Salvio,Salvio Hexia,Spell,0,1
+ , ,0,Protection against hexes,0,0,0,0,0,0,1,Salvio,Salvio Hexia,Spell,0,1
+ , ,0,Protection against hexes,0,0,0,0,0,0,1,Salvio,Salvio Hexia,Spell,0,1
+ , ,0,"Causes wounds, as if slashed by a sword",0,0,0,0,0,4,2,Sectumsempra,Sectumsempra,Spell,0,6
+ , ,0,Produces Snake,0,1,0,0,0,0,0,Serpensortia,Serpensortia,Spell,0,1
+ , ,0,Silences victim,0,0,0,0,1,0,0,Silencio,Silencio,Spell,0,1
+ , ,0,Silences victim,0,0,0,0,1,0,0,Silencio,Silencio,Spell,0,1
+ , ,0,Amplifies voice,0,0,0,3,0,0,0,Sonorus,Sonorus,Spell,0,3
+ , ,0,Reveals Hidden secrets or magical properties,0,0,0,0,0,1,0,Specialis,Specialis Revelio,Spell,0,1
+ , ,0,Reveals Hidden secrets or magical properties,0,0,0,0,0,1,0,Specialis,Specialis Revelio,Spell,0,1
+ , ,0,Knocks out opponent,0,0,0,9,1,1,9,Stupefy,Stupefy,Spell,0,20
+ , ,0,Knocks out opponent,0,0,0,9,1,1,9,Stupefy,Stupefy,Spell,0,20
+ , ,0,Forces opponent to dance,0,1,0,0,0,0,0,Tarantallegra,Tarantallegra,Spell,0,1
+ , ,0,Cleans up messes,0,0,0,0,0,1,1,Tergeo,Tergeo,Spell,0,2
+ , ,0,Cleans up messes,0,0,0,0,0,1,1,Tergeo,Tergeo,Spell,0,2
+ , ,0,Cleans up messes,0,0,0,0,0,1,1,Tergeo,Tergeo,Spell,0,2
+ , ,0,Cleans up messes,0,0,0,0,0,1,1,Tergeo,Tergeo,Spell,0,2
+ , ,0,Cleans up messes,0,0,0,0,0,1,1,Tergeo,Tergeo,Spell,0,2
+ , ,0,Unsticks an object,0,0,1,0,0,0,0,Waddiwasi,Waddiwasi,Spell,0,1
+ , ,0,Makes on object fly,3,0,0,0,1,0,1,Wingardium,Wingardium Leviosa,Charm,0,5
