@@ -41,6 +41,7 @@ def load_spells_from_books():
         book_data[book.replace(".txt", "")] = book_spells
 
     pickle.dump(spells, open("../Pickles/spells_in_books.p", "wb"))
+    pickle.dump(book_data, open("../Pickles/book_data.p", "wb"))
     # print(len(spells))
     # print(spells)
     # print(book_data)
@@ -57,7 +58,7 @@ def load_all_spells():
 
     all_spells = []
     for s in spell_json:
-        all_spells.append(s['Short'])
+        all_spells.append(s['Short'].lower())
     
     pickle.dump(all_spells, open("../Pickles/all_spells.p", "wb"))
     #print(len(all_spells))
@@ -74,9 +75,10 @@ def  spells_in_this_book(book, spell_list):
     f = open(path, 'r')
     raw = f.read()
     tokens = word_tokenize(raw)
+    words = [w.lower() for w in tokens]
     spellcounter = 0
 
-    for word in tokens:
+    for word in words:
         if word in spell_list:
             spell = word
             if spell not in spells:
@@ -91,23 +93,31 @@ def build_spell_json(spells, spell_json):
     
     new_json = []
     for line in spell_json:
-        if line['Short'] in spells:
-            spell = line['Short']
-            new_line = {"Spell":0, "Short":0, "Effect": 0, "Type": 0, "Category":0, "Danger":0, "Unforgivable": 0,
-                        "HP_01":0, "HP_02":0 ,"HP_03":0, "HP_04":0, "HP_05":0, "HP_06":0, "HP_07":0, 
-                        "overall": 0, "Anmerkung":0}
+        if line['Short'].lower() in spells:
+            spell = line['Short'].lower()
+            #print(spell)
+            new_line = {"Spell": "", "Short": "", "Effect": "", "Type": "", "Category": "", "Danger": "", "Unforgivable": "",
+                        "HP_01": "", "HP_02": "" ,"HP_03": "", "HP_04": "", "HP_05": "", "HP_06": "", "HP_07": "", 
+                        "overall": "", "Anmerkung": ""}
             for key in new_line:
                 if key in line:
                     new_line[key] = line[key]
                 elif key in spells[spell]:
                     new_line[key] = spells[spell][key]
             
-        new_json.append(new_line)    
+            # check for unforgivalbe curses
+            if (spell == "Avada") or (spell == "Crucio") or (spell == "Imperio"):
+                new_line["Unforgivable"] = "True"
+            else:
+                new_line["Unforgivable"] = "False"
+
+            #print(new_line)
+            new_json.append(new_line)    
     #print(new_json)      
 
     pickle.dump(new_json, open("../Pickles/spells.p", "wb"))
 
-    #json_string = json.dumps(new_json)
+    json_string = json.dumps(new_json)
     json.dump(new_json, open('../Data/spells.json', 'w'))
 
     tmp = pandas.read_json('../Data/spells.json')
