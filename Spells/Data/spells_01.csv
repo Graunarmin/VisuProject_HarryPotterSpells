@@ -1,54 +1,56 @@
 Anmerkung,Category,Danger,Effect,HP_01,HP_02,HP_03,HP_04,HP_05,HP_06,HP_07,Short,Spell,Type,Unforgivable,overall
- , ,,Summons an object,,,,8,5,2,12,Accio,Accio,Charm,False,27
- , ,,Shoots water from wand.,,,,,,6,1,Aguamenti,Aguamenti,Charm,False,7
- , ,,Opens locked objects,1,,1,,,1,,Alohomora,Alohomora,Charm,False,3
+ , ,,Summons an object,,,,8,10,3,12,Accio,Accio,Charm,False,33
+ , ,,Shoots water from wand.,,,,,,7,1,Aguamenti,Aguamenti,Charm,False,8
+ , ,,Opens locked objects,2,,1,,3,1,,Alohomora,Alohomora,Charm,False,7
  , ,,Clears the target’s airway.,,,,,,1,,Anapneo,Anapneo,Spell,False,1
  , ,,Reveals invisible ink,,1,,,,,,Aparecium,Aparecium,Spell,False,1
  , ,,Teleportation Spell,,,4,7,6,17,6,Apparate,Apparate,Spell,False,40
- , ,,Murders opponent – Unforgivable,,,,9,3,1,8,Avada,Avada Kedavra,Curse,False,21
+ , ,,Murders opponent – Unforgivable,,,,9,4,2,8,Avada,Avada Kedavra,Curse,False,23
  , ,,Launches birds from your wand,,,,1,,,,Avis,Avis,Spell,False,1
  , ,,Damages opponents,,,,,,,1,Cascading,Cascading,Jinx,False,1
  , ,,Detects enemies and emits a scream,,,,,,,2,Caterwauling,Caterwauling,Charm,False,2
- , ,,Detects enemies and emits an alarm,,,,13,6,15,12,Cave,Cave Inimicum,Charm,False,46
+ , ,,Detects enemies and emits an alarm,,,,13,7,15,12,Cave,Cave Inimicum,Charm,False,47
+ , ,,Locks Doors,,,,,3,,,Colloportus,Colloportus,Spell,False,3
  , ,,Explode Flames on target,,,,,,,2,Confringo,Confringo,Curse,False,2
  , ,,Used to confuse opponent,,,1,1,,,1,Confundus,Confundus,Charm,False,3
- , ,,Tortures opponent – Unforgivable,,,,5,,2,4,Crucio,Crucio,Curse,False,11
+ , ,,Tortures opponent – Unforgivable,,,,5,4,2,4,Crucio,Crucio,Curse,False,15
  , ,,Counters “Prior Incatato”,,,,1,,,,Deletrius,Deletrius,Spell,False,1
  , ,,Enlarges Teeth,,,,1,,,,Densaugeo,Densaugeo,Spell,False,1
  , ,,Wind Damaging Spell,,,,,,,1,Deprimo,Deprimo,Spell,False,1
  , ,,Moves an object downwards,,,,,,,2,Descendo,Descendo,Spell,False,2
- , ,,Splits seams,,,,1,,,3,Diffindo,Diffindo,Spell,False,4
- , ,,Opens passageways,,,3,,,,,Dissendium,Dissendium,Spell,False,3
- , ,,Makes the target blend in to the surroundings,,,,,2,1,7,Disillusionment,Disillusionment,Charm,False,10
+ , ,,Splits seams,,,,1,1,,3,Diffindo,Diffindo,Spell,False,5
+ , ,,Opens passageways,,,4,,,,,Dissendium,Dissendium,Spell,False,4
+ , ,,Makes the target blend in to the surroundings,,,,,3,1,7,Disillusionment,Disillusionment,Charm,False,11
  , ,,Makes Objects Hard,,,,,,,1,Duro,Duro,Spell,False,1
  , ,,Enlarges and item,,,,1,,,,Engorgio,Engorgio,Charm,False,1
  , ,,Counters Stupefy,,,,3,,,,Ennervate,Ennervate,Spell,False,3
  , ,,Heals minor injuries,,,,,,2,,Episkey,Episkey,Spell,False,2
  , ,,Builds things,,,,,,,1,Erecto,Erecto,Spell,False,1
- , ,,Creates a Patronus – A Defensive Guardian,,,31,1,,,6,Expecto,Expecto Patronum,Charm,False,38
- , ,,Disarms your opponent,,3,4,3,3,1,8,Expelliarmus,Expelliarmus,Charm,False,22
+ , ,,Creates a Patronus – A Defensive Guardian,,,32,1,4,,6,Expecto,Expecto Patronum,Charm,False,43
+ , ,,Disarms your opponent,,3,4,3,7,2,8,Expelliarmus,Expelliarmus,Charm,False,27
  , ,,Makes Objects Explode,,,,,,,1,Expulso,Expulso,Spell,False,1
  , ,,Creates bandages,,,1,,,,,Ferula,Ferula,Spell,False,1
  , ,,Hides a secret within someone,,,2,,,,7,Fidelius,Fidelius,Charm,False,9
  , ,,"Difficult to control, large fire curse – Dark Magic",,,,,,,2,Fiendfyre,Fiendfyre,Curse,False,2
- and Finite Incantatum (Stops any current spells), ,,Finishes spells in the casters area,,1,,,,,2,Finite,Finite,Spell,False,3
+ and Finite Incantatum (Stops any current spells), ,,Finishes spells in the casters area,,1,,,1,,2,Finite,Finite,Spell,False,4
  , ,,Multiplies and burns objects upon touch,,,,,,,1,Flagrante,Flagrante,Curse,False,1
+ , ,,Allows user to write on objects,,,,,1,,,Flagrate,Flagrate,Spell,False,1
  , ,,Produces boils on opponent,,,,1,,,,Furnunculus,Furnunculus,Curse,False,1
  , ,,Duplicates an Object,,,,,,,1,Geminio,Geminio,Spell,False,1
  , ,,Turns stairs into ramps,,,,,,,1,Glisseo,Glisseo,Spell,False,1
  , ,,Reveals humans nearby,,,,,,,2,Homenum,Homenum Revelio,Spell,False,2
  , ,,Lockhart’s Werewolf “cure”,,1,,,,,,Homorphus,Homorphus,Charm,False,1
- , ,,Slows an advancing object,,,,4,,3,1,Impedimenta,Impedimenta,Charm,False,8
+ , ,,Slows an advancing object,,,,4,5,3,1,Impedimenta,Impedimenta,Charm,False,13
  , ,,Controls a person – Unforgivable,,,,1,,,4,Imperio,Imperio,Curse,False,5
- , ,,Makes an object repel water,,,1,,1,,2,Impervius,Impervius,Charm,False,4
- , ,,Ties someone up,,,,,,1,,Incarcerous,Incarcerous,Spell,False,1
+ , ,,Makes an object repel water,,,1,,2,,2,Impervius,Impervius,Charm,False,5
+ , ,,Ties someone up,,,,,1,1,,Incarcerous,Incarcerous,Spell,False,2
  , ,,Starts a fire,,,,1,,2,,Incendio,Incendio,Spell,False,3
  , ,,Glues opponent’s tongue to roof of mouth,,,,,,1,,Langlock,Langlock,Spell,False,1
- , ,,Allows the caster to read minds of victims,,,,,4,1,,Legilimens,Legilimens,Spell,False,5
+ , ,,Allows the caster to read minds of victims,,,,,5,1,,Legilimens,Legilimens,Spell,False,6
  , ,,Hangs victim upside down by feet,,,,,,4,,Levicorpus,Levicorpus,Spell,False,4
  , ,,Counterspell to Liberacorpus,,,,,,1,,Liberacorpus,Liberacorpus,Spell,False,1
- , ,,Locks opponents legs,1,,,,1,,,Locomotor,Locomotor Mortis,Curse,False,2
-and Lumos Maxima (Creates a Ball of Light that can brighten a room for a long period time), ,,Creates light at wand tip,,2,4,4,1,3,5,Lumos,Lumos,Spell,False,19
+ , ,,Locks opponents legs,1,,,,2,,,Locomotor,Locomotor Mortis,Curse,False,3
+and Lumos Maxima (Creates a Ball of Light that can brighten a room for a long period time), ,,Creates light at wand tip,,2,4,4,2,3,5,Lumos,Lumos,Spell,False,20
  , ,,Moves objects with wand,,,1,,,,,Mobiliarbus,Mobiliarbus,Charm,False,1
  , ,,Moves unconscious bodies,,,1,,,,,Mobilicorpus,Mobilicorpus,Spell,False,1
  , ,,Prevents nearby people from listening to conversations,,,,,,6,5,Muffliato,Muffliato,Spell,False,11
@@ -57,28 +59,30 @@ and Lumos Maxima (Creates a Ball of Light that can brighten a room for a long pe
  , ,,Makes conjured items attack,,,,,,1,,Oppugno,Oppugno,Spell,False,1
  , ,,Conjures a bunch of flowers,,,,1,,,,Orchideous,Orchideous,Spell,False,1
  , ,,Removes Pixies (maybe),,1,,,,,,Peskipiksi,Peskipiksi Pesternomi,Spell,False,1
- , ,,Body – Bind,1,,,,,5,1,Petrificus,Petrificus Totalus,Spell,False,7
+ , ,,Body – Bind,1,,,,3,5,1,Petrificus,Petrificus Totalus,Spell,False,10
  , ,,Animates statues and armor suits,,,,,,,1,Piertotum,Piertotum Locomotor,Spell,False,1
+ , ,,Makes an object a Portkey for traveling,,,,,2,,,Portus,Portus,Charm,False,2
  , ,,"Result when brother wands duel, the loser’s wand shows all spells it recently cast",,,,2,,,1,Priori,Priori Incantatem,Spell,False,3
  , ,,Reveals a wands last spell / cast,,,,2,2,,,Prior,Prior Incantato,Spell,False,4
- and Protego Maxima (Protects one from Dark Magic) and Protego Totalem (Area Protection Spell), ,,Cause spells to reflect back to the sender.,,,,,,1,6,Protego,Protego,Charm,False,7
+ and Protego Maxima (Protects one from Dark Magic) and Protego Totalem (Area Protection Spell), ,,Cause spells to reflect back to the sender.,,,,,3,1,6,Protego,Protego,Charm,False,10
  , ,,Returns items to original size. Counters Engorgio,,,,2,,,,Reducio,Reducio,Spell,False,2
- , ,,Blasts solid objects aside,,,,,,2,,Reducto,Reducto,Spell,False,2
+ , ,,Blasts solid objects aside,,,,,1,2,,Reducto,Reducto,Spell,False,3
  , ,,Releases user from binding,,,,1,,,3,Relashio,Relashio,Spell,False,4
  , ,,Cures unconsciousness,,,,,,2,,Rennervate,Rennervate,Spell,False,2
- , ,,Repairs Things,,,,1,,3,1,Reparo,Reparo,Spell,False,5
+ , ,,Repairs Things,,,,1,3,3,1,Reparo,Reparo,Spell,False,8
  , ,,Keeps Muggles away,,,,,,,1,Repello,Repello Muggletum,Charm,False,1
  , ,,Reveals Hidden objects,,,,,,2,1,Revelio,Revelio,Spell,False,3
  , ,,Tickles opponent,,1,,,,,,Rictusempra,Rictusempra,Charm,False,1
- , ,,Use this spell and laugh to defeat a boggart,,,9,1,4,,,Riddikulus,Riddikulus,Spell,False,14
+ , ,,Use this spell and laugh to defeat a boggart,,,11,1,5,,,Riddikulus,Riddikulus,Spell,False,17
  , ,,Protection against hexes,,,,,,,1,Salvio,Salvio Hexia,Spell,False,1
+ , ,,A Cleaning Charm,,,,,3,,,Scourgify,Scourgify,Charm,False,3
  , ,,"Causes wounds, as if slashed by a sword",,,,,,6,2,Sectumsempra,Sectumsempra,Spell,False,8
  , ,,Produces Snake,,1,,,,,,Serpensortia,Serpensortia,Spell,False,1
- , ,,Silences victim,,,,,3,,,Silencio,Silencio,Spell,False,3
+ , ,,Silences victim,,,,,7,,,Silencio,Silencio,Spell,False,7
  , ,,Amplifies voice,,,,3,,,,Sonorus,Sonorus,Spell,False,3
- , ,,Reveals Hidden secrets or magical properties,,,,,,1,,Specialis,Specialis Revelio,Spell,False,1
- , ,,Knocks out opponent,,,,10,1,1,9,Stupefy,Stupefy,Spell,False,21
- , ,,Forces opponent to dance,,1,,,,,,Tarantallegra,Tarantallegra,Spell,False,1
+ , ,,Reveals Hidden secrets or magical properties,,,,,,2,,Specialis,Specialis Revelio,Spell,False,2
+ , ,,Knocks out opponent,,,,10,7,1,9,Stupefy,Stupefy,Spell,False,27
+ , ,,Forces opponent to dance,,1,,,1,,,Tarantallegra,Tarantallegra,Spell,False,2
  , ,,Cleans up messes,,,,,,1,1,Tergeo,Tergeo,Spell,False,2
  , ,,Unsticks an object,,,1,,,,,Waddiwasi,Waddiwasi,Spell,False,1
  , ,,Makes on object fly,3,,,,1,,1,Wingardium,Wingardium Leviosa,Charm,False,5

@@ -2,6 +2,7 @@ import nltk
 from nltk.corpus import PlaintextCorpusReader  as PCR
 from nltk import word_tokenize
 import json
+import csv
 import pickle
 import os
 import sys
@@ -42,13 +43,11 @@ def load_spells_from_books():
 
     pickle.dump(spells, open("../Pickles/spells_in_books.p", "wb"))
     pickle.dump(book_data, open("../Pickles/book_data.p", "wb"))
-    # print(len(spells))
-    # print(spells)
-    # print(book_data)
-
     
     #spells = pickle.load(open("../Pickles/spells_in_books.p", "rb"))
     build_spell_json(spells, spell_json)
+    build_book_json()
+    
 
 def load_all_spells():
     '''load all spells from the website (pre filtered by hand from us) and dump them as pickle'''
@@ -61,8 +60,6 @@ def load_all_spells():
         all_spells.append(s['Short'].lower())
     
     pickle.dump(all_spells, open("../Pickles/all_spells.p", "wb"))
-    #print(len(all_spells))
-    #print(all_spells)
    
     return spell_json
 
@@ -75,7 +72,8 @@ def  spells_in_this_book(book, spell_list):
     f = open(path, 'r')
     raw = f.read()
     tokens = word_tokenize(raw)
-    words = [w.lower() for w in tokens]
+    words_tmp = [w.lower() for w in tokens]
+    words = [(w.replace("'", "")).replace('"', "") for w in words_tmp]
     spellcounter = 0
 
     for word in words:
@@ -88,6 +86,7 @@ def  spells_in_this_book(book, spell_list):
             spellcounter += 1
     
     return spells, spellcounter
+
 
 def build_spell_json(spells, spell_json):
     
@@ -125,13 +124,22 @@ def build_spell_json(spells, spell_json):
 
     tmp.to_csv("../Data/spells_01.csv", encoding='utf-8', index=False)  
 
-      
+def build_book_json():
+    book_data = pickle.load(open('../Pickles/book_data.p', 'rb'))
+
+    json.dump(book_data, open('../Data/book_data.json', 'w'))
+    tmp = pandas.read_json('../Data/book_data.json')
+    print(tmp)
+    #book_data_csv = tmp.to_csv()
+    tmp.to_csv("../Data/book_data_01.csv", encoding='utf-8', index=False)
+
 
 def main():
     
     #file = sys.argv[1]
 
     load_spells_from_books()
+    #build_book_json()
 
 if __name__ == '__main__':
     main()
