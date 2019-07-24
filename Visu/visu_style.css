@@ -1,4 +1,22 @@
+/* ------------ fonts -------------------- */
+
+    /* font-family: 'Marck Script', cursive;
+
+    font-family: 'Merienda', cursive;
+
+    font-family: 'Charm', cursive;
+
+    font-family: 'Playfair Display', serif;
+
+    font-family: 'Lora', serif;
+
+    font-family: 'Crimson Text', serif; */
+
+
+
+/* ------------ parallel coordinate chart -------------------- */
 svg {
+    font-family: 'Lora', serif;
     font: 10px sans-serif;
   }
   
@@ -27,6 +45,51 @@ svg {
   }
   
   .axis text {
+    font-family: 'Lora', serif;
     text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
     cursor: move;
   }
+
+/*------------------------- Spell list ------------------------ */
+
+.spellList {
+  position: absolute;
+  scrollbar-width: none;
+  top: 20px;
+  left: 16px;
+}
+
+.spells{
+  display: block;
+	border-style: none;
+	background-color: transparent;
+  cursor: pointer;
+  font-family: 'Marck Script', cursive;
+	font-size: 15px;
+}
+.spells:hover{
+	color : #6dbbdc;
+}
+
+.spellList{
+	/*display: none;*/
+	position: absolute;
+	overflow: scroll;
+	max-height: 650px;
+	width: 250px;
+}
+.open {
+	display: block;
+}
+.closed {
+	display: none;
+}
+#Liste{
+  overflow: scroll;
+  scrollbar-width: none;
+  max-height: 650px;
+  background-image: url(img/scroll.png);
+  background-position: 0px -70px;
+  background-size: 100% 120%;
+  background-repeat: no-repeat;
+}

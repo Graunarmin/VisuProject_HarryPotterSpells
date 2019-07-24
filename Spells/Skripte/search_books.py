@@ -64,7 +64,7 @@ def load_all_spells():
     return spell_json
 
 
-def  spells_in_this_book(book, spell_list):
+def spells_in_this_book(book, spell_list):
     """filter spell-list so only those spells that are in the books remain"""
 
     spells = {}

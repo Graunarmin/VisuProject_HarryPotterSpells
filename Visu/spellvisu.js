@@ -1,31 +1,55 @@
+function init(){
+    document.body.addEventListener("load", parallel_coordinates());
+    let spells = document.getElementsByClassName("spells");
+
+    let i;
+    for (i = 0; i < spells.length; i++) {
+        console.log(this.id);
+        spells[i].addEventListener("click", toggle(this.id));
+        spells[i].addEventListener("click", highlight_path(this.id));
+    } 
+}
 
 function parallel_coordinates(){
 
-    var margin = {top: 30, right: 10, bottom: 10, left: 10},
-    width = 960 - margin.left - margin.right,
+    //platzieren des charts
+    var margin = {top: 30, right: 10, bottom: 10, left: 350},
+    width = 1350 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
+
+    //ordinale (diskret) Skalierung der Punkte 0 bis Breite mit Schrittweite 1 erstellen
     var x = d3.scale.ordinal().rangePoints([0, width], 1),
         y = {},
         dragging = {};
 
+    //Linie, Achse, Vorder- und Hintergrund erstellen    
     var line = d3.svg.line(),
+        //die Labels sollen links stehen:
         axis = d3.svg.axis().orient("left"),
         background,
         foreground;
 
+    //Größe des svg festlegen    
     var svg = d3.select("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
     .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.csv("spell_numbers.csv", function(error, spells) {
+    //Daten laden    
+    d3.csv("Data/spell_numbers.csv", function(error, spells) {
 
     // Extract the list of dimensions and create a scale for each.
+    // domain: boundaries of the data
+    // keys gibt alle keys der ausgewählten Daten zurück
     x.domain(dimensions = d3.keys(spells[0]).filter(function(d) {
-        return d != "Spell" && (y[d] = d3.scale.linear()
+        // die Werte aus Domain werden linear skaliert auf die Werte aus Range
+        return (d != "Spell") && (y[d] = d3.scale.linear()
+            // extent gives min and max value as [min, max]
+            // '+' returns the numeric value, so if p were a string, +p is the numeric value of p
             .domain(d3.extent(spells, function(p) { return +p[d]; }))
+            //range: boundaries in which the data can be transformed
             .range([height, 0]));
     }));
 
@@ -34,6 +58,7 @@ function parallel_coordinates(){
         .attr("class", "background")
         .selectAll("path")
         .data(spells)
+        //enter und append hängen so viele path-elemente an wie nötig
         .enter().append("path")
         .attr("d", path);
 
@@ -125,4 +150,13 @@ function parallel_coordinates(){
     });
     }
 
+}
+
+function toggle(id){
+    console.log(id);
+
+}
+
+function highlight_path(id){
+    console.log(id);
 }
