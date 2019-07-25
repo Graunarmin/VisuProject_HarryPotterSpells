@@ -51,18 +51,26 @@ svg {
   }
 
 /*------------------------- Spell list ------------------------ */
-
-.listContainer {
+.background {
   position: absolute;
   scrollbar-width: none;
-  top: 20px;
+  top: 15px;
   left: 16px;
   width: 300px;
-  height: 700px;
+  height: 710px;
   background-image: url(img/scroll.png);
   background-position: -5px -30px;
   background-size: 100% 105%;
   background-repeat: no-repeat;
+}
+
+.listContainer {
+  position: absolute;
+  scrollbar-width: none;
+  top: 5px;
+  left: 16px;
+  width: 400px;
+  height: 700px;
 }
 
 .spellList {
@@ -85,22 +93,56 @@ svg {
   font-size: 15px;
 }
 
+.spells:hover{
+  color : #55d1d3 !important; 
+  /* !important so it still works after using javascript! */
+}
+
 /* Padding: Inhalt bis zur Border, 
 Margin: Border bis Dokumentrand */
 
-.infoOpen{
-  display: block;
+
+/* ---------- Pop-up -------------- */
+/* Popup container */
+.spells {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.spells .info {
+  display: none;
   list-style-type: none;
-  
+  margin-top: 7px;
+  margin-left: 10px;
+  margin-bottom: 10px;
   color: black;
-  font-family: 'Merienda', cursive;
-	font-size: 15px;
+  font-family: 'Lora', serif;
+	font-size: 14px;
+  width: 160px;
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 10px;
+  position: relative;
 }
 
-.infoClosed {
-	display: none;
+/* Toggle this class - hide and show the popup */
+.spells .show {
+  display: block;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
 }
 
-.spells:hover{
-	color : #6dbbdc;
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 0.8;}
 }
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:0.8 ;}
+}
+

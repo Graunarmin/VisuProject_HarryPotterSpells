@@ -1,21 +1,12 @@
-// ------------- global variables --------------
-
-var charm_color = 'lawngreen';
-var spell_color = 'rgb(0, 136, 255)';
-var curse_color = 'orange';
-var unfor_color = 'red';
-
-
 
 function init(){
     document.body.addEventListener("load", parallel_coordinates());
     var spells = document.querySelectorAll('.spells');
 
     spells.forEach.call(spells, function(e){
-        e.addEventListener("click", toggle);
+        e.addEventListener("click", toggle_info);
         e.addEventListener("click", highlight_path);
     });
-
 }
 
 function parallel_coordinates(){
@@ -160,39 +151,52 @@ function parallel_coordinates(){
 
 }
 
-function toggle(){
+function toggle_info(){
     var id = this.id;
-    console.log("toggle: " + this.id);
+    //console.log("toggle: " + this.id);
 
     var elements = document.querySelectorAll('#'+id);
     // console.log(elements);
     var spell = elements[0];
     var info_box = elements[1];
     
-    //open Info 
-    if(info_box.className == 'infoClosed'){
-        //first close other Infobox if open:
-        close();
-
-        //then open this one,
-        //make the others grey and this one in its color and bigger
-        open(spell, info_box);
+    // if it's already open:
+    if(info_box.classList.contains('show')){
+         //close Info, set all font-colors and sizes back to normal
+         hide();
+         reset_list();
         
-    
-    //close Info    
+    //if it's closed
     }else{
-        //close Info, set all font-colors and sizes back to normal
-        close();
-        reset_list();
+       //first close other Infobox if open:
+       hide();
+       //then make the other spells grey 
+       //and this one in its color and bigger
+       show(spell, info_box);
     }
-
 }
 
-function close(){
+function show(spell, info){
+    //grey out everything
+    var elements = document.querySelectorAll(".spells")
+    elements.forEach.call(elements, function(e){
+        e.style.color = 'grey';
+    });
+
+    //then color the Spell in its respective color
+    var colour = color(info);
+    spell.style.color = colour[0];
+    spell.style.fontSize = '18px';
+    //and Show the Infobox
+    info.classList.toggle("show");
+    info.style.backgroundColor = colour[1];
+}
+
+function hide(){
     //there is ALWAYS only one open Infobox! If not - change the code!
-    var element = document.querySelector('.infoOpen');
+    var element = document.querySelector('.show');
     if(element){
-        element.className = 'infoClosed';
+        element.classList.toggle("show");
     }
     reset_list();
 }
@@ -205,37 +209,23 @@ function reset_list(){
     });
 }
 
-function open(spell, info){
-    //grey out everything
-    var elements = document.querySelectorAll(".spells")
-    elements.forEach.call(elements, function(e){
-        e.style.color = 'grey';
-    });
-
-    //then show infos and color the Spell in its respective color
-    info.className = 'infoOpen';
-    spell.style.color = color(info);
-    spell.style.fontSize = '18px';
-}
-
 function color(element){
     //choose respective color for each spell type
     var type = String(element.querySelector('.type').innerHTML);
-    console.log(type);
     
     switch(type){
         case "Charm":
             //green
-            return "rgb(100, 183, 17)";
+            return ["rgb(100, 183, 17)", "rgba(100, 183, 17, 0.4)"];
         case "Spell":
             //blue
-            return "rgb(0, 136, 255)";
+            return ["rgb(0, 136, 255)", "rgba(0, 136, 255, 0.4)"];
         case "Curse":
             //orange
-            return "rgb(255, 132, 0)";
+            return ["rgb(255, 132, 0)", "rgba(255, 132, 0, 0.4)"];
         case "Unforgivable Curse":
             //red
-            return "rgb(184, 12, 12)";
+            return ["rgb(184, 12, 12)", "rgba(184, 12, 12, 0.4)"];
     }
 }
 
