@@ -21,7 +21,7 @@ def spells_to_html():
         tmp = """
         <li class='spells' id='{}'>
             <a class='toggleSpells'> {} </a>
-            <ul class='info' display='none'>
+            <ul class='infoClosed'>
                 <li class='effect'> {} </li>
                 <li class='type'> {} </li>
                 <li class='category'> {} </li>

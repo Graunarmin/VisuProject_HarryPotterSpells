@@ -52,11 +52,27 @@ svg {
 
 /*------------------------- Spell list ------------------------ */
 
-.spellList {
+.listContainer {
   position: absolute;
   scrollbar-width: none;
   top: 20px;
   left: 16px;
+  width: 300px;
+  height: 700px;
+  background-image: url(img/scroll.png);
+  background-position: -5px -30px;
+  background-size: 100% 105%;
+  background-repeat: no-repeat;
+}
+
+.spellList {
+  display: block;
+  overflow: scroll;
+  margin-top: 45px;
+  margin-left: 20px;
+  scrollbar-width: none;
+  max-height: 600px;
+  max-width: 250px;
 }
 
 .spells{
@@ -64,32 +80,17 @@ svg {
 	border-style: none;
 	background-color: transparent;
   cursor: pointer;
-  font-family: 'Marck Script', cursive;
+  font-family: 'Merienda', cursive;
 	font-size: 15px;
 }
 .spells:hover{
 	color : #6dbbdc;
 }
 
-.spellList{
-	/*display: none;*/
-	position: absolute;
-	overflow: scroll;
-	max-height: 650px;
-	width: 250px;
+.infoOpen{
+  display: block;
 }
-.open {
-	display: block;
-}
-.closed {
+
+.infoClosed {
 	display: none;
-}
-#Liste{
-  overflow: scroll;
-  scrollbar-width: none;
-  max-height: 650px;
-  background-image: url(img/scroll.png);
-  background-position: 0px -70px;
-  background-size: 100% 120%;
-  background-repeat: no-repeat;
 }
