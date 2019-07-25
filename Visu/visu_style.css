@@ -80,17 +80,27 @@ svg {
 	border-style: none;
 	background-color: transparent;
   cursor: pointer;
+  color: black;
   font-family: 'Merienda', cursive;
-	font-size: 15px;
+  font-size: 15px;
 }
-.spells:hover{
-	color : #6dbbdc;
-}
+
+/* Padding: Inhalt bis zur Border, 
+Margin: Border bis Dokumentrand */
 
 .infoOpen{
   display: block;
+  list-style-type: none;
+  
+  color: black;
+  font-family: 'Merienda', cursive;
+	font-size: 15px;
 }
 
 .infoClosed {
 	display: none;
+}
+
+.spells:hover{
+	color : #6dbbdc;
 }

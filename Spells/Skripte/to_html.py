@@ -20,19 +20,19 @@ def spells_to_html():
         html_id = spell.split(" ")[0].lower()
         tmp = """
         <li class='spells' id='{}'>
-            <a class='toggleSpells'> {} </a>
-            <ul class='infoClosed'>
-                <li class='effect'> {} </li>
-                <li class='type'> {} </li>
-                <li class='category'> {} </li>
-                <li class='danger'> {} </li>
+            <a class='toggleSpells'>{}</a>
+            <ul class='infoClosed' id='{}'>
+                <li class='effect'>{}</li>
+                <li class='type'>{}</li>
+                <li class='category'>{}</li>
+                <li class='danger'>{}</li>
             </ul>
         </li>"""
 
-        html = tmp.format(html_id, spell, effect, typ, category, danger)
+        html = tmp.format(html_id, spell, html_id, effect, typ, category, danger)
         html_list.append(html)
 
-    with open('../Data/Background/html/spell_list_complete.html', 'w') as f:
+    with open('../Data/Background/html/spell_list.html', 'w') as f:
         for item in html_list:
             f.write("%s\n" % item)
 

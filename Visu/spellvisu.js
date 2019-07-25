@@ -1,13 +1,21 @@
+// ------------- global variables --------------
+
+var charm_color = 'lawngreen';
+var spell_color = 'rgb(0, 136, 255)';
+var curse_color = 'orange';
+var unfor_color = 'red';
+
+
+
 function init(){
     document.body.addEventListener("load", parallel_coordinates());
-    let spells = document.getElementsByClassName("spells");
+    var spells = document.querySelectorAll('.spells');
 
-    let i;
-    for (i = 0; i < spells.length; i++) {
-        console.log(this.id);
-        spells[i].addEventListener("click", toggle(this.id));
-        spells[i].addEventListener("click", highlight_path(this.id));
-    } 
+    spells.forEach.call(spells, function(e){
+        e.addEventListener("click", toggle);
+        e.addEventListener("click", highlight_path);
+    });
+
 }
 
 function parallel_coordinates(){
@@ -152,11 +160,86 @@ function parallel_coordinates(){
 
 }
 
-function toggle(id){
-    console.log(id);
+function toggle(){
+    var id = this.id;
+    console.log("toggle: " + this.id);
+
+    var elements = document.querySelectorAll('#'+id);
+    // console.log(elements);
+    var spell = elements[0];
+    var info_box = elements[1];
+    
+    //open Info 
+    if(info_box.className == 'infoClosed'){
+        //first close other Infobox if open:
+        close();
+
+        //then open this one,
+        //make the others grey and this one in its color and bigger
+        open(spell, info_box);
+        
+    
+    //close Info    
+    }else{
+        //close Info, set all font-colors and sizes back to normal
+        close();
+        reset_list();
+    }
 
 }
 
-function highlight_path(id){
-    console.log(id);
+function close(){
+    //there is ALWAYS only one open Infobox! If not - change the code!
+    var element = document.querySelector('.infoOpen');
+    if(element){
+        element.className = 'infoClosed';
+    }
+    reset_list();
+}
+ 
+function reset_list(){
+    var elements = document.querySelectorAll('.spells');
+    elements.forEach.call(elements, function(e){
+        e.style.fontSize = '15px';
+        e.style.color = 'black';
+    });
+}
+
+function open(spell, info){
+    //grey out everything
+    var elements = document.querySelectorAll(".spells")
+    elements.forEach.call(elements, function(e){
+        e.style.color = 'grey';
+    });
+
+    //then show infos and color the Spell in its respective color
+    info.className = 'infoOpen';
+    spell.style.color = color(info);
+    spell.style.fontSize = '18px';
+}
+
+function color(element){
+    //choose respective color for each spell type
+    var type = String(element.querySelector('.type').innerHTML);
+    console.log(type);
+    
+    switch(type){
+        case "Charm":
+            //green
+            return "rgb(100, 183, 17)";
+        case "Spell":
+            //blue
+            return "rgb(0, 136, 255)";
+        case "Curse":
+            //orange
+            return "rgb(255, 132, 0)";
+        case "Unforgivable Curse":
+            //red
+            return "rgb(184, 12, 12)";
+    }
+}
+
+function highlight_path(){
+    var id = this.id;
+    // console.log("highlight_path: " + this.id);
 }
