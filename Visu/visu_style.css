@@ -1,57 +1,27 @@
-/* ------------ fonts -------------------- */
+/* ------------ Fonts -------------------- */
 
     /* font-family: 'Marck Script', cursive;
-
     font-family: 'Merienda', cursive;
-
     font-family: 'Charm', cursive;
-
     font-family: 'Playfair Display', serif;
-
     font-family: 'Lora', serif;
-
     font-family: 'Crimson Text', serif; */
 
 
+/* ------- Main Container --------- */
 
-/* ------------ parallel coordinate chart -------------------- */
-svg {
-    font-family: 'Lora', serif;
-    font: 10px sans-serif;
-  }
-  
-  .background path {
-    fill: none;
-    stroke: #ddd;
-    shape-rendering: crispEdges;
-  }
-  
-  .foreground path {
-    fill: none;
-    stroke: steelblue;
-  }
-  
-  .brush .extent {
-    fill-opacity: .3;
-    stroke: #fff;
-    shape-rendering: crispEdges;
-  }
-  
-  .axis line,
-  .axis path {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-  }
-  
-  .axis text {
-    font-family: 'Lora', serif;
-    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
-    cursor: move;
-  }
+.Headline{
+  text-align: center;
+  font-family: 'Lora', serif;
+  font-size: 25px;
+}
 
-/*------------------------- Spell list ------------------------ */
-.background {
+/*------------- Spell list ----------- */
+
+/* Padding: Inhalt bis zur Border, 
+Margin: Border bis Dokumentrand */
+
+.listBackground {
   position: absolute;
   scrollbar-width: none;
   top: 15px;
@@ -64,7 +34,7 @@ svg {
   background-repeat: no-repeat;
 }
 
-.listContainer {
+.spellList {
   position: absolute;
   scrollbar-width: none;
   top: 5px;
@@ -73,7 +43,7 @@ svg {
   height: 700px;
 }
 
-.spellList {
+.list {
   display: block;
   overflow: scroll;
   margin-top: 45px;
@@ -87,22 +57,21 @@ svg {
   display: block;
 	border-style: none;
 	background-color: transparent;
-  cursor: pointer;
   color: black;
   font-family: 'Merienda', cursive;
   font-size: 15px;
 }
 
-.spells:hover{
+.toggleSpells{
+  cursor: pointer;
+}
+
+.toggleSpells:hover{
   color : #55d1d3 !important; 
   /* !important so it still works after using javascript! */
 }
 
-/* Padding: Inhalt bis zur Border, 
-Margin: Border bis Dokumentrand */
-
-
-/* ---------- Pop-up -------------- */
+/* ------ Pop-up / Infokasten ------ */
 /* Popup container */
 .spells {
   -webkit-user-select: none;
@@ -116,13 +85,13 @@ Margin: Border bis Dokumentrand */
   display: none;
   list-style-type: none;
   margin-top: 7px;
-  margin-left: 10px;
+  margin-left: -5px;
   margin-bottom: 10px;
   color: black;
   font-family: 'Lora', serif;
 	font-size: 14px;
   width: 160px;
-  color: #fff;
+  color: rgb(72, 72, 72);
   border-radius: 6px;
   padding: 8px 10px;
   position: relative;
@@ -146,3 +115,110 @@ Margin: Border bis Dokumentrand */
   to {opacity:0.8 ;}
 }
 
+
+/*--- Tags ----*/
+
+.info{
+  cursor: auto;
+}
+
+.tag{
+  font-family: 'Lora', serif;
+  font-size: 12px;
+  color: rgb(72, 72, 72);
+  border-style: none;
+  opacity: 0.7;
+  cursor: pointer;
+  border: none;
+  border-radius: 30px;
+  padding: 7px 10px; /* oben-unten / links-rechts */
+  margin: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+
+a:link{
+  text-decoration: none;
+  color: rgb(72, 72, 72);
+}
+
+a:visited{
+  text-decoration: none;
+  color: rgb(72, 72, 72);
+}
+
+.tag:hover{
+  /* background-color:  */
+  opacity: 0.9;
+  border-radius: 35px;
+  padding: 12px 15px; /* oben-unten / links-rechts */
+}
+
+
+/* ------------------------ ChartContainer -------------------------*/
+
+/* ---------- Legende ---------- */
+.Legend{
+  text-align: right;
+  font-family: 'Lora', serif;
+  font-size: 14px;
+}
+
+.legendHead{
+  text-align: center;
+}
+
+#legendList{
+  list-style: none;
+}
+
+.legendList li{
+  display: inline;
+  padding: 20px;
+}
+
+li#charm{
+  list-style-image: url('img/charm_bullet_small.png');
+}
+
+li#curse{
+  list-style-image: url('img/curse_bullet_small.png');
+}
+
+/* -------- parallel coordinate chart --------- */
+svg {
+  font-family: 'Lora', serif;
+  font-size: 10px;
+  width: 2000;
+  height: 400;
+}
+
+.background path {
+  fill: none;
+  stroke: #ddd;
+  shape-rendering: crispEdges;
+}
+
+.foreground path {
+  fill: none;
+  stroke: steelblue;
+}
+
+.brush .extent {
+  fill-opacity: .3;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
+
+.axis line,
+.axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  font-family: 'Lora', serif;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  cursor: move;
+}

@@ -14,6 +14,17 @@ def spells_to_html():
         typ = str(element["Type"])
         category = str(element["Category"])
         danger = str(element["Danger"])
+        link = element["Link"]
+        
+
+        if danger == "0":
+            danger = "Harmless"
+        elif danger == "1":
+            danger = "Harmful"
+        elif danger == "2":
+            danger = "Severe"
+        elif danger == "3":
+            danger = "Lethal"
         
         spell_list.append(spell)
         
@@ -23,13 +34,14 @@ def spells_to_html():
             <a class='toggleSpells'>{}</a>
             <ul class='info' id='{}'>
                 <li class='effect'>{}</li>
-                <li class='type'>{}</li>
-                <li class='category'>{}</li>
-                <li class='danger'>{}</li>
+                <li class='spellLink'><button class='tag link'><a href={} target='_blank'>More Details</a></button></li>
+                <li class='type'><button class="tag type">{}</button></li>
+                <li class='category'><button class="tag category">{}</li>
+                <li class='danger'><button class="tag danger">{}</li>
             </ul>
         </li>"""
 
-        html = tmp.format(html_id, spell, html_id, effect, typ, category, danger)
+        html = tmp.format(html_id, spell, html_id, effect, link, typ, category, danger)
         html_list.append(html)
 
     with open('../Data/Background/html/spell_list.html', 'w') as f:

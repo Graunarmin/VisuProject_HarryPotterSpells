@@ -211,7 +211,7 @@ function reset_list(){
 
 function color(element){
     //choose respective color for each spell type
-    var type = String(element.querySelector('.type').innerHTML);
+    var type = String(element.querySelector('.type .tag').innerHTML);
     
     switch(type){
         case "Charm":

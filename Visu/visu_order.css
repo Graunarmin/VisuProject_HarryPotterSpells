@@ -1,0 +1,55 @@
+/* ---------------- Flexboxes -------------- */
+/*
+  <Container>
+      <Headline/>
+      <VisuContainer>
+          <ListContainer/>
+          <ChartContainer>
+              <Legend/>
+              <ParaChart/>
+              <BarChart/>
+          </ChartContainer>
+      </VisuContainer>
+  </Container
+*/
+.Container{
+  display: flex;
+  flex-direction: column;
+}
+
+.Container div{
+  margin: 10px;
+  flex: 1;
+}
+
+.Headline{
+  flex: 1;
+}
+
+.VisuContainer div{
+  display: flex;
+  margin:0;
+}
+
+.ListContainer{
+  flex:1;
+}
+
+.ChartContainer{
+  flex:2;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+/* .Legend{
+
+} */
+
+.ParaChart{
+  margin-bottom: 20px;
+}
+
+/* .BarChart{
+
+} */
