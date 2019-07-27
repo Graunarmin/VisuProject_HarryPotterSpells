@@ -160,29 +160,43 @@ a:visited{
 /* ---------- Legende ---------- */
 .Legend{
   text-align: right;
-  font-family: 'Lora', serif;
-  font-size: 14px;
 }
-
-.legendHead{
-  text-align: center;
-}
-
-#legendList{
-  list-style: none;
-}
-
 .legendList li{
-  display: inline;
+  display: inline-block;
   padding: 20px;
 }
 
+.legendList li:before{
+    content: "";
+    display: list-item;
+    position: absolute;
+}
+
+li.legendHead{
+  font-family: 'Lora', serif;
+  list-style: none;
+  font-size: 14px;
+}
+
 li#charm{
-  list-style-image: url('img/charm_bullet_small.png');
+  list-style-image: url('img/bullets/charm_bullet_small.png');
+}
+
+li#spell{
+  list-style-image: url('img/bullets/spell_bullet_small.png');
 }
 
 li#curse{
-  list-style-image: url('img/curse_bullet_small.png');
+  list-style-image: url('img/bullets/curse_bullet_small.png');
+}
+
+li#unforgivable{
+  list-style-image: url('img/bullets/unforg_bullet_small.png');
+}
+
+.category{
+  font-family: 'Lora', serif;
+  font-size: 12px;
 }
 
 /* -------- parallel coordinate chart --------- */

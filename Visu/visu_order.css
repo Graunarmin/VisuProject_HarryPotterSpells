@@ -28,6 +28,7 @@
 
 .VisuContainer div{
   display: flex;
+  flex-direction: column;
   margin:0;
 }
 
@@ -42,9 +43,9 @@
   margin-right: 20px;
 }
 
-/* .Legend{
-
-} */
+.Legend{
+    justify-content: flex-end;
+}
 
 .ParaChart{
   margin-bottom: 20px;
