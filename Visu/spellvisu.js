@@ -1,11 +1,11 @@
 
 function init(){
     document.body.addEventListener("load", parallel_coordinates());
-    var spells = document.querySelectorAll('.spells');
+    var spells = document.querySelectorAll('.toggleSpells');
 
     spells.forEach.call(spells, function(e){
-        e.addEventListener("click", toggle_info);
-        e.addEventListener("click", highlight_path);
+        e.addEventListener("click", toggle_info, false);
+        e.addEventListener("click", highlight_path, false);
     });
 }
 
@@ -156,7 +156,7 @@ function parallel_coordinates(){
 }
 
 function toggle_info(){
-    var id = this.id;
+    var id = this.innerHTML.toLowerCase();
     //console.log("toggle: " + this.id);
 
     var elements = document.querySelectorAll('#'+id);
