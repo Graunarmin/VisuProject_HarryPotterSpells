@@ -5,8 +5,9 @@
         <title> Visualization </title>
         <meta charset="utf-8"/>
 
-        <link href="visu_style.css" rel="stylesheet" type="text/CSS"/>
         <link href="visu_order.css" rel="stylesheet" type="text/CSS"/>
+        <link href="visu_style.css" rel="stylesheet" type="text/CSS"/>
+  
         <link href="https://fonts.googleapis.com/css?family=Charm|Crimson+Text|Lora|Marck+Script|Merienda|Playfair+Display&display=swap" rel="stylesheet"> 
 
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
@@ -908,9 +909,6 @@
                                         <li class='danger'><button class="tag danger">Harmless</li>
                                     </ul>
                                 </li>
-    
-    
-    
 
                             </ul>
 
@@ -922,14 +920,18 @@
                 <div class="ChartContainer">
 
                     <div class="Legend">
+                        <div class="Whitespace">
+                            
+                        </div>
 
                         <div class="legendList">
+                            <span class="legendHead">Categories:</span>
+                            
                             <ul id="legendList">
-                                <li class="legendHead">Categories:</li>
-                                <li class="legendElements" id="charm"><button class="category" id="catCharm">Charm</button></li>
-                                <li class="legendElements" id="spell"><button class="category" id="catSpell">Spell</button></li>
-                                <li class="legendElements" id ="curse"><button class="category" id="catCurse">Curse</button></li>
-                                <li class="legendElements" id="unforgivable"><button class="category" id="catUnforgivable">Unforgivable Curse</button></li>
+                                <li class="legendElements" id="charm"><button class="legendcat" id="catCharm">Charm</button></li>
+                                <li class="legendElements" id="spell"><button class="legendcat" id="catSpell">Spell</button></li>
+                                <li class="legendElements" id ="curse"><button class="legendcat" id="catCurse">Curse</button></li>
+                                <li class="legendElements" id="unforgivable"><button class="legendcat" id="catUnforgivable">Unforgivable Curse</button></li>
                             </ul>
                         </div>
                     </div>

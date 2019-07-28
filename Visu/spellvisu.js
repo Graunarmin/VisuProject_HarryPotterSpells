@@ -11,10 +11,14 @@ function init(){
 
 function parallel_coordinates(){
 
+    // get svg size:
+    var el   = document.querySelector('#paraCoords');
+    var rect = el.getBoundingClientRect(); // get the bounding rectangle
+
     //platzieren des charts
-    var margin = {top: 30, right: 10, bottom: 10, left: 350},
-    width = 1350 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    var margin = {top: 30, right: 10, bottom: 10, left: 10},
+    width = rect.width - margin.left - margin.right,
+    height = rect.width/2 - margin.top - margin.bottom;
 
 
     //ordinale (diskret) Skalierung der Punkte 0 bis Breite mit Schrittweite 1 erstellen
@@ -186,7 +190,7 @@ function show(spell, info){
     //then color the Spell in its respective color
     var colour = color(info);
     spell.style.color = colour[0];
-    spell.style.fontSize = '18px';
+    spell.style.fontSize = '22px';
     //and Show the Infobox
     info.classList.toggle("show");
     info.style.backgroundColor = colour[1];
@@ -204,7 +208,7 @@ function hide(){
 function reset_list(){
     var elements = document.querySelectorAll('.spells');
     elements.forEach.call(elements, function(e){
-        e.style.fontSize = '15px';
+        e.style.fontSize = '20px';
         e.style.color = 'black';
     });
 }

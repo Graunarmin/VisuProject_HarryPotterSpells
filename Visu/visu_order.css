@@ -1,5 +1,15 @@
 /* ---------------- Flexboxes -------------- */
 /*
+|--------------------|
+|      Headline      |
+|--------------------|
+|       |   Legende  |
+| Liste |------------|
+|       | ParaChart  |
+|       |------------|
+|       | BarChart   |
+|--------------------|
+
   <Container>
       <Headline/>
       <VisuContainer>
@@ -12,45 +22,78 @@
       </VisuContainer>
   </Container
 */
+
 .Container{
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid black; */
 }
 
 .Container div{
-  margin: 10px;
-  flex: 1;
+    margin: 5px;
 }
 
-.Headline{
-  flex: 1;
-}
+    /* .Headline{
+        border: 2px solid red;
+    } */
 
-.VisuContainer div{
-  display: flex;
-  flex-direction: column;
-  margin:0;
-}
+    .Headline div{
+        margin: -5px;
+    }
 
-.ListContainer{
-  flex:1;
-}
+    .VisuContainer{
+        display: flex;
+        flex-direction: row;
+        /* border: 2px solid blue; */
+    }
 
-.ChartContainer{
-  flex:2;
-  display: flex;
-  flex-direction: column;
-  margin-right: 20px;
-}
 
-.Legend{
-    justify-content: flex-end;
-}
+        .ListContainer{
+            flex:1;
+            /* border: 2px solid purple; */
+        }
 
-.ParaChart{
-  margin-bottom: 20px;
-}
+        .ChartContainer{
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            flex:3;
+            /* border: 2px solid orange; */
+            
+        }
 
-/* .BarChart{
+        .Legend{
+            display: flex;
+            flex-direction:row;
+            justify-content: flex-end;
+            /* border: 2px solid green; */
+        }
+        
+            .Whitespace{
+                flex: 1.4;
+                /* border: 2px dotted brown; */
+            }
 
-} */
+            .legendList{
+                flex:1;
+                border: 1px solid grey;
+                display: flex;
+                flex-direction: column;
+            }
+                /* .legendHead{
+                    flex:1;
+                }
+
+                #legendList{
+                    flex:1;
+                } */
+                
+
+
+        /* .ParaChart{
+            border: 2px solid slateblue;
+        } */
+
+        /* .BarChart{
+
+        } */
