@@ -1,0 +1,10 @@
+id,parentID,size
+spells,
+year1,spells
+year2,spells
+year3,spells
+year4,spells
+spell,year2,8
+charm,year3,5
+spell,year3,7
+curse,year4,9

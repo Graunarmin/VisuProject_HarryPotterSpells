@@ -1,6 +1,7 @@
 
 function init(){
-    document.body.addEventListener("load", parallel_coordinates());
+    // document.body.addEventListener("load", parallel_coordinates());
+    document.body.addEventListener("load", bubbleChart());
     var spells = document.querySelectorAll('.toggleSpells');
 
     spells.forEach.call(spells, function(e){
@@ -19,6 +20,7 @@ function parallel_coordinates(){
     var margin = {top: 30, right: 10, bottom: 10, left: 10},
     width = rect.width - margin.left - margin.right,
     height = rect.width/2 - margin.top - margin.bottom;
+    // height = rect.height - margin.top - margin.bottom;
 
 
     //ordinale (diskret) Skalierung der Punkte 0 bis Breite mit Schrittweite 1 erstellen
@@ -154,6 +156,51 @@ function parallel_coordinates(){
     }
 
 }
+
+function bubbleChart(){
+    // get svg size:
+    var element   = document.querySelector('.Chart');
+    var rect = element.getBoundingClientRect(); // get the bounding rectangle
+
+    //platzieren des charts
+    var margin = {top: 30, right: 10, bottom: 10, left: 10};
+    var width = rect.width ,//- margin.left - margin.right,
+    height = rect.width/2;// - margin.top - margin.bottom;
+
+    //Größe des svg festlegen    
+    var svg = d3.select("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+    // Get the data from our CSV file
+    d3.csv('Pdata.csv', function(error, CsvData) {
+        if (error) throw error;
+
+        vData = d3.stratify()(CsvData);
+        drawViz(vData);
+    });
+
+    function drawViz(vData) {
+        // Declare d3 layout
+        var vLayout = d3.pack().size([width, height]);
+
+        // Layout + Data
+        var vRoot = d3.hierarchy(vData).sum(function (d) { return d.data.size; });
+        var vNodes = vRoot.descendants();
+        vLayout(vRoot);
+        var vSlices = svg.selectAll('circle').data(vNodes).enter().append('circle');
+
+        // Draw on screen
+        vSlices.attr('cx', function (d) { return d.x; })
+            .attr('cy', function (d) { return d.y; })
+            .attr('r', function (d) { return d.r; });
+    }
+}
+
+    
 
 function toggle_info(){
     var id = this.innerHTML.toLowerCase();
