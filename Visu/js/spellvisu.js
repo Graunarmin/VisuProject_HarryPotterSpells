@@ -176,7 +176,7 @@ function bubbleChart(){
 
 
     // Get the data from our CSV file
-    d3.csv('Pdata.csv', function(error, CsvData) {
+    d3.csv('../Playground/Pdata.csv', function(error, CsvData) {
         if (error) throw error;
 
         vData = d3.stratify()(CsvData);

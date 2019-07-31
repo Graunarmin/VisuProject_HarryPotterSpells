@@ -123,25 +123,7 @@
         "HP_06": "",
         "HP_07": "",
         "overall": "1",
-        "Anmerkung": " "
-    },
-    {
-        "Spell": "Caterwauling",
-        "Short": "Caterwauling",
-        "Type": "Charm",
-        "Category": "Protection",
-        "Danger": "0",
-        "Effect": "Detects enemies and emits a scream",
-        "Link": "https://harrypotter.fandom.com/wiki/Caterwauling_Charm",
-        "HP_01": "",
-        "HP_02": "",
-        "HP_03": "",
-        "HP_04": "",
-        "HP_05": "",
-        "HP_06": "",
-        "HP_07": "2",
-        "overall": "2",
-        "Anmerkung": " "
+        "Anmerkung": ""
     },
     {
         "Spell": "Cave Inimicum",
@@ -1013,20 +995,17 @@
         "Type": "Spell",
         "Category": "Counter",
         "Danger": "0",
-        "Effect": "Result when brother wands duel",
-        "Link": " the loser\u2019s wand shows all spells it recently cast",
-        "HP_01": "https://harrypotter.fandom.com/wiki/Reverse_Spell",
+        "Effect": "Result when brother wands duel the loser\u2019s wand shows all spells it recently cast",
+        "Link": "https://harrypotter.fandom.com/wiki/Reverse_Spell",
+        "HP_01": "",
         "HP_02": "",
         "HP_03": "",
-        "HP_04": "",
-        "HP_05": "2",
+        "HP_04": "2",
+        "HP_05": "",
         "HP_06": "",
-        "HP_07": "",
-        "overall": "1",
-        "Anmerkung": "3",
-        "null": [
-            " "
-        ]
+        "HP_07": "1",
+        "overall": "3",
+        "Anmerkung": " "
     },
     {
         "Spell": "Prior Incantato",
@@ -1268,20 +1247,17 @@
         "Type": "Spell",
         "Category": "Fight",
         "Danger": "2",
-        "Effect": "Causes wounds",
-        "Link": " as if slashed by a sword",
-        "HP_01": "https://www.pottermore.com/explore-the-story/sectumsempra",
+        "Effect": "Causes wounds \u2013 as if slashed by a sword",
+        "Link": "https://www.pottermore.com/explore-the-story/sectumsempra",
+        "HP_01": "",
         "HP_02": "",
         "HP_03": "",
         "HP_04": "",
         "HP_05": "",
-        "HP_06": "",
-        "HP_07": "6",
-        "overall": "2",
-        "Anmerkung": "8",
-        "null": [
-            " "
-        ]
+        "HP_06": "6",
+        "HP_07": "2",
+        "overall": "8",
+        "Anmerkung": " "
     },
     {
         "Spell": "Serpensortia",
