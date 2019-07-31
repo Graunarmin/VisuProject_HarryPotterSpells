@@ -1,0 +1,26 @@
+{"name": "Spells", "children":
+    [{"name":"Philosophers Stone", "children":
+        [{"name":"Charm","children":
+            [{"name":"Accio","size":2},{"name":"Aguamenti","size":4}]
+        },
+        {"name":"Spell","children":
+            [{"name":"Diffindo","size":3},{"name":"Engorgio","size":1}]
+        }]
+    },
+    {"name":"Chamber of Secrets","children":
+        [{"name":"Charm","children":
+            [{"name":"Lumos","size":2},{"name":"Aguamenti","size":4}]
+        },
+        {"name":"Spell","children":
+            [{"name":"Nox","size":3},{"name":"Engorgio","size":1}]
+        }]
+    },
+    {"name":"Prisoner of Azkaban", "children":
+        [{"name":"Charm","children":
+            [{"name":"Lumos","size":2},{"name":"Aguamenti","size":4}]
+        },
+        {"name":"Spell","children":
+            [{"name":"Nox","size":3},{"name":"Engorgio","size":1}]
+        }]
+    }]
+}
