@@ -7,6 +7,7 @@ function init(){
         e.addEventListener("click", toggle_info, false);
         e.addEventListener("click", highlight_path, false);
     });
+
 }
 
 //zoomable Treemap
