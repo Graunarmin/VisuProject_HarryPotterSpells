@@ -26,6 +26,7 @@
 .Container{
     display: flex;
     flex-direction: column;
+    height: 100%;
     /* border: 2px solid black; */
 }
 
@@ -92,7 +93,7 @@
                 
 
 
-        /* .ParaChart{
+        /* .Chart{
             border: 2px solid slateblue;
         } */
 

@@ -16,11 +16,14 @@ function treemap(){
     var rect = element.getBoundingClientRect(); // get the bounding rectangle
 
     //platzieren des charts
-    var height = rect.width/2;//- margin.left - margin.right,
+    var height = rect.width/2//- margin.left - margin.right,
+        width = rect.width,
+        margin = 20,
+        diameter = height;
 
-    var svg = d3.select("svg"),
-    margin = 20,
-    diameter = height,
+    var svg = d3.select("svg")
+        .attr("width", width + margin + margin)
+        .attr("height", height + margin + margin),
     g = svg.append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
     //Farbpalette festlegen
@@ -35,7 +38,7 @@ function treemap(){
         .padding(2);
 
     //Daten einlesen und daraus Visu bauen    
-    d3.json("Data/treemap_data.json", function(error, root) {
+    d3.json("Data/treemap_data_2.json", function(error, root) {
         if (error) throw error;
 
         root = d3.hierarchy(root)

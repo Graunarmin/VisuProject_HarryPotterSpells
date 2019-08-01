@@ -17,13 +17,13 @@ def create_treedata():
         unforg = {"name":"Unforgivable Curse","children":[]}
 
         for element in spells:
-            if element["Type"] == "Charm":
+            if element["Type"] == "Charm" and str(element[year]):
                 charm["children"].append({"name":element["Spell"],"size":element[year]})
-            elif element["Type"] == "Spell":
+            elif element["Type"] == "Spell" and str(element[year]):
                 spell["children"].append({"name":element["Spell"],"size":element[year]})
-            elif element["Type"] == "Curse":
+            elif element["Type"] == "Curse" and str(element[year]):
                 curse["children"].append({"name":element["Spell"],"size":element[year]})
-            elif element["Type"] == "Unforgivable Curse":
+            elif element["Type"] == "Unforgivable Curse" and str(element[year]):
                 unforg["children"].append({"name":element["Spell"],"size":element[year]})
         
         categories = [charm, spell, curse, unforg]
@@ -47,10 +47,10 @@ def create_treedata():
     
     json_dict = {"name":"Spells","children":books}
 
-    pickle.dump(json_dict, open("../Pickles/treemap_data.p", "wb"))
+    pickle.dump(json_dict, open("../Pickles/treemap_data_2.p", "wb"))
 
     json_string = json.dumps(json_dict)
-    json.dump(json_dict, open('../Data/Background/json/treemap_data.json', 'w'))
+    json.dump(json_dict, open('../Data/Background/json/treemap_data_2.json', 'w'))
 
 
 def main():

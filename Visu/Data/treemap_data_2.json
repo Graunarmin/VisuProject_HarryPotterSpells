@@ -1,0 +1,55 @@
+{"name": "Spells", "children": 
+    [{"name": "Philosophers Stone", "children": 
+        [{"name": "Charm", "children": 
+            [{"name": "Alohomora", "size": "2"}, {"name": "Wingardium Leviosa", "size": "3"}]},
+        {"name": "Spell", "children": 
+            [{"name": "Petrificus Totalus", "size": "1"}]}, 
+        {"name": "Curse", "children": 
+            [{"name": "Locomotor Mortis", "size": "1"}]}]}, 
+    {"name": "Chamber of Secrets", "children": 
+        [{"name": "Charm", "children": 
+            [{"name": "Expelliarmus", "size": "3"}, {"name": "Obliviate", "size": "1"}, {"name": "Rictusempra", "size": "1"}]}, 
+        {"name": "Spell", "children": 
+        [   {"name": "Aparecium", "size": "1"}, {"name": "Finite", "size": "1"}, {"name": "Lumos", "size": "2"}, {"name": "Peskipiksi Pesternomi", "size": "1"}, {"name": "Serpensortia", "size": "1"}, {"name": "Tarantallegra", "size": "1"}]}]}, 
+    {"name": "Prisoner of Azkaban", "children": 
+        [{"name": "Charm", "children": 
+            [{"name": "Alohomora", "size": "1"}, {"name": "Confundo", "size": "1"}, {"name": "Expecto Patronum", "size": "32"}, {"name": "Expelliarmus", "size": "4"}, {"name": "Impervius", "size": "1"}, {"name": "Mobiliarbus", "size": "1"}]}, 
+        {"name": "Spell", "children": 
+            [{"name": "Dissendium", "size": "4"}, {"name": "Ferula", "size": "1"}, {"name": "Lumos", "size": "4"}, {"name": "Mobilicorpus", "size": "1"}, {"name": "Nox", "size": "1"}, {"name": "Riddikulus", "size": "11"}, {"name": "Waddiwasi", "size": "1"}]}]}, 
+    {"name": "Goblet of Fire", "children": 
+        [{"name": "Charm", "children": 
+            [{"name": "Accio", "size": "8"}, {"name": "Confundo", "size": "1"}, {"name": "Engorgio", "size": "1"}, {"name": "Expecto Patronum", "size": "1"}, {"name": "Expelliarmus", "size": "3"}, {"name": "Impedimenta", "size": "4"}, {"name": "Obliviate", "size": "1"}]}, 
+        {"name": "Spell", "children": 
+            [{"name": "Avis", "size": "1"}, {"name": "Deletrius", "size": "1"}, {"name": "Densaugeo", "size": "1"}, {"name": "Diffindo", "size": "1"}, {"name": "Incendio", "size": "1"}, {"name": "Lumos", "size": "4"}, {"name": "Orchideous", "size": "1"}, {"name": "Priori Incantatem", "size": "2"}, {"name": "Prior Incantato", "size": "2"}, {"name": "Reducio", "size": "2"}, {"name": "Relashio", "size": "1"}, {"name": "Reparo", "size": "1"}, {"name": "Riddikulus", "size": "1"}, {"name": "Sonorus", "size": "3"}, {"name": "Stupefy", "size": "10"}]}, 
+        {"name": "Curse", "children": 
+                [{"name": "Furnunculus", "size": "1"}]}, 
+        {"name": "Unforgivable Curse", "children": 
+            [{"name": "Avada Kedavra", "size": "9"}, {"name": "Crucio", "size": "5"}, {"name": "Imperio", "size": "1"}]}]}, 
+    {"name": "Order of the Pheonix", "children": 
+        [{"name": "Charm", "children": 
+            [{"name": "Accio", "size": "10"}, {"name": "Alohomora", "size": "3"}, {"name": "Expecto Patronum", "size": "4"}, {"name": "Expelliarmus", "size": "7"}, {"name": "Impedimenta", "size": "5"}, {"name": "Impervius", "size": "2"}, {"name": "Portus", "size": "2"}, {"name": "Protego", "size": "3"}, {"name": "Scourgify", "size": "3"}, {"name": "Wingardium Leviosa", "size": "1"}]}, 
+        {"name": "Spell", "children": 
+            [{"name": "Colloportus", "size": "3"}, {"name": "Diffindo", "size": "1"}, {"name": "Finite", "size": "1"}, {"name": "Flagrate", "size": "1"}, {"name": "Incarcerous", "size": "1"}, {"name": "Legilimens", "size": "5"}, {"name": "Lumos", "size": "2"}, {"name": "Petrificus Totalus", "size": "3"}, {"name": "Prior Incantato", "size": "2"}, {"name": "Reducto", "size": "1"}, {"name": "Rennervate", "size": "3"}, {"name": "Reparo", "size": "3"}, {"name": "Riddikulus", "size": "5"}, {"name": "Silencio", "size": "7"}, {"name": "Stupefy", "size": "7"}, {"name": "Tarantallegra", "size": "1"}]}, 
+        {"name": "Curse", "children": 
+            [{"name": "Locomotor Mortis", "size": "2"}]}, 
+        {"name": "Unforgivable Curse", "children": 
+            [{"name": "Avada Kedavra", "size": "4"}, {"name": "Crucio", "size": "4"}]}]}, 
+    {"name": "Halfblood Prince", "children": 
+        [{"name": "Charm", "children": 
+            [{"name": "Accio", "size": "3"}, {"name": "Aguamenti", "size": "7"}, {"name": "Alohomora", "size": "1"}, {"name": "Confundo", "size": "1"}, {"name": "Expelliarmus", "size": "2"}, {"name": "Impedimenta", "size": "3"}, {"name": "Protego", "size": "1"}]}, 
+        {"name": "Spell", "children": 
+            [{"name": "Anapneo", "size": "1"}, {"name": "Episkey", "size": "2"}, {"name": "Incarcerous", "size": "1"}, {"name": "Incendio", "size": "2"}, {"name": "Langlock", "size": "1"}, {"name": "Legilimens", "size": "1"}, {"name": "Levicorpus", "size": "4"}, {"name": "Liberacorpus", "size": "1"}, {"name": "Lumos", "size": "3"}, {"name": "Muffliato", "size": "6"}, {"name": "Oppugno", "size": "1"}, {"name": "Petrificus Totalus", "size": "5"}, {"name": "Reducto", "size": "2"}, {"name": "Rennervate", "size": "2"}, {"name": "Reparo", "size": "3"}, {"name": "Revelio", "size": "2"}, {"name": "Sectumsempra", "size": "6"}, {"name": "Specialis Revelio", "size": "2"}, {"name": "Stupefy", "size": "1"}, {"name": "Tergeo", "size": "1"}]},
+        {"name": "Unforgivable Curse", "children": 
+            [{"name": "Avada Kedavra", "size": "2"}, {"name": "Crucio", "size": "2"}]}]}, 
+    {"name": "Deathly Hallows", "children": 
+        [{"name": "Charm", "children": 
+            [{"name": "Accio", "size": "12"}, {"name": "Aguamenti", "size": "1"}, {"name": "Cave Inimicum", "size": "2"}, {"name": "Confundo", "size": "1"}, {"name": "Expecto Patronum", "size": "6"}, {"name": "Expelliarmus", "size": "8"}, {"name": "Impedimenta", "size": "1"}, {"name": "Impervius", "size": "2"}, {"name": "Obliviate", "size": "1"}, {"name": "Protego", "size": "6"}, {"name": "Repello Muggletum", "size": "1"}, {"name": "Wingardium Leviosa", "size": "1"}]}, 
+        {"name": "Spell", "children": 
+            [{"name": "Deprimo", "size": "1"}, {"name": "Descendo", "size": "2"}, {"name": "Diffindo", "size": "3"}, {"name": "Duro", "size": "1"}, {"name": "Erecto", "size": "1"}, {"name": "Expulso", "size": "1"}, {"name": "Finite", "size": "2"}, {"name": "Geminio", "size": "1"}, {"name": "Glisseo", "size": "1"}, {"name": "Homenum Revelio", "size": "2"}, {"name": "Lumos", "size": "5"}, {"name": "Muffliato", "size": "5"}, {"name": "Nox", "size": "1"}, {"name": "Petrificus Totalus", "size": "1"}, {"name": "Piertotum Locomotor", "size": "1"}, {"name": "Priori Incantatem", "size": "1"}, {"name": "Relashio", "size": "3"}, {"name": "Reparo", "size": "1"}, {"name": "Revelio", "size": "1"}, {"name": "Salvio Hexia", "size": "1"}, {"name": "Sectumsempra", "size": "2"}, {"name": "Stupefy", "size": "9"}, {"name": "Tergeo", "size": "1"}]}, 
+        {"name": "Curse", "children": 
+            [{"name": "Confringo", "size": "2"}, {"name": "Flagrante", "size": "1"}]}, 
+        {"name": "Unforgivable Curse", "children": 
+            [{"name": "Avada Kedavra", "size": "8"}, {"name": "Crucio", "size": "4"}, {"name": "Imperio", "size": "4"}]
+        }]
+    }]
+}
