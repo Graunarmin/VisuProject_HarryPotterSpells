@@ -28,9 +28,10 @@ def create_arcdata():
     for spell in linkliste:
         link = linkliste[spell]
         for i in range(len(link)-1):
-            links.append({"source":link[i],"target":link[i+1],"value":1})
-    
-    
+            for j in range(i+1,len(link)-1):
+                links.append({"source":link[i],"target":link[j],"value":1})
+
+
     data = {"nodes":nodes,"links":links}
 
     pickle.dump(data, open("../Pickles/arcdata.p", "wb"))
