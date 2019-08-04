@@ -1,0 +1,17 @@
+
+.toolTip{
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    display: none;
+    min-width: 50px;
+    height: auto;
+    background: none; 
+    border: 1px solid grey;
+    padding: 10px;
+    text-align: center;
+}
+
+/*.circle{
+    cursor: default; 
+}*/
