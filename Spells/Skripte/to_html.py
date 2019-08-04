@@ -65,8 +65,8 @@ def csv_to_json(csv_path, json_path):
 
 def main():
     
-    #csv_to_json("../Data/used/spells.csv",'../Data/used/spells.json')
-    spells_to_html()
+    csv_to_json("../Data/used/spells.csv",'../Data/used/spells.json')
+    #spells_to_html()
 
 if __name__ == '__main__':
     main()
