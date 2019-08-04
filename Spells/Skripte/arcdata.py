@@ -1,7 +1,7 @@
 import json
 import pickle
 
-def create_archdata():
+def create_arcdata():
     
     spells = pickle.load(open("../Pickles/spells_final.p", "rb"))
     nodes = []
@@ -33,14 +33,14 @@ def create_archdata():
     
     data = {"nodes":nodes,"links":links}
 
-    pickle.dump(data, open("../Pickles/archdata.p", "wb"))
+    pickle.dump(data, open("../Pickles/arcdata.p", "wb"))
 
     json_string = json.dumps(data)
-    json.dump(data, open('../Data/Background/json/archdata.json', 'w'))
+    json.dump(data, open('../Data/Background/json/arcdata.json', 'w'))
 
 def main():
     
-    create_archdata()
+    create_arcdata()
 
 if __name__ == '__main__':
     main()
