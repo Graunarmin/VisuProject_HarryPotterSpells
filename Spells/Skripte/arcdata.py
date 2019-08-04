@@ -28,7 +28,7 @@ def create_arcdata():
     for spell in linkliste:
         link = linkliste[spell]
         for i in range(len(link)-1):
-            for j in range(i+1,len(link)-1):
+            for j in range(i+1,len(link)):
                 links.append({"source":link[i],"target":link[j],"value":1})
 
 
