@@ -1,6 +1,6 @@
 
 function init(){
-    document.body.addEventListener("load", treemap());
+    document.body.addEventListener("load", arc());
     var spells = document.querySelectorAll('.toggleSpells');
 
     spells.forEach.call(spells, function(e){
@@ -8,6 +8,264 @@ function init(){
         e.addEventListener("click", highlight_path, false);
     });
 
+}
+
+function arc(){
+    //var clicked = false;
+    var id = "0";
+
+    // get svg size:
+    /*var element   = document.querySelector('.Chart');
+    var rect = element.getBoundingClientRect(); // get the bounding rectangle
+
+    //platzieren des charts
+    var height = rect.width/2//- margin.left - margin.right,
+        width = rect.width,
+        margin = 20;
+        //diameter = height;*/
+
+    // set the dimensions and margins of the graph
+    var margin = {top: 0, right: 30, bottom: 50, left: 60},
+    width = 1000 - margin.left - margin.right,
+    height = 535 - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    var svg = d3.select("#Visu")
+    //.append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+    // Read dummy data
+    d3.json("Data/arcdata.json", function( data) {
+
+    // List of node names
+    var allNodes = data.nodes.map(function(d){return d.name})
+
+    // List of groups
+    var allGroups = data.nodes.map(function(d){return d.type})
+    allGroups = [...new Set(allGroups)]
+
+    // A color scale for groups:
+    var color = d3.scaleOrdinal()
+        .domain(allGroups)
+        .range(d3.schemeSet3);
+
+    // A linear scale for node size
+    var size = d3.scaleLinear()
+        .domain([1,10])
+        .range([2,10]);
+
+    // A linear scale to position the nodes on the X axis
+    var x = d3.scalePoint()
+        .range([0, width])
+        .domain(allNodes)
+
+    // In my input data, links are provided between nodes -id-, NOT between node names.
+    // So I have to do a link between this id and the name
+    var idToNode = {};
+    data.nodes.forEach(function (n) {
+        idToNode[n.id] = n;
+    });
+
+    // Add the links
+    var links = svg
+        .selectAll('mylinks')
+        .data(data.links)
+        .enter()
+        .append('path')
+        .attr('d', function (d) {
+        start = x(idToNode[d.source].name)    // X position of start node on the X axis
+        end = x(idToNode[d.target].name)      // X position of end node
+        return ['M', start, height-30,    // the arc starts at the coordinate x=start, y=height-30 (where the starting node is)
+            'A',                            // This means we're gonna build an elliptical arc
+            (start - end)/2, ',',    // Next 2 lines are the coordinates of the inflexion point. Height of this point is proportional with start - end distance
+            (start - end)/2, 0, 0, ',',
+            start < end ? 1 : 0, end, ',', height-30] // We always want the arc on top. So if end is before start, putting 0 here turn the arc upside down.
+            .join(' ');
+        })
+        .style("fill", "none")
+        .attr("stroke", "grey")
+        .style("stroke-width", 1)
+
+    // Add the circle for the nodes
+    var nodes = svg
+        .selectAll("mynodes")
+        .data(data.nodes.sort(function(a,b) { return +b.size - +a.size }))
+        .enter()
+        .append("circle")
+        .attr("cx", function(d){ return(x(d.name))})
+        .attr("cy", height-30)
+        .attr("r", function(d){ return(size(d.size))})
+        .style("fill", function(d){ return color(d.type)})
+        .attr("stroke", "white")
+
+
+    // And give them a label
+    var labels = svg
+        .selectAll("mylabels")
+        .data(data.nodes)
+        .enter()
+        .append("text")
+        .attr("x", 0)
+        .attr("y", 0)
+        .text(function(d){ return(d.spell)} )
+        .style("text-anchor", "end")
+        .attr("transform", function(d){ return( "translate(" + (x(d.name)) + "," + (height-15) + ")rotate(-45)")})
+        .style("font-size", 6)
+
+    nodes
+        //---------------------------------- Mouseover ----------------------------------
+        .on('mouseover', function (d) {
+
+        //If no other spell is currently selected
+        if(id == "0"){
+
+            //----------------- Nodes -----------------
+            //Reduce opacity of all circles
+            nodes
+            .style('opacity', .2)
+            //Only current circle stays the same color 
+            d3.select(this)
+            .style('opacity', 1)
+
+            //----------------- Connections -----------------
+            links
+            //Color of the link
+            .style('stroke', function (link_d){ 
+                if(link_d.source === d.id || link_d.target === d.id){
+                return color(d.type); 
+                }
+                else{
+                return '#b8b8b8';
+                }
+            })
+            //Opacity of the link
+            .style('stroke-opacity', function (link_d) { 
+                if(link_d.source === d.id || link_d.target === d.id){
+                return 1;
+                }
+                else{
+                return 0.2;
+                }
+            })
+            //Width of the link
+            .style('stroke-width', function (link_d) { 
+                if(link_d.source === d.id || link_d.target === d.id){
+                return 4;
+                }
+                else{
+                return 1;
+                }
+            })
+
+            //----------------- Labels -----------------
+            labels
+            //Size of the labels
+            .style("font-size", function(label_d){ 
+                if(label_d.name === d.name){
+                return 16;
+                }
+                else{
+                return 2;
+                }
+            })
+        }
+        })
+        //---------------------------------- Mouseout ----------------------------------
+        .on('mouseout', function (d) {
+
+        //If the spell wasn't selected
+        if(id == "0"){
+            nodes.style('opacity', 1)
+            links
+            .style('stroke', 'grey')
+            .style('stroke-opacity', .8)
+            .style('stroke-width', '1')
+            labels
+            .style("font-size", 6 ) 
+        }
+
+        })
+        //---------------------------------- Click ----------------------------------
+        .on('click', function (d) {
+        
+        //If the spell wasn't selected yet
+        if(id == "0"){
+
+            //Get id of current circle
+            id = d.id;
+
+            //----------------- Nodes -----------------
+            //Reduce opacity of all circles
+            nodes
+            .style('opacity', .2)
+            //Only current circle stays the same color 
+            d3.select(this)
+            .style('opacity', 1)
+
+            //----------------- Connections -----------------
+            links
+            //Color of the link
+            .style('stroke', function (link_d){ 
+                if(link_d.source === d.id || link_d.target === d.id){
+                return color(d.type); 
+                }
+                else{
+                return '#b8b8b8';
+                }
+            })
+            //Opacity of the link
+            .style('stroke-opacity', function (link_d) { 
+                if(link_d.source === d.id || link_d.target === d.id){
+                return 1;
+                }
+                else{
+                return 0.2;
+                }
+            })
+            //Width of the link
+            .style('stroke-width', function (link_d) { 
+                if(link_d.source === d.id || link_d.target === d.id){
+                return 4;
+                }
+                else{
+                return 1;
+                }
+            })
+
+            //----------------- Labels -----------------
+            labels
+            //Size of the labels
+            .style("font-size", function(label_d){ 
+                if(label_d.name === d.name){
+                return 16;
+                }
+                else{
+                return 2;
+                }
+            })
+        }
+
+        //Else if the spell was selected and clicked again 
+        else if(id == d.id){
+
+            id = "0";
+
+            nodes.style('opacity', 1)
+            links
+            .style('stroke', 'grey')
+            .style('stroke-opacity', .8)
+            .style('stroke-width', '1')
+            labels
+            .style("font-size", 6 ) 
+
+        }
+
+        })
+    })
 }
 
 //zoomable Treemap
