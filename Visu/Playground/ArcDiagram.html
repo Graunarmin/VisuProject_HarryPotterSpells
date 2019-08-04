@@ -19,8 +19,8 @@ var id = "0";
 
 // set the dimensions and margins of the graph
 var margin = {top: 0, right: 30, bottom: 50, left: 60},
-  width = 650 - margin.left - margin.right,
-  height = 400 - margin.top - margin.bottom;
+  width = 1000 - margin.left - margin.right,
+  height = 800 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
@@ -32,13 +32,13 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Read dummy data
-d3.json("arch_try.json", function( data) {
+d3.json("arcdata.json", function( data) {
 
   // List of node names
   var allNodes = data.nodes.map(function(d){return d.name})
 
   // List of groups
-  var allGroups = data.nodes.map(function(d){return d.grp})
+  var allGroups = data.nodes.map(function(d){return d.type})
   allGroups = [...new Set(allGroups)]
 
   // A color scale for groups:
@@ -86,13 +86,13 @@ d3.json("arch_try.json", function( data) {
   // Add the circle for the nodes
   var nodes = svg
     .selectAll("mynodes")
-    .data(data.nodes.sort(function(a,b) { return +b.n - +a.n }))
+    .data(data.nodes.sort(function(a,b) { return +b.size - +a.size }))
     .enter()
     .append("circle")
       .attr("cx", function(d){ return(x(d.name))})
       .attr("cy", height-30)
-      .attr("r", function(d){ return(size(d.n))})
-      .style("fill", function(d){ return color(d.grp)})
+      .attr("r", function(d){ return(size(d.size))})
+      .style("fill", function(d){ return color(d.type)})
       .attr("stroke", "white")
 
 
@@ -104,7 +104,7 @@ d3.json("arch_try.json", function( data) {
     .append("text")
       .attr("x", 0)
       .attr("y", 0)
-      .text(function(d){ return(d.spell)} )
+      .text(function(d){ return(d.name)} )
       .style("text-anchor", "end")
       .attr("transform", function(d){ return( "translate(" + (x(d.name)) + "," + (height-15) + ")rotate(-45)")})
       .style("font-size", 6)
@@ -129,7 +129,7 @@ d3.json("arch_try.json", function( data) {
           //Color of the link
           .style('stroke', function (link_d){ 
             if(link_d.source === d.id || link_d.target === d.id){
-              return color(d.grp); 
+              return color(d.type); 
             }
             else{
               return '#b8b8b8';
@@ -204,7 +204,7 @@ d3.json("arch_try.json", function( data) {
           //Color of the link
           .style('stroke', function (link_d){ 
             if(link_d.source === d.id || link_d.target === d.id){
-              return color(d.grp); 
+              return color(d.type); 
             }
             else{
               return '#b8b8b8';
