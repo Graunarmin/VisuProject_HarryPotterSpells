@@ -12,354 +12,395 @@ function init(){
 
 function arc(){
     
+    //---------------------- Variables ----------------------
+
     var clicked = "0";
     var hover = "0";
     var book = "0";
     var id = "0";
+    var circleTooltip = d3.select("body").append("div").attr("class", "toolTip");
 
-    // get svg size:
-    /*var element   = document.querySelector('.Chart');
-    var rect = element.getBoundingClientRect(); // get the bounding rectangle
+    //---------------------- Size ----------------------
 
-    //platzieren des charts
-    var height = rect.width/2//- margin.left - margin.right,
-        width = rect.width,
-        margin = 20;
-        //diameter = height;*/
+    //Get svg size
+    var element = document.querySelector('.Chart');
+    var rect = element.getBoundingClientRect(); 
 
-    // set the dimensions and margins of the graph
-    var margin = {top: 0, right: 30, bottom: 50, left: 60},
-    width = 1100 - margin.left - margin.right,
-    height = 580 - margin.top - margin.bottom;
+    //Set dimensions of graph depending on svg size
+    var margin = {top: 0, right: 30, bottom: 10, left: 60};
+    var height = rect.width/2 - margin.top - margin.bottom;
+    var width = rect.width - margin.left - margin.right;
 
-    // append the svg object to the body of the page
+    //Select svg element of page and add dimensions 
     var svg = d3.select("#Visu")
-        .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
+        .attr("width", width + margin.left + margin.right)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var circleTooltip = d3.select("body").append("div").attr("class", "toolTip");
+    //---------------------- Read Data ----------------------
 
-    d3.json("Data/arcdata.json", function( data) {
+    d3.json("Data/arcdata.json", function(data){
 
-    // List of node names
-    var allNodes = data.nodes.map(function(d){return d.name})
+        //List of all circles
+        var allCircles = data.nodes.map(function(d){return d.name})
 
-    // List of groups
-    var allGroups = data.nodes.map(function(d){return d.type})
-    allGroups = [...new Set(allGroups)]
+        //List of all types
+        var allTypes = data.nodes.map(function(d){return d.type})
+        //Somehow changes the size ^^
+        allTypes = [...new Set(allTypes)]
 
-    // A color scale for groups:
-    var color = d3.scaleOrdinal()
-        .domain(allGroups)
-        //Charm(Green),Curse(Orange),Spell(Blue),Unforgivable(Red)
-        .range(["#B2CF9C", "#F9D47D", "#4E8BD1", "#BE253F"]);
-        //.range(d3.schemeSet3);
+        //Range of colors for the different types 
+        var color = d3.scaleOrdinal()
+            .domain(allTypes)
+            //Charm(Green),Curse(Orange),Spell(Blue),Unforgivable(Red)
+            .range(["#B2CF9C", "#F9D47D", "#4E8BD1", "#BE253F"]);
 
-    // A linear scale for node size
-    var size = d3.scaleLinear()
-        .domain([1,10])
-        .range([4,13]);
+        //Linear scale for circle size
+        var size = d3.scaleLinear()
+            .domain([1,10])
+            .range([4,13]);
 
-    // A linear scale to position the nodes on the X axis
-    var x = d3.scalePoint()
-        .range([0, width])
-        .domain(allNodes)
+        //Linear scale for circle position on x-axis
+        var x = d3.scalePoint()
+            .domain(allCircles)
+            .range([0, width])
+            
+        //--    
+        // In my input data, links are provided between nodes -id-, NOT between node names.
+        // So I have to do a link between this id and the name
+        var idToNode = {};
+        data.nodes.forEach(function(n){
+            idToNode[n.id] = n;
+        });
 
-    // In my input data, links are provided between nodes -id-, NOT between node names.
-    // So I have to do a link between this id and the name
-    var idToNode = {};
-    data.nodes.forEach(function (n) {
-        idToNode[n.id] = n;
-    });
-
-    // Add the links
-    var links = svg
-        .selectAll('mylinks')
-        .data(data.links)
-        .enter()
-        .append('path')
-        .attr('d', function (d) {
-        start = x(idToNode[d.source].name)    // X position of start node on the X axis
-        end = x(idToNode[d.target].name)      // X position of end node
-        return ['M', start, height-30,    // the arc starts at the coordinate x=start, y=height-30 (where the starting node is)
-            'A',                            // This means we're gonna build an elliptical arc
-            (start - end)/2, ',',    // Next 2 lines are the coordinates of the inflexion point. Height of this point is proportional with start - end distance
-            (start - end)/2, 0, 0, ',',
-            start < end ? 1 : 0, end, ',', height-30] // We always want the arc on top. So if end is before start, putting 0 here turn the arc upside down.
-            .join(' ');
-        })
-        .style("fill", "none")
-        .attr("stroke", "grey")
-        .style("stroke-width", 1)
-
-    // Add the circle for the nodes
-    var nodes = svg
-        .selectAll("mynodes")
-        .data(data.nodes.sort(function(a,b) { return +b.size - +a.size }))
-        .enter()
-        .append("circle")
-        .attr("class", "circle")
-        .attr("id", function(d){
-            return d.id;
-        })
-        .attr("cx", function(d){ return(x(d.name))})
-        .attr("cy", height-30)
-        .attr("r", function(d){ return(size(d.size))})
-        .style("fill", function(d){ return color(d.type)})
-        .attr("stroke", "white")
-
-
-    // And give them a label
-    var labels = svg
-        .selectAll("mylabels")
-        .data(data.nodes)
-        .enter()
-        .append("text")
-        .attr("class", "labels")
-        .attr("x", 0)
-        .attr("y", 0)
-        .text(function(d){ return(d.spell)} )
-        .style("text-anchor", "end")
-        .attr("transform", function(d){ return( "translate(" + (x(d.name)) + "," + (height-300) + ")")})
-        .style("font-size", 0)
-
-    nodes
-        //---------------------------------- Mouseover ----------------------------------
-        .on('mouseover', function(d){
-
-            //Id of the circle we are hovering above
-            hover = d.id;
-            //Book of the circle we are hovering above
-            book = hover.slice(hover.length-1,hover.length);
-            //Id without number
-            id = hover.slice(0,hover.length-1);
-
-            //If no circle is clicked
-            if(clicked == "0"){
-
-                //----------------- Nodes -----------------
-                //Reduce opacity of all circles
-                nodes
-                .style('opacity', .2)
-                .style("cursor", "pointer");
-
-                //Only current circle and all connected circles stay the same color 
-                for(i = 1; i < 8; i++){
-                    d3.select("#" + id + i)
-                    .style('opacity', 1)
-                }
-
-                //----------------- Connections -----------------
-                links
-                //Color of the link
-                .style('stroke', function (link_d){ 
-                    if(link_d.source === d.id || link_d.target === d.id){
-                        return color(d.type); 
-                    }
-                    else{
-                        return '#b8b8b8';
-                    }
-                })
-                //Opacity of the link
-                .style('stroke-opacity', function(link_d){ 
-                    if(link_d.source === d.id || link_d.target === d.id){
-                        return 1;
-                    }
-                    else{
-                        return 0.2;
-                    }
-                })
-                //Width of the link
-                .style('stroke-width', function(link_d){ 
-                    if(link_d.source === d.id || link_d.target === d.id){
-                        return 4;
-                    }
-                    else{
-                        return 1;
-                    }
-                })
-
-                //----------------- Labels -----------------
-                labels
-                //Size of the labels
-                .style("font-size", function(label_d){ 
-                    if(label_d.name === d.name){
-                        return 20;
-                    }
-                    else{
-                        return 0;
-                    }
-                })
-                .style("stroke", function(label_d){
-                    if(label_d.name === d.name){
-                        return color(d.type);
-                    }
-                })
-
-                //----------------- Tooltip -----------------
-                circleTooltip
-                .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY + 50 + "px")
-                .style("display", "inline-block")
-                .html(d.spell + ":" + "<br>" + "Used " + d.size + " times in book " + book);
-
-            }
-            //If a circle was clicked and we are hovering above it
-            else if(hover == clicked){
-
-                nodes
-                .style("cursor", "pointer");
-
-                //----------------- Tooltip -----------------
-                circleTooltip
-                .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY + 50 + "px")
-                .style("display", "inline-block")
-                .html(d.spell + ":" + "<br>" + "Used " + d.size + " times in book " + book);
-            }
-            //If a circle was clicked and we are hovering above a connected circle
-            else if(!(clicked == "0") && id == clicked.slice(0,clicked.length-1)){
-
-                d3.select("#" + hover)
-                .style("cursor", "pointer")
-
-                //----------------- Tooltip -----------------
-                circleTooltip
-                .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY + 30 + "px")
-                .style("display", "inline-block")
-                .html(d.spell + ":" + "<br>" + "Used " + d.size + " times in book " + book);
-            }
-            //Else a circle was clicked but we are hovering above a different one
-            else{
-
-                nodes
-                .style("cursor", "default");
-            }
-        })
-        //---------------------------------- Mouseout ----------------------------------
-        .on('mouseout', function (d) {
-
-            //If the spell wasn't selected
-            if(clicked == "0"){
-
-                //----------------- Nodes -----------------
-                nodes
-                .style('opacity', 1)
-
-                //----------------- Connections -----------------
-                links
-                .style('stroke', 'grey')
-                .style('stroke-opacity', .8)
-                .style('stroke-width', '1')
-
-                //----------------- Labels -----------------
-                labels
-                .style("font-size", 0) 
-            }
-
-            //----------------- Tooltip -----------------
-            circleTooltip
-            .style("display","none");
-
-        })
-        //---------------------------------- Click ----------------------------------
-        .on('click', function (d) {
+        //---------------------- Add Connections ----------------------
         
-            //If no circle is selected
-            if(clicked == "0"){
+        var links = svg
+            .selectAll('mylinks')
+            .data(data.links)
+            .enter()
+            .append('path')
+            .attr('d', function(d){
+                start = x(idToNode[d.source].name)    // X position of start node on the X axis
+                end = x(idToNode[d.target].name)      // X position of end node
+                return ['M', start, height-30,    // the arc starts at the coordinate x=start, y=height-30 (where the starting node is)
+                    'A',                            // This means we're gonna build an elliptical arc
+                    (start - end)/2, ',',    // Next 2 lines are the coordinates of the inflexion point. Height of this point is proportional with start - end distance
+                    (start - end)/2, 0, 0, ',',
+                    start < end ? 1 : 0, end, ',', height-30] // We always want the arc on top. So if end is before start, putting 0 here turn the arc upside down.
+                    .join(' ');
+            })
+            .style("fill", "none")
+            .attr("stroke", "grey")
+            .style("stroke-width", 1)
 
-                //Mark as clicked
-                clicked = d.id;
+        //---------------------- Add Circles ----------------------
+        
+        var nodes = svg
+            .selectAll("mynodes")
+            .data(data.nodes.sort(function(a,b) { return +b.size - +a.size }))
+            .enter()
+            .append("circle")
+            .attr("class", "circle")
+            .attr("id", function(d){
+                return d.id;
+            })
+            .attr("cx", function(d){ 
+                return(x(d.name))
+            })
+            .attr("cy", height-30)
+            .attr("r", function(d){ 
+                return(size(d.size))
+            })
+            .style("fill", function(d){ 
+                return color(d.type)
+            })
+            .attr("stroke", "white")
 
-                //----------------- Nodes -----------------
-                //Reduce opacity of all circles
-                nodes
-                .style('opacity', .2)
+        //---------------------- Add labels ----------------------
+       
+        var labels = svg
+            .selectAll("mylabels")
+            .data(data.nodes)
+            .enter()
+            .append("text")
+            .attr("class", "labels")
+            .attr("x", 0)
+            .attr("y", 0)
+            .text(function(d){ 
+                return(d.spell)
+            })
+            .style("text-anchor", "end")
+            .attr("transform", function(d){ 
+                return( "translate(" + (x(d.name)) + "," + (height-300) + ")" )
+            })
+            .style("font-size", 0)
 
-                //Only current circle and all connected circles stay the same color 
-                for(i = 1; i < 8; i++){
-                    d3.select("#" + id + i)
-                    .style('opacity', 1)
+        //---------------------- Add Interactions ----------------------
+
+        nodes
+
+            //---------------------- Mouseover ----------------------
+
+            .on('mouseover', function(d){
+
+                //Id of the circle we are hovering above
+                hover = d.id;
+                //Book of the circle we are hovering above
+                book = hover.slice(hover.length-1,hover.length);
+                //Id without number
+                id = hover.slice(0,hover.length-1);
+
+                //IF no circle is clicked
+                if(clicked == "0"){
+
+                    //---------------------- Circles ----------------------
+
+                    //Reduce opacity of all circles
+                    nodes
+                    .style('opacity', .2)
+                    .style("cursor", "pointer");
+
+                    //Only current circle and all connected circles stay the same color 
+                    for(i = 1; i < 8; i++){
+                        d3.select("#" + id + i)
+                        .style('opacity', 1)
+                    }
+
+                    ///---------------------- Connections ----------------------
+
+                    links
+                    //Color of the link
+                    .style('stroke', function (link_d){ 
+                        if(link_d.source === d.id || link_d.target === d.id){
+                            return color(d.type); 
+                        }
+                        else{
+                            return '#b8b8b8';
+                        }
+                    })
+                    //Opacity of the link
+                    .style('stroke-opacity', function(link_d){ 
+                        if(link_d.source === d.id || link_d.target === d.id){
+                            return 1;
+                        }
+                        else{
+                            return 0.2;
+                        }
+                    })
+                    //Width of the link
+                    .style('stroke-width', function(link_d){ 
+                        if(link_d.source === d.id || link_d.target === d.id){
+                            return 4;
+                        }
+                        else{
+                            return 1;
+                        }
+                    })
+
+                    //---------------------- Labels ----------------------
+
+                    labels
+                    //Size of the labels
+                    .style("font-size", function(label_d){ 
+                        if(label_d.name === d.name){
+                            return 20;
+                        }
+                        else{
+                            return 0;
+                        }
+                    })
+                    .style("stroke", function(label_d){
+                        if(label_d.name === d.name){
+                            return color(d.type);
+                        }
+                    })
+
+                    //---------------------- Tooltip ----------------------
+
+                    circleTooltip
+                    .style("left", d3.event.pageX - 50 + "px")
+                    .style("top", d3.event.pageY + 50 + "px")
+                    .style("display", "inline-block")
+                    .html(
+                        d.spell + ":" + "<br>" 
+                        + "Used " + d.size + " times in book " + book
+                    );
                 }
 
-                //----------------- Connections -----------------
-                links
-                //Color of the link
-                .style('stroke', function (link_d){ 
-                    if(link_d.source === d.id || link_d.target === d.id){
-                    return color(d.type); 
-                    }
-                    else{
-                    return '#b8b8b8';
-                    }
-                })
-                //Opacity of the link
-                .style('stroke-opacity', function (link_d) { 
-                    if(link_d.source === d.id || link_d.target === d.id){
-                    return 1;
-                    }
-                    else{
-                    return 0.2;
-                    }
-                })
-                //Width of the link
-                .style('stroke-width', function (link_d) { 
-                    if(link_d.source === d.id || link_d.target === d.id){
-                    return 4;
-                    }
-                    else{
-                    return 1;
-                    }
-                })
+                //ELSE IF a circle was clicked and we are hovering above it
+                else if(hover == clicked){
 
-                //----------------- Labels -----------------
-                labels
-                //Size of the labels
-                .style("font-size", function(label_d){ 
-                    if(label_d.name === d.name){
-                    return 20;
+                    //---------------------- Circles ----------------------
+                    nodes
+                    .style("cursor", "pointer");
+
+                    //---------------------- Tooltip ----------------------
+                    circleTooltip
+                    .style("left", d3.event.pageX - 50 + "px")
+                    .style("top", d3.event.pageY + 50 + "px")
+                    .style("display", "inline-block")
+                    .html(
+                        d.spell + ":" + "<br>" + "Used " 
+                        + d.size + " times in book " + book
+                    );
+                }
+
+                //ELSE IF a circle was clicked and we are hovering above a connected circle
+                else if(!(clicked == "0") && id == clicked.slice(0,clicked.length-1)){
+
+                    //---------------------- Circles ----------------------
+                    d3.select("#" + hover)
+                    .style("cursor", "pointer")
+
+                    //---------------------- Tooltip ----------------------
+                    circleTooltip
+                    .style("left", d3.event.pageX - 50 + "px")
+                    .style("top", d3.event.pageY + 30 + "px")
+                    .style("display", "inline-block")
+                    .html(
+                        d.spell + ":" + "<br>" 
+                        + "Used " + d.size + " times in book " + book
+                    );
+                }
+
+                //ELSE a circle was clicked but we are hovering above a different one
+                else{
+
+                    //---------------------- Circles ----------------------
+                    nodes
+                    .style("cursor", "default");
+                }
+            })
+
+            //---------------------- Mouseout ----------------------
+
+            .on('mouseout', function(d){
+
+                //IF the spell wasn't selected
+                if(clicked == "0"){
+
+                    //---------------------- Circles ----------------------
+                    nodes
+                    .style('opacity', 1)
+
+                    //---------------------- Connections ----------------------
+                    links
+                    .style('stroke', 'grey')
+                    .style('stroke-opacity', .8)
+                    .style('stroke-width', '1')
+
+                    //---------------------- Lables ----------------------
+                    labels
+                    .style("font-size", 0) 
+                }
+
+                //---------------------- Tooltip ----------------------
+                circleTooltip
+                .style("display","none");
+
+            })
+
+            //---------------------- Click ----------------------
+
+            .on('click', function(d){
+            
+                //IF no circle is selected
+                if(clicked == "0"){
+
+                    //Mark as clicked
+                    clicked = d.id;
+
+                    //---------------------- Circles ----------------------
+
+                    //Reduce opacity of all circles
+                    nodes
+                    .style('opacity', .2)
+
+                    //Only current circle and all connected circles stay the same color 
+                    for(i = 1; i < 8; i++){
+                        d3.select("#" + id + i)
+                        .style('opacity', 1)
                     }
-                    else{
-                    return 0;
-                    }
-                })
-                .style("stroke", function(label_d){
-                    if(label_d.name === d.name){
-                        return color(d.type);
-                    }
-                })
-            }
 
-            //Else if circle was selected and it or connected circle is clicked (again)
-            else if(clicked.slice(0,clicked.length-1) == d.id.slice(0,clicked.length-1)){
+                    //---------------------- Connections ----------------------
 
-                //Mark as no longer clicked
-                clicked = "0";
+                    links
+                    //Color of the link
+                    .style('stroke', function (link_d){ 
+                        if(link_d.source === d.id || link_d.target === d.id){
+                        return color(d.type); 
+                        }
+                        else{
+                        return '#b8b8b8';
+                        }
+                    })
+                    //Opacity of the link
+                    .style('stroke-opacity', function (link_d) { 
+                        if(link_d.source === d.id || link_d.target === d.id){
+                        return 1;
+                        }
+                        else{
+                        return 0.2;
+                        }
+                    })
+                    //Width of the link
+                    .style('stroke-width', function (link_d) { 
+                        if(link_d.source === d.id || link_d.target === d.id){
+                        return 4;
+                        }
+                        else{
+                        return 1;
+                        }
+                    })
 
-                //----------------- Nodes -----------------
-                nodes
-                .style('opacity', 1)
+                    //---------------------- Labels ----------------------
 
-                //----------------- Connections -----------------
-                links
-                .style('stroke', 'grey')
-                .style('stroke-opacity', .8)
-                .style('stroke-width', '1')
+                    labels
+                    //Size of the labels
+                    .style("font-size", function(label_d){ 
+                        if(label_d.name === d.name){
+                        return 20;
+                        }
+                        else{
+                        return 0;
+                        }
+                    })
+                    //Color of the labels
+                    .style("stroke", function(label_d){
+                        if(label_d.name === d.name){
+                            return color(d.type);
+                        }
+                    })
+                }
 
-                //----------------- Labels -----------------
-                labels
-                .style("font-size", 0) 
-            }
+                //ELSE IF circle was selected and it or connected circle is clicked (again)
+                else if(clicked.slice(0,clicked.length-1) == d.id.slice(0,clicked.length-1)){
 
+                    //Mark as no longer clicked
+                    clicked = "0";
+
+                    //---------------------- Circles ----------------------
+                    nodes
+                    .style('opacity', 1)
+
+                    //---------------------- Connections ----------------------
+                    links
+                    .style('stroke', 'grey')
+                    .style('stroke-opacity', .8)
+                    .style('stroke-width', '1')
+
+                    //---------------------- Labels ----------------------
+                    labels
+                    .style("font-size", 0) 
+                }
+            })
         })
-    })
-}
+    }
 
 //zoomable Treemap
-function treemap(){
+/*function treemap(){
     // get svg size:
     var element   = document.querySelector('.Chart');
     var rect = element.getBoundingClientRect(); // get the bounding rectangle
@@ -445,10 +486,10 @@ function treemap(){
             circle.attr("r", function(d) { return d.r * k; });
         }
     });
-}
+}*/
 
 // static Treemap
-function bubbleChart(){
+/*function bubbleChart(){
     // get svg size:
     var element   = document.querySelector('.Chart');
     var rect = element.getBoundingClientRect(); // get the bounding rectangle
@@ -489,7 +530,7 @@ function bubbleChart(){
             .attr('cy', function (d) { return d.y; })
             .attr('r', function (d) { return d.r; });
     }
-}
+}*/
 
     
 
