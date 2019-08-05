@@ -65,24 +65,24 @@
             
         }
 
-        .Legend{
+        /* .Legend{
             display: flex;
             flex-direction:row;
             justify-content: flex-end;
             /* border: 2px solid green; */
-        }
+        /*}
         
             .Whitespace{
                 flex: 1.4;
                 /* border: 2px dotted brown; */
-            }
+            /*}
 
             .legendList{
                 flex:1;
                 border: 1px solid grey;
                 display: flex;
                 flex-direction: column;
-            }
+            } */
                 /* .legendHead{
                     flex:1;
                 }

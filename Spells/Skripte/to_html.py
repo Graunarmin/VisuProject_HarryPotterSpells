@@ -33,15 +33,15 @@ def spells_to_html():
         <li class='spells' id='{}'>
             <a class='toggleSpells'>{}</a>
             <ul class='info' id='{}'>
-                <li class='effect'>{}</li>
+                <li class='effect' id='{}Effect'><span class='infoHead'>Effect </span><span class='infoContent'>{}</span></li>
+                <li class='type' id='{}Type'><span class='infoHead'>Type </span><span class='infoContent'>{}</span></li>
+                <li class='category' id='{}Category'><span class='infoHead'>Category </span><span class='infoContent'>{}</span></li>
+                <li class='danger'id='{}Danger'><span class='infoHead'>Danger </span><span class='infoContent'>{}</span></li>
                 <li class='spellLink'><button class='tag link'><a href={} target='_blank'>More Details</a></button></li>
-                <li class='type'><button class="tag type">{}</button></li>
-                <li class='category'><button class="tag category">{}</li>
-                <li class='danger'><button class="tag danger">{}</li>
             </ul>
         </li>"""
 
-        html = tmp.format(html_id, spell, html_id, effect, link, typ, category, danger)
+        html = tmp.format(html_id, spell, html_id, html_id, effect, html_id, typ, html_id, category, html_id, danger, link)
         html_list.append(html)
 
     with open('../Data/Background/html/spell_list.html', 'w') as f:

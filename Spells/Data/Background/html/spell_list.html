@@ -1,40 +1,4 @@
-<!DOCTYPE HTML>
-<html lang="DE">
-    <head>
-        
-        <title> Visualization </title>
-        <meta charset="utf-8"/>
 
-        <link href="css/visu_order.css" rel="stylesheet" type="text/CSS"/>
-        <!-- <link href="css/visu_style.css" rel="stylesheet" type="text/CSS"/> -->
-        <link href="css/arc.css" rel="stylesheet" type="text/CSS"/>
-  
-        <link href="https://fonts.googleapis.com/css?family=Charm|Crimson+Text|Lora|Marck+Script|Merienda|Playfair+Display&display=swap" rel="stylesheet"> 
-
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="https://d3js.org/d3.v4.min.js"></script>
-        <!-- Load color palette -->
-        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-        <script src="js/spellvisu.js" type="text/javascript"></script>
-        
-
-    </head>
-
-    <body id="body" onload="init()">
-        <div class="Container">
-        
-            <div class="Headline">The Spells of the Wizarding World</div>
-
-            <div class="VisuContainer">
-
-                <div class="ListContainer">
-
-                    <!-- <div class="listBackground"> -->
-                        <div class="spellList" id="spellList">
-                        
-                            <ul class="list" id="Liste">
-                                
-                                
         <li class='spells' id='accio'>
             <a class='toggleSpells'>Accio</a>
             <ul class='info' id='accio'>
@@ -93,7 +57,7 @@
         <li class='spells' id='avada'>
             <a class='toggleSpells'>Avada Kedavra</a>
             <ul class='info' id='avada'>
-                <li class='effect' id='avadaEffect'><span class='infoHead'>Effect </span><span class='infoContent'>Murders opponent</span></li>
+                <li class='effect' id='avadaEffect'><span class='infoHead'>Effect </span><span class='infoContent'>Murders opponent – Unforgivable</span></li>
                 <li class='type' id='avadaType'><span class='infoHead'>Type </span><span class='infoContent'>Unforgivable Curse</span></li>
                 <li class='category' id='avadaCategory'><span class='infoHead'>Category </span><span class='infoContent'>Fight</span></li>
                 <li class='danger'id='avadaDanger'><span class='infoHead'>Danger </span><span class='infoContent'>Lethal</span></li>
@@ -159,7 +123,7 @@
         <li class='spells' id='crucio'>
             <a class='toggleSpells'>Crucio</a>
             <ul class='info' id='crucio'>
-                <li class='effect' id='crucioEffect'><span class='infoHead'>Effect </span><span class='infoContent'>Tortures opponent</span></li>
+                <li class='effect' id='crucioEffect'><span class='infoHead'>Effect </span><span class='infoContent'>Tortures opponent – Unforgivable</span></li>
                 <li class='type' id='crucioType'><span class='infoHead'>Type </span><span class='infoContent'>Unforgivable Curse</span></li>
                 <li class='category' id='crucioCategory'><span class='infoHead'>Category </span><span class='infoContent'>Fight</span></li>
                 <li class='danger'id='crucioDanger'><span class='infoHead'>Danger </span><span class='infoContent'>Severe</span></li>
@@ -412,7 +376,7 @@
         <li class='spells' id='imperio'>
             <a class='toggleSpells'>Imperio</a>
             <ul class='info' id='imperio'>
-                <li class='effect' id='imperioEffect'><span class='infoHead'>Effect </span><span class='infoContent'>Controls a person</span></li>
+                <li class='effect' id='imperioEffect'><span class='infoHead'>Effect </span><span class='infoContent'>Controls a person – Unforgivable</span></li>
                 <li class='type' id='imperioType'><span class='infoHead'>Type </span><span class='infoContent'>Unforgivable Curse</span></li>
                 <li class='category' id='imperioCategory'><span class='infoHead'>Category </span><span class='infoContent'>Mind</span></li>
                 <li class='danger'id='imperioDanger'><span class='infoHead'>Danger </span><span class='infoContent'>Severe</span></li>
@@ -903,62 +867,3 @@
                 <li class='spellLink'><button class='tag link'><a href=https://www.pottermore.com/explore-the-story/wingardium-leviosa target='_blank'>More Details</a></button></li>
             </ul>
         </li>
-   
-
-                            </ul>
-
-                        </div>
-                    <!-- </div> -->
-
-                </div><!-- close ListContainer -->
-                
-
-                <div class="ChartContainer">
-
-                    <!-- <div class="Legend">
-                        <div class="Whitespace">
-                            
-                        </div>
-
-                        <div class="legendList">
-                            <span class="legendHead">Type:</span>
-                            
-                            <ul id="legendList">
-                                <li class="legendElements" id="charm"><button class="legendcat" id="catCharm">Charm</button></li>
-                                <li class="legendElements" id="spell"><button class="legendcat" id="catSpell">Spell</button></li>
-                                <li class="legendElements" id ="curse"><button class="legendcat" id="catCurse">Curse</button></li>
-                                <li class="legendElements" id="unforgivable"><button class="legendcat" id="catUnforgivable">Unforgivable Curse</button></li>
-                            </ul>
-                        </div>
-                    </div> -->
-                
-                    <div class="Chart">
-                        <svg id="Visu"></svg>
-                    </div>
-
-                </div> <!-- close chartContainer -->
-
-            
-            </div> <!-- close VisuContainer -->
-        
-        </div> <!-- close Container -->
-
-        <!-- ................. Loading Screen ................. -->
-        <!-- <div id="loader"><img src="Goethe_head.png" width="80px"></div>
-        <div id="quote"></div>
-        <div id="quoteAuthor">- J.W. von Goethe</div> -->
-
-        <!-- ..................... Sidebar ..................... -->
-        <!-- <div id="SidebarContainer">
-            <a href="#" id="filter">
-                <ol class="SidebarList">
-                    <li id="SidebarHeadline">Navigation</li>
-                        <button id="resetButton" onclick="location.reload()">Reset everything</button>
-                    </li> 
-                </ol>
-            </a>
-        </div> -->
-
-    </div>
-    </body>
-</html>
