@@ -19,6 +19,7 @@ function arc(){
     var book = "0";
     var id = "0";
     var circleTooltip = d3.select("body").append("div").attr("class", "toolTip");
+    var legendClicked = "0";
 
     //---------------------- Size ----------------------
 
@@ -53,8 +54,8 @@ function arc(){
         //Range of colors for the different types 
         var color = d3.scaleOrdinal()
             .domain(allTypes)
-            //Charm(Green),Curse(Orange),Spell(Blue),Unforgivable(Red)
-            .range(["#B2CF9C", "#F9D47D", "#4E8BD1", "#BE253F"]);
+            //Charm(Green),Spell(Blue),Curse(Orange),Unforgivable(Red)
+            .range(["#B2CF9C", "#4E8BD1", "#F9D47D", "#BE253F"]);
 
         //Linear scale for circle size
         var size = d3.scaleLinear()
@@ -65,7 +66,7 @@ function arc(){
         var x = d3.scalePoint()
             .domain(allCircles)
             .range([0, width])
-            
+
         //--    
         // In my input data, links are provided between nodes -id-, NOT between node names.
         // So I have to do a link between this id and the name
@@ -77,7 +78,7 @@ function arc(){
         //---------------------- Add Connections ----------------------
         
         var links = svg
-            .selectAll('mylinks')
+            .selectAll("mylinks")
             .data(data.links)
             .enter()
             .append('path')
@@ -118,7 +119,7 @@ function arc(){
             })
             .attr("stroke", "white")
 
-        //---------------------- Add labels ----------------------
+        //---------------------- Add Labels To Circles ----------------------
        
         var labels = svg
             .selectAll("mylabels")
@@ -126,7 +127,7 @@ function arc(){
             .enter()
             .append("text")
             .attr("class", "labels")
-            .attr("x", 0)
+            .attr("x",/*8*/0)
             .attr("y", 0)
             .text(function(d){ 
                 return(d.spell)
@@ -137,7 +138,7 @@ function arc(){
             })
             .style("font-size", 0)
 
-        //---------------------- Add Interactions ----------------------
+        //---------------------- Add Interactions To Circles ----------------------
 
         nodes
 
@@ -221,7 +222,7 @@ function arc(){
 
                     circleTooltip
                     .style("left", d3.event.pageX - 50 + "px")
-                    .style("top", d3.event.pageY + 50 + "px")
+                    .style("top", d3.event.pageY + 30 + "px")
                     .style("display", "inline-block")
                     .html(
                         d.spell + ":" + "<br>" 
@@ -239,7 +240,7 @@ function arc(){
                     //---------------------- Tooltip ----------------------
                     circleTooltip
                     .style("left", d3.event.pageX - 50 + "px")
-                    .style("top", d3.event.pageY + 50 + "px")
+                    .style("top", d3.event.pageY + 30 + "px")
                     .style("display", "inline-block")
                     .html(
                         d.spell + ":" + "<br>" + "Used " 
@@ -396,6 +397,79 @@ function arc(){
                     .style("font-size", 0) 
                 }
             })
+
+            //---------------------- Add Legend ----------------------
+
+            var legend = svg
+                .selectAll("mytypes")
+                .data(allTypes)
+                .enter()
+                .append("rect") 
+                .attr("id", function (d) {
+                    return ("id" + d);
+                })
+                /*.attr("class", function (d) {
+                    legendClassArray.push(d); 
+                    return "legend";
+                })*/
+                .attr("x", width - 150)  
+                .attr("width", 20)
+                .attr("height", 20)
+                .style("fill", function(d){ 
+                    return color(d)
+                })
+                .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; })
+            
+            //---------------------- Add Labels To Legend ----------------------
+
+            var legendLabels = svg
+                .selectAll("mylegendLables")
+                .data(allTypes)
+                .enter()
+                .append("text")
+                .attr("x", width-120)
+                .attr("y", 15)
+                .text(function(d){
+                    return d;
+                })
+                .style("text-anchor", "front")
+                .style("font-size", 13)
+                .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; })   
+
+            //---------------------- Add Interactions To Legend ----------------------
+
+            legend
+                .on("mouseover", function(d){
+
+                    //Every rect
+                    legend
+                        .style('opacity', .5);
+
+                    //This rect
+                    d3.select(this)
+                        .style('opacity', 1)
+                        .style("stroke","grey")
+                        .style("stroke-width",0.8)
+                        .style("cursor", "pointer")
+                })
+                .on("mouseout", function(d){
+
+                    legend
+                        .style('opacity', 1)
+                        .style("stroke","white")
+                        .style("stroke-width",0)
+                })
+                .on("click", function(d){
+
+                    legendClicked = d;
+
+                    //This rect
+                    d3.select(this)
+                        .style('opacity', 1)
+                        .style("stroke","black")
+                        .style("stroke-width",1.5)
+                        .style("cursor", "pointer")
+                })
         })
     }
 
