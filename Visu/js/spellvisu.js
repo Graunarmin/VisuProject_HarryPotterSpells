@@ -28,7 +28,7 @@ function arc(){
     var rect = element.getBoundingClientRect(); 
 
     //Set dimensions of graph depending on svg size
-    var margin = {top: 0, right: 30, bottom: 10, left: 60};
+    var margin = {top: 0, right: 30, bottom: -90, left: 60};
     var height = rect.width/2 - margin.top - margin.bottom;
     var width = rect.width - margin.left - margin.right;
 
@@ -65,7 +65,7 @@ function arc(){
         //Linear scale for circle position on x-axis
         var x = d3.scalePoint()
             .domain(allCircles)
-            .range([0, width])
+            .range([-80, width])
 
         //--    
         // In my input data, links are provided between nodes -id-, NOT between node names.
@@ -130,7 +130,7 @@ function arc(){
             .attr("x",/*8*/0)
             .attr("y", 0)
             .text(function(d){ 
-                return(d.spell)
+                return d.spell;
             })
             .style("text-anchor", "end")
             .attr("transform", function(d){ 
@@ -212,7 +212,7 @@ function arc(){
                             return 0;
                         }
                     })
-                    .style("stroke", function(label_d){
+                    .style("fill", function(label_d){
                         if(label_d.name === d.name){
                             return color(d.type);
                         }
@@ -369,7 +369,7 @@ function arc(){
                         }
                     })
                     //Color of the labels
-                    .style("stroke", function(label_d){
+                    .style("fill", function(label_d){
                         if(label_d.name === d.name){
                             return color(d.type);
                         }

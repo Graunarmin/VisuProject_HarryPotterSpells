@@ -150,35 +150,10 @@
   
   /* ------------------------ ChartContainer -------------------------*/
   
-  /* -------- Parallel Coordinate Chart --------- */
-  
-  .node {
-    cursor: pointer;
-  }
-  
-  .node:hover {
-    stroke: #000;
-    stroke-width: 1.5px;
-  }
-  
-  .node--leaf {
-    fill: white;
-  }
-  
-  .label {
-    font: 11px 'Playfair Display', serif;
-    text-anchor: middle;
-    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
-  }
-  
-  .label,
-  .node--root,
-  .node--leaf {
-    pointer-events: none;
-  }
+  /* -------- Arc Chart --------- */
   
   .Chart{
-      padding-top:40px;
+    padding-top:40px;
     margin-top:20px;
     text-align: center;
   }
@@ -189,6 +164,8 @@
     background:transparent !important;
     width: 100%;
     height: 100%;
+    overflow: visible;
+    color: transparent;
   }
   
   .toolTip{
@@ -308,3 +285,6 @@
       #sidenav {padding-top: 15px;}
   }
 
+  .labels{
+      color: transparent;
+  }
