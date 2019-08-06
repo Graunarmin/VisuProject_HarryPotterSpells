@@ -10,6 +10,10 @@
 
 /* ------- Main Container --------- */
 
+.Container{
+    overflow: visible;
+}
+
 .Headline{
     text-align: center;
     font-family: 'Playfair Display', serif;
