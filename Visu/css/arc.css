@@ -224,17 +224,17 @@
   
   
   .filterelement{
-      display:none;
-      font-size: 18px;
-      border-style: none;
-      background-color:  #5c6bc0;
-      opacity: 1;
-      cursor: pointer;
-      border: none;
-      border-radius: 20px;
+    display:none;
+    font-size: 18px;
+    border-style: none;
+    background-color:  #5c6bc0;
+    opacity: 1;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
     color: white;
-      padding: 10px 15px;
-      margin: 15px;
+    padding: 10px 15px;
+    margin: 15px;
     text-align: center;
     text-decoration: none;
   }
@@ -244,14 +244,15 @@
   }
   
   .filterelement .tooltiptext{
-      visibility: hidden;
-      /* width: 80px; */
+
+    visibility: hidden;
+    /* width: 80px; */
     background-color: #5c6bc0;
-      color: #fff;
-      font-size: 18px;
+    color: #fff;
+    font-size: 18px;
     text-align: center;
     border-radius: 20px;
-      padding: 5px;
+    padding: 5px;
   
     /* Position the tooltip */
     position: absolute;
@@ -263,18 +264,19 @@
   }
   
   #resetButton{
+
     visibility: hidden;
     font-family: 'Playfair Display', serif;
-      font-size: 14px;
-      border-style: none;
-      background-color: #04e5f5;
-      opacity: 1;
-      cursor: pointer;
-      border: none;
-      border-radius: 25px;
+    font-size: 14px;
+    border-style: none;
+    background-color: #04e5f5;
+    opacity: 1;
+    cursor: pointer;
+    border: none;
+    border-radius: 25px;
     color: white;
-      padding: 7px 10px;
-      margin: 15px;
+    padding: 7px 10px;
+    margin: 15px;
     text-align: center;
     text-decoration: none;
   }
@@ -288,7 +290,7 @@
   @media screen and (max-height: 450px) {
       #sidenav {padding-top: 15px;}
   }
-
+/* 
   .labels{
       color: transparent;
-  }
+  } */

@@ -28,7 +28,7 @@ function arc(){
     var rect = element.getBoundingClientRect(); 
 
     //Set dimensions of graph depending on svg size
-    var margin = {top: 0, right: 30, bottom: -90, left: 60};
+    var margin = {top: 0, right: 30, bottom: 0, left: 90};
     var height = rect.width/2 - margin.top - margin.bottom;
     var width = rect.width - margin.left - margin.right;
 
@@ -127,8 +127,8 @@ function arc(){
             .enter()
             .append("text")
             .attr("class", "labels")
-            .attr("x",/*8*/0)
-            .attr("y", 0)
+            .attr("x",0)
+            .attr("y",0)
             .text(function(d){ 
                 return d.spell;
             })
@@ -398,78 +398,145 @@ function arc(){
                 }
             })
 
-            //---------------------- Add Legend ----------------------
+        //---------------------- Add Legend ----------------------
 
-            var legend = svg
-                .selectAll("mytypes")
-                .data(allTypes)
-                .enter()
-                .append("rect") 
-                .attr("id", function (d) {
-                    return ("id" + d);
-                })
-                /*.attr("class", function (d) {
-                    legendClassArray.push(d); 
-                    return "legend";
-                })*/
-                .attr("x", width - 150)  
-                .attr("width", 20)
-                .attr("height", 20)
-                .style("fill", function(d){ 
-                    return color(d)
-                })
-                .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; })
-            
-            //---------------------- Add Labels To Legend ----------------------
+        var legend = svg
+            .selectAll("mytypes")
+            .data(allTypes)
+            .enter()
+            .append("rect") 
+            //"#idrect" + type
+            .attr("id", function(d){
+                return ("idrect" + d);
+            })
+            /*.attr("class", function (d) {
+                legendClassArray.push(d); 
+                return "legend";
+            })*/
+            .attr("x", width - 150)  
+            .attr("y", -20)
+            .attr("width", 20)
+            .attr("height", 20)
+            .style("fill", function(d){ 
+                return color(d)
+            })
+            .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; })
+        
+        //---------------------- Add Labels To Legend ----------------------
 
-            var legendLabels = svg
-                .selectAll("mylegendLables")
-                .data(allTypes)
-                .enter()
-                .append("text")
-                .attr("x", width-120)
-                .attr("y", 15)
-                .text(function(d){
-                    return d;
-                })
-                .style("text-anchor", "front")
-                .style("font-size", 13)
-                .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; })   
+        var legendLabels = svg
+            .selectAll("mylegendLables")
+            .data(allTypes)
+            .enter()
+            .append("text")
+            .attr("id", function(d){
+                return ("idlabel" + d);
+            })
+            .attr("x", width-120)
+            .attr("y", -5)
+            .text(function(d){
+                return d;
+            })
+            .style("text-anchor", "front")
+            .style("font-size", 13)
+            .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; })   
 
-            //---------------------- Add Interactions To Legend ----------------------
+        //---------------------- Add Interactions To Legend ----------------------
 
-            legend
-                .on("mouseover", function(d){
+        legend
+            .on("mouseover", function(d){
+
+                //IF nothing on the legend is clicked
+                if(legendClicked == "0"){
+
+                    //The rect we are hovering above 
+                    d3.select(this)
+                    .style("stroke",function(d){
+                        return color(d);
+                    })
+                    .style("stroke-width",3)
+                    .style("cursor", "pointer")
+                }  
+                //ELSE IF a type was clicked and were hovering above it  
+                else if(legendClicked == d){
+
+                    d3.select(this)
+                    .style("cursor", "pointer")
+                }  
+                //ELSE a type was clicked but we are hovering above a different one
+                else{
+
+                    d3.select(this)
+                    .style("cursor", "default")
+                }              
+            })
+            .on("mouseout", function(d){
+
+                //IF nothing on legend was clicked
+                if(legendClicked == "0"){
+
+                    legend
+                    .style("stroke","white")
+                    .style("stroke-width",0)
+                }
+            })
+            .on("click", function(d){
+
+                //IF nothing on legend is clicked
+                if(legendClicked == "0"){
+
+                    //Clicked = true
+                    legendClicked = d;
+
+                    //---------------------- Rectangles ----------------------
 
                     //Every rect
                     legend
-                        .style('opacity', .5);
+                    .style('opacity', .3);
 
-                    //This rect
+                    //The rect that was clicked
                     d3.select(this)
-                        .style('opacity', 1)
-                        .style("stroke","grey")
-                        .style("stroke-width",0.8)
-                        .style("cursor", "pointer")
-                })
-                .on("mouseout", function(d){
+                    .style('opacity', 1)
+                    .style("stroke",function(d){
+                        return color(d);
+                    })
+                    .style("stroke-width",3)
+                    
+                    //---------------------- Labels ----------------------
 
+                    //Lower opacity of all labels
+                    legendLabels
+                    .style("opacity", 0.3);
+                    
+                    //Return opacity of current label back to 1
+                    d3.select("#idlabel" + d)
+                    .style("opacity", 1);
+                       
+                }
+                //ELSE IF rect was clicked and we are clicking on the same one again 
+                else if(legendClicked == d){
+                    
+                    //Clicked = false
+                    legendClicked = "0";
+
+                    //---------------------- Rectangles ----------------------
+
+                    //Every rect
                     legend
-                        .style('opacity', 1)
-                        .style("stroke","white")
-                        .style("stroke-width",0)
-                })
-                .on("click", function(d){
+                    .style('opacity', 1);
 
-                    legendClicked = d;
-
-                    //This rect
+                    //The rect that was clicked again
                     d3.select(this)
-                        .style('opacity', 1)
-                        .style("stroke","black")
-                        .style("stroke-width",1.5)
-                        .style("cursor", "pointer")
-                })
+                    .style("stroke","white")
+                    .style("stroke-width",0)
+
+                    //---------------------- Labels ----------------------
+                    
+                    //Return opacity of all labels back to 1
+                    legendLabels
+                    .style("opacity", 1);
+                }
+            })
         })
     }
 
