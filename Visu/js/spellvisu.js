@@ -34,43 +34,44 @@ function arc(){
 
     //Select svg element of page and add dimensions 
     var svg = d3.select("#Visu")
-        .attr("height", height + margin.top + margin.bottom)
-        .attr("width", width + margin.left + margin.right)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                .attr("height", height + margin.top + margin.bottom)
+                .attr("width", width + margin.left + margin.right)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     //---------------------- Read Data ----------------------
 
     d3.json("Data/arcdata.json", function(data){
 
         //List of all circles
-        var allCircles = data.nodes.map(function(d){return d.name})
+        var allCircles = data.nodes.map(function(d){return d.name});
 
         //List of all types
-        var allTypes = data.nodes.map(function(d){return d.type})
+        var allTypes = data.nodes.map(function(d){return d.type});
         //Somehow changes the size ^^
         allTypes = [...new Set(allTypes)]
 
         //Range of colors for the different types 
         var color = d3.scaleOrdinal()
-            .domain(allTypes)
-            //Charm(Green),Spell(Blue),Curse(Orange),Unforgivable(Red)
-            .range(["#B2CF9C", "#4E8BD1", "#F9D47D", "#BE253F"]);
+                      .domain(allTypes)
+                      //Charm(Green),Spell(Blue),Curse(Orange),Unforgivable(Red)
+                      .range(["#B2CF9C", "#4E8BD1", "#F9D47D", "#BE253F"]);
 
         //Linear scale for circle size
         var size = d3.scaleLinear()
-            .domain([1,10])
-            .range([4,13]);
+                     .domain([1,10])
+                     .range([4,13]);
 
         //Linear scale for circle position on x-axis
         var x = d3.scalePoint()
-            .domain(allCircles)
-            .range([-80, width])
+                  .domain(allCircles)
+                  .range([-80, width]);
 
         //--    
         // In my input data, links are provided between nodes -id-, NOT between node names.
         // So I have to do a link between this id and the name
         var idToNode = {};
+
         data.nodes.forEach(function(n){
             idToNode[n.id] = n;
         });
@@ -94,7 +95,7 @@ function arc(){
             })
             .style("fill", "none")
             .attr("stroke", "grey")
-            .style("stroke-width", 1)
+            .style("stroke-width", 1);
 
         //---------------------- Add Circles ----------------------
         
@@ -103,9 +104,11 @@ function arc(){
             .data(data.nodes.sort(function(a,b) { return +b.size - +a.size }))
             .enter()
             .append("circle")
-            .attr("class", "circle")
+            .attr("class", function(d){
+                return ("class" + d.type);
+            })
             .attr("id", function(d){
-                return d.id;
+                return ("id" + d.id + "-" + d.type);
             })
             .attr("cx", function(d){ 
                 return(x(d.name))
@@ -117,7 +120,7 @@ function arc(){
             .style("fill", function(d){ 
                 return color(d.type)
             })
-            .attr("stroke", "white")
+            .attr("stroke", "white");
 
         //---------------------- Add Labels To Circles ----------------------
        
@@ -136,267 +139,355 @@ function arc(){
             .attr("transform", function(d){ 
                 return( "translate(" + (x(d.name)) + "," + (height-300) + ")" )
             })
-            .style("font-size", 0)
+            .style("font-size", 0);
 
         //---------------------- Add Interactions To Circles ----------------------
 
         nodes
 
-            //---------------------- Mouseover ----------------------
+        //---------------------- Mouseover ----------------------
 
-            .on('mouseover', function(d){
+        .on('mouseover', function(d){
 
-                //Id of the circle we are hovering above
-                hover = d.id;
-                //Book of the circle we are hovering above
-                book = hover.slice(hover.length-1,hover.length);
-                //Id without number
-                id = hover.slice(0,hover.length-1);
+            //Id of the circle we are hovering above
+            hover = d.id;
+            //Book of the circle we are hovering above
+            book = hover.slice(hover.length-1,hover.length);
+            //Id without number
+            id = hover.slice(0,hover.length-1);
 
-                //IF no circle is clicked
-                if(clicked == "0"){
+            //IF no circle and nothing on legend is clicked OR IF 
+            if(clicked == "0" && legendClicked == "0" || clicked == "0" && legendClicked == d.type){
 
-                    //---------------------- Circles ----------------------
+                //---------------------- Circles ----------------------
 
-                    //Reduce opacity of all circles
-                    nodes
-                    .style('opacity', .2)
-                    .style("cursor", "pointer");
+                //Reduce opacity of all circles
+                nodes
+                .style('opacity', .2)
+                .style("cursor", "pointer");
 
-                    //Only current circle and all connected circles stay the same color 
-                    for(i = 1; i < 8; i++){
-                        d3.select("#" + id + i)
-                        .style('opacity', 1)
+                //Only current circle and all connected circles stay the same color 
+                for(i = 1; i < 8; i++){
+                    d3.select("#id" + id + i + "-" + d.type)
+                    .style('opacity', 1);
+                }
+
+                //---------------------- Connections ----------------------
+
+                links
+                //Color of the link
+                .style('stroke', function (link_d){ 
+                    if(link_d.source === d.id || link_d.target === d.id){
+                        return color(d.type); 
                     }
+                    else{
+                        return '#b8b8b8';
+                    }
+                })
+                //Opacity of the link
+                .style('stroke-opacity', function(link_d){ 
+                    if(link_d.source === d.id || link_d.target === d.id){
+                        return 1;
+                    }
+                    else{
+                        return 0.2;
+                    }
+                })
+                //Width of the link
+                .style('stroke-width', function(link_d){ 
+                    if(link_d.source === d.id || link_d.target === d.id){
+                        return 4;
+                    }
+                    else{
+                        return 1;
+                    }
+                })
 
-                    ///---------------------- Connections ----------------------
+                //---------------------- Labels ----------------------
 
-                    links
-                    //Color of the link
-                    .style('stroke', function (link_d){ 
-                        if(link_d.source === d.id || link_d.target === d.id){
-                            return color(d.type); 
-                        }
-                        else{
-                            return '#b8b8b8';
-                        }
-                    })
-                    //Opacity of the link
-                    .style('stroke-opacity', function(link_d){ 
-                        if(link_d.source === d.id || link_d.target === d.id){
-                            return 1;
-                        }
-                        else{
-                            return 0.2;
-                        }
-                    })
-                    //Width of the link
-                    .style('stroke-width', function(link_d){ 
-                        if(link_d.source === d.id || link_d.target === d.id){
-                            return 4;
-                        }
-                        else{
-                            return 1;
-                        }
-                    })
+                labels
+                //Size of the labels
+                .style("font-size", function(label_d){ 
+                    if(label_d.name === d.name){
+                        return 20;
+                    }
+                    else{
+                        return 0;
+                    }
+                })
+                .style("fill", function(label_d){
+                    if(label_d.name === d.name){
+                        return color(d.type);
+                    }
+                })
 
-                    //---------------------- Labels ----------------------
+                //---------------------- Tooltip ----------------------
 
-                    labels
-                    //Size of the labels
-                    .style("font-size", function(label_d){ 
-                        if(label_d.name === d.name){
-                            return 20;
-                        }
-                        else{
-                            return 0;
-                        }
-                    })
-                    .style("fill", function(label_d){
-                        if(label_d.name === d.name){
-                            return color(d.type);
-                        }
-                    })
+                circleTooltip
+                .style("left", d3.event.pageX - 50 + "px")
+                .style("top", d3.event.pageY + 30 + "px")
+                .style("display", "inline-block")
+                .html(
+                    d.spell + ":" + "<br>" 
+                    + "Used " + d.size + " times in book " + book
+                );
+            }
 
-                    //---------------------- Tooltip ----------------------
+            //ELSE IF a circle was clicked and we are hovering above it
+            else if(hover == clicked){
 
-                    circleTooltip
-                    .style("left", d3.event.pageX - 50 + "px")
-                    .style("top", d3.event.pageY + 30 + "px")
-                    .style("display", "inline-block")
-                    .html(
-                        d.spell + ":" + "<br>" 
-                        + "Used " + d.size + " times in book " + book
-                    );
-                }
-
-                //ELSE IF a circle was clicked and we are hovering above it
-                else if(hover == clicked){
-
-                    //---------------------- Circles ----------------------
-                    nodes
-                    .style("cursor", "pointer");
-
-                    //---------------------- Tooltip ----------------------
-                    circleTooltip
-                    .style("left", d3.event.pageX - 50 + "px")
-                    .style("top", d3.event.pageY + 30 + "px")
-                    .style("display", "inline-block")
-                    .html(
-                        d.spell + ":" + "<br>" + "Used " 
-                        + d.size + " times in book " + book
-                    );
-                }
-
-                //ELSE IF a circle was clicked and we are hovering above a connected circle
-                else if(!(clicked == "0") && id == clicked.slice(0,clicked.length-1)){
-
-                    //---------------------- Circles ----------------------
-                    d3.select("#" + hover)
-                    .style("cursor", "pointer")
-
-                    //---------------------- Tooltip ----------------------
-                    circleTooltip
-                    .style("left", d3.event.pageX - 50 + "px")
-                    .style("top", d3.event.pageY + 30 + "px")
-                    .style("display", "inline-block")
-                    .html(
-                        d.spell + ":" + "<br>" 
-                        + "Used " + d.size + " times in book " + book
-                    );
-                }
-
-                //ELSE a circle was clicked but we are hovering above a different one
-                else{
-
-                    //---------------------- Circles ----------------------
-                    nodes
-                    .style("cursor", "default");
-                }
-            })
-
-            //---------------------- Mouseout ----------------------
-
-            .on('mouseout', function(d){
-
-                //IF the spell wasn't selected
-                if(clicked == "0"){
-
-                    //---------------------- Circles ----------------------
-                    nodes
-                    .style('opacity', 1)
-
-                    //---------------------- Connections ----------------------
-                    links
-                    .style('stroke', 'grey')
-                    .style('stroke-opacity', .8)
-                    .style('stroke-width', '1')
-
-                    //---------------------- Lables ----------------------
-                    labels
-                    .style("font-size", 0) 
-                }
+                //---------------------- Circles ----------------------
+                nodes
+                .style("cursor", "pointer");
 
                 //---------------------- Tooltip ----------------------
                 circleTooltip
-                .style("display","none");
+                .style("left", d3.event.pageX - 50 + "px")
+                .style("top", d3.event.pageY + 30 + "px")
+                .style("display", "inline-block")
+                .html(
+                    d.spell + ":" + "<br>" + "Used " 
+                    + d.size + " times in book " + book
+                );
+            }
 
-            })
+            //ELSE IF a circle was clicked and we are hovering above a connected circle
+            else if(!(clicked == "0") && id == clicked.slice(0,clicked.length-1)){
 
-            //---------------------- Click ----------------------
+                //---------------------- Circles ----------------------
+                d3.select("#id" + hover + "-" + d.type)
+                .style("cursor", "pointer");
 
-            .on('click', function(d){
-            
-                //IF no circle is selected
-                if(clicked == "0"){
+                //---------------------- Tooltip ----------------------
+                circleTooltip
+                .style("left", d3.event.pageX - 50 + "px")
+                .style("top", d3.event.pageY + 30 + "px")
+                .style("display", "inline-block")
+                .html(
+                    d.spell + ":" + "<br>" 
+                    + "Used " + d.size + " times in book " + book
+                );
+            }
 
-                    //Mark as clicked
-                    clicked = d.id;
+            //ELSE a circle was clicked but we are hovering above a different one
+            else{
 
-                    //---------------------- Circles ----------------------
+                //---------------------- Circles ----------------------
+                nodes
+                .style("cursor", "default");
+            }
+        })
 
-                    //Reduce opacity of all circles
-                    nodes
-                    .style('opacity', .2)
+        //---------------------- Mouseout ----------------------
 
-                    //Only current circle and all connected circles stay the same color 
+        .on('mouseout', function(d){
+
+            //IF no spell and nothing on legend is clicked
+            if(clicked == "0" && legendClicked == "0"){
+
+                //---------------------- Circles ----------------------
+                nodes
+                .style('opacity', 1);
+
+                //---------------------- Connections ----------------------
+                links
+                .style('stroke', 'grey')
+                .style('stroke-opacity', .8)
+                .style('stroke-width', '1');
+
+                //---------------------- Lables ----------------------
+                labels
+                .style("font-size", 0);
+            }
+            else if(clicked == "0" && legendClicked == d.type){
+                
+                for(j = 1; j < allCircles.length; j++){
                     for(i = 1; i < 8; i++){
-                        d3.select("#" + id + i)
-                        .style('opacity', 1)
+                        d3.select("#id" + allCircles[j] + "-" + d.type)
+                        .style('opacity', 1);
                     }
-
-                    //---------------------- Connections ----------------------
-
-                    links
-                    //Color of the link
-                    .style('stroke', function (link_d){ 
-                        if(link_d.source === d.id || link_d.target === d.id){
-                        return color(d.type); 
-                        }
-                        else{
-                        return '#b8b8b8';
-                        }
-                    })
-                    //Opacity of the link
-                    .style('stroke-opacity', function (link_d) { 
-                        if(link_d.source === d.id || link_d.target === d.id){
-                        return 1;
-                        }
-                        else{
-                        return 0.2;
-                        }
-                    })
-                    //Width of the link
-                    .style('stroke-width', function (link_d) { 
-                        if(link_d.source === d.id || link_d.target === d.id){
-                        return 4;
-                        }
-                        else{
-                        return 1;
-                        }
-                    })
-
-                    //---------------------- Labels ----------------------
-
-                    labels
-                    //Size of the labels
-                    .style("font-size", function(label_d){ 
-                        if(label_d.name === d.name){
-                        return 20;
-                        }
-                        else{
-                        return 0;
-                        }
-                    })
-                    //Color of the labels
-                    .style("fill", function(label_d){
-                        if(label_d.name === d.name){
-                            return color(d.type);
-                        }
-                    })
                 }
 
-                //ELSE IF circle was selected and it or connected circle is clicked (again)
-                else if(clicked.slice(0,clicked.length-1) == d.id.slice(0,clicked.length-1)){
+                //Reduce opacity of all links
+                links
+                .style('stroke', '#b8b8b8')
+                .style('stroke-opacity',0.2);
 
-                    //Mark as no longer clicked
-                    clicked = "0";
+                //Labels
+                labels
+                .style("font-size", 0);
+            }
 
-                    //---------------------- Circles ----------------------
-                    nodes
-                    .style('opacity', 1)
+            //---------------------- Tooltip ----------------------
+            circleTooltip
+            .style("display","none");
 
-                    //---------------------- Connections ----------------------
-                    links
-                    .style('stroke', 'grey')
-                    .style('stroke-opacity', .8)
-                    .style('stroke-width', '1')
+        })
 
-                    //---------------------- Labels ----------------------
-                    labels
-                    .style("font-size", 0) 
+        //---------------------- Click ----------------------
+
+        .on('click', function(d){
+        
+            //IF no circle and nothing on legend was clicked OR IF no circle was clicked but this circle is the same type as the clicked rect
+            if(clicked == "0" && legendClicked == "0" || clicked == "0" && legendClicked == d.type){
+
+                //Mark as clicked
+                clicked = d.id;
+
+                //---------------------- Circles ----------------------
+
+                //Reduce opacity of all circles
+                nodes
+                .style('opacity', .2);
+
+                //Only current circle and all connected circles stay the same color 
+                for(i = 1; i < 8; i++){
+                    d3.select("#id" + id + i + "-" + d.type)
+                    .style('opacity', 1);
                 }
-            })
+
+                //---------------------- Connections ----------------------
+
+                links
+                //Color of the link
+                .style('stroke', function (link_d){ 
+                    if(link_d.source === d.id || link_d.target === d.id){
+                    return color(d.type); 
+                    }
+                    else{
+                    return '#b8b8b8';
+                    }
+                })
+                //Opacity of the link
+                .style('stroke-opacity', function (link_d) { 
+                    if(link_d.source === d.id || link_d.target === d.id){
+                    return 1;
+                    }
+                    else{
+                    return 0.2;
+                    }
+                })
+                //Width of the link
+                .style('stroke-width', function (link_d) { 
+                    if(link_d.source === d.id || link_d.target === d.id){
+                    return 4;
+                    }
+                    else{
+                    return 1;
+                    }
+                })
+
+                //---------------------- Labels ----------------------
+
+                labels
+                //Size of the labels
+                .style("font-size", function(label_d){ 
+                    if(label_d.name === d.name){
+                    return 20;
+                    }
+                    else{
+                    return 0;
+                    }
+                })
+                //Color of the labels
+                .style("fill", function(label_d){
+                    if(label_d.name === d.name){
+                        return color(d.type);
+                    }
+                })
+
+                //---------------------- Legend ----------------------
+
+                //Reduce opacity of all rect
+                legend
+                .style('opacity', .3);
+
+                //Only rect of current type stays colored 
+                d3.select("#idrect" + d.type)
+                .style('opacity', 1)
+                .style("stroke",function(d){
+                    return color(d);
+                })
+                .style("stroke-width",3);
+
+                //Lower opacity of all labels
+                legendLabels
+                .style("opacity", 0.3);
+                
+                //Return opacity of current label back to 1
+                d3.select("#idlabel" + d.type)
+                .style("opacity", 1);
+            }
+
+            //ELSE IF circle was selected, it or connected circle is clicked (again) and nothing on legend is clicked 
+            else if(clicked.slice(0,clicked.length-1) == d.id.slice(0,clicked.length-1) && legendClicked == "0"){
+
+                //Mark as no longer clicked
+                clicked = "0";
+
+                //---------------------- Circles ----------------------
+                nodes
+                .style('opacity', 1);
+
+                //---------------------- Connections ----------------------
+                links
+                .style('stroke', 'grey')
+                .style('stroke-opacity', .8)
+                .style('stroke-width', '1');
+
+                //---------------------- Labels ----------------------
+                labels
+                .style("font-size", 0); 
+
+                //---------------------- Legend ----------------------
+
+                //Return opacity of all rect back to 1
+                legend
+                .style('opacity', 1)
+                .style("stroke","white")
+                .style("stroke-width",0);
+
+                //Return opacity of all labels back to 1
+                legendLabels
+                .style("opacity", 1);
+            }
+
+            //ELSE IF circle was selected, it or connected circle is clicked (again) and something on legend is clicked
+            else if(clicked.slice(0,clicked.length-1) == d.id.slice(0,clicked.length-1) && legendClicked == d.type){
+
+                //Mark as no longer clicked
+                clicked = "0";
+
+                //---------------------- Circles ----------------------
+
+                for(i = 1; i < allCircles.length; i++){
+                    d3.select("#id" + allCircles[i] + "-" + d.type)
+                    .style('opacity', 1);
+                }
+
+                //---------------------- Connections ----------------------
+                /*links
+                .style('stroke', 'grey')
+                .style('stroke-opacity', .8)
+                .style('stroke-width', '1');*/
+
+                //---------------------- Labels ----------------------
+                labels
+                .style("font-size", 0); 
+
+                //---------------------- Legend ----------------------
+
+                //Return opacity of all rect back to 1
+                /*legend
+                .style('opacity', 1)
+                .style("stroke","white")
+                .style("stroke-width",0);
+
+                //Return opacity of all labels back to 1
+                legendLabels
+                .style("opacity", 1);*/
+            }
+        })
 
         //---------------------- Add Legend ----------------------
 
@@ -420,7 +511,7 @@ function arc(){
             .style("fill", function(d){ 
                 return color(d)
             })
-            .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; })
+            .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; });
         
         //---------------------- Add Labels To Legend ----------------------
 
@@ -439,106 +530,184 @@ function arc(){
             })
             .style("text-anchor", "front")
             .style("font-size", 13)
-            .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; })   
+            .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; });   
 
         //---------------------- Add Interactions To Legend ----------------------
 
         legend
-            .on("mouseover", function(d){
 
-                //IF nothing on the legend is clicked
-                if(legendClicked == "0"){
+        //---------------------- Mouseover ----------------------
 
-                    //The rect we are hovering above 
-                    d3.select(this)
-                    .style("stroke",function(d){
-                        return color(d);
-                    })
-                    .style("stroke-width",3)
-                    .style("cursor", "pointer")
-                }  
-                //ELSE IF a type was clicked and were hovering above it  
-                else if(legendClicked == d){
+        .on("mouseover", function(d){
 
-                    d3.select(this)
-                    .style("cursor", "pointer")
-                }  
-                //ELSE a type was clicked but we are hovering above a different one
-                else{
+            //IF nothing on the legend and no circle is clicked
+            if(legendClicked == "0" && clicked == "0"){
 
-                    d3.select(this)
-                    .style("cursor", "default")
-                }              
-            })
-            .on("mouseout", function(d){
+                //The rect we are hovering above 
+                d3.select(this)
+                .style("stroke",function(d){
+                    return color(d);
+                })
+                .style("stroke-width",3)
+                .style("cursor", "pointer");
+            }  
+            //ELSE IF a type was clicked (but no circle) and were hovering above the type  
+            else if(legendClicked == d && clicked == "0"){
 
-                //IF nothing on legend was clicked
-                if(legendClicked == "0"){
+                d3.select(this)
+                .style("cursor", "pointer");
+            }  
+            //ELSE a type was clicked but we are hovering above a different one
+            else{
 
-                    legend
-                    .style("stroke","white")
-                    .style("stroke-width",0)
-                }
-            })
-            .on("click", function(d){
-
-                //IF nothing on legend is clicked
-                if(legendClicked == "0"){
-
-                    //Clicked = true
-                    legendClicked = d;
-
-                    //---------------------- Rectangles ----------------------
-
-                    //Every rect
-                    legend
-                    .style('opacity', .3);
-
-                    //The rect that was clicked
-                    d3.select(this)
-                    .style('opacity', 1)
-                    .style("stroke",function(d){
-                        return color(d);
-                    })
-                    .style("stroke-width",3)
-                    
-                    //---------------------- Labels ----------------------
-
-                    //Lower opacity of all labels
-                    legendLabels
-                    .style("opacity", 0.3);
-                    
-                    //Return opacity of current label back to 1
-                    d3.select("#idlabel" + d)
-                    .style("opacity", 1);
-                       
-                }
-                //ELSE IF rect was clicked and we are clicking on the same one again 
-                else if(legendClicked == d){
-                    
-                    //Clicked = false
-                    legendClicked = "0";
-
-                    //---------------------- Rectangles ----------------------
-
-                    //Every rect
-                    legend
-                    .style('opacity', 1);
-
-                    //The rect that was clicked again
-                    d3.select(this)
-                    .style("stroke","white")
-                    .style("stroke-width",0)
-
-                    //---------------------- Labels ----------------------
-                    
-                    //Return opacity of all labels back to 1
-                    legendLabels
-                    .style("opacity", 1);
-                }
-            })
+                d3.select(this)
+                .style("cursor", "default");
+            }              
         })
-    }
+
+        //---------------------- Mouseout ----------------------
+
+        .on("mouseout", function(d){
+
+            //IF nothing on legend was clicked
+            if(legendClicked == "0" && clicked == "0"){
+
+                legend
+                .style("stroke","white")
+                .style("stroke-width",0);
+            }
+        })
+
+        //---------------------- Click ----------------------
+
+        .on("click", function(d){
+
+            //IF nothing on legend is clicked
+            if(legendClicked == "0" && clicked == "0"){
+
+                //Clicked = true
+                legendClicked = d;
+
+                //---------------------- Rectangles ----------------------
+
+                //Every rect
+                legend
+                .style('opacity', .3);
+
+                //The rect that was clicked
+                d3.select(this)
+                .style('opacity', 1)
+                .style("stroke",function(d){
+                    return color(d);
+                })
+                .style("stroke-width",3);
+                
+                //---------------------- Labels ----------------------
+
+                //Lower opacity of all labels
+                legendLabels
+                .style("opacity", 0.3);
+                
+                //Return opacity of current label back to 1
+                d3.select("#idlabel" + d)
+                .style("opacity", 1);
+
+                //---------------------- Begin Erase ----------------------
+                
+                //erase(this);
+
+                //Reduce opacity of all circles
+                nodes
+                .style('opacity', .2)
+                .style("cursor", "pointer");
+
+                //Only current circle and all connected circles stay the same color 
+                for(i = 1; i < allCircles.length; i++){
+                    d3.select("#id" + allCircles[i] + "-" + d)
+                    .style('opacity', 1);
+                }
+
+                //Reduce opacity of all links
+                links
+                .style('stroke', '#b8b8b8')
+                .style('stroke-opacity',0.2);
+
+                //---------------------- End Erase ----------------------
+
+            }
+            //ELSE IF rect was clicked and we are clicking on the same one again 
+            else if(legendClicked == d && clicked == "0"){
+                
+                //Clicked = false
+                legendClicked = "0";
+
+                //---------------------- Rectangles ----------------------
+
+                //Every rect
+                legend
+                .style('opacity', 1);
+
+                //The rect that was clicked again
+                d3.select(this)
+                .style("stroke","white")
+                .style("stroke-width",0);
+
+                //---------------------- Labels ----------------------
+                
+                //Return opacity of all labels back to 1
+                legendLabels
+                .style("opacity", 1);
+
+                //---------------------- Begin PutBack ----------------------
+                
+                //erase(this);
+
+                //Return opacity of all circles back to 1
+                nodes
+                .style('opacity', 1)
+                .style("cursor", "pointer");
+
+                //Return opacity of all links back to 1
+                links
+                .style('stroke', 'grey')
+                .style('stroke-opacity', .8)
+                .style('stroke-width', '1');
+
+                //---------------------- End PutBack ----------------------
+            }
+        })
+
+        function erase(){
+
+            //console.log(nodes.length)
+
+            //Reduce opacity of all circles
+            nodes
+            .style('opacity', .2)
+            .style("cursor", "pointer");
+
+            //Only current circle and all connected circles stay the same color 
+            for(i = 1; i < allCircles.length; i++){
+                d3.select("." + d)
+                console.log(allCircles[i])
+                //d3.select("#" + id + i)
+                //.style('opacity', 1);
+            }
+
+            ///---------------------- Connections ----------------------
+
+            links
+            //Color of the link
+            .style('stroke', function (ld){ 
+                return '#b8b8b8';
+            })
+            //Opacity of the link
+            .style('stroke-opacity', function(link_d){ 
+                return 0.2;
+            })
+        }
+    })
+}
 
 
 function toggle_info(){
