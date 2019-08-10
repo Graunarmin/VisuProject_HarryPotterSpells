@@ -47,7 +47,7 @@ function arc(){
         var allCircles = data.nodes.map(function(d){return d.name});
 
         //List of all types
-        var allTypes = data.nodes.map(function(d){return d.type});
+        var allTypes = data.nodes.map(function(d){return (d.type).split(' ').join('')});
         //Somehow changes the size ^^
         allTypes = [...new Set(allTypes)]
 
@@ -55,7 +55,7 @@ function arc(){
         var color = d3.scaleOrdinal()
                       .domain(allTypes)
                       //Charm(Green),Spell(Blue),Curse(Orange),Unforgivable(Red)
-                      .range(["#B2CF9C", "#4E8BD1", "#F9D47D", "#BE253F"]);
+                      .range(["#A5C78B", "#4E8BD1", "#FFB733", "#BE253F"]);
 
         //Linear scale for circle size
         var size = d3.scaleLinear()
@@ -105,10 +105,11 @@ function arc(){
             .enter()
             .append("circle")
             .attr("class", function(d){
-                return ("class" + d.type);
+                return ("class" + (d.type).split(' ').join(''));
             })
             .attr("id", function(d){
-                return ("id" + d.id + "-" + d.type);
+                console.log((d.type).split(' ').join(''))
+                return ("id" + d.id + "-" + (d.type).split(' ').join(''));
             })
             .attr("cx", function(d){ 
                 return(x(d.name))
@@ -118,7 +119,7 @@ function arc(){
                 return(size(d.size))
             })
             .style("fill", function(d){ 
-                return color(d.type)
+                return color((d.type).split(' ').join(''))
             })
             .attr("stroke", "white");
 
@@ -157,18 +158,18 @@ function arc(){
             id = hover.slice(0,hover.length-1);
 
             //IF no circle and nothing on legend is clicked OR IF 
-            if(clicked == "0" && legendClicked == "0" || clicked == "0" && legendClicked == d.type){
+            if(clicked == "0" && legendClicked == "0" || clicked == "0" && legendClicked == (d.type).split(' ').join('')){
 
                 //---------------------- Circles ----------------------
 
                 //Reduce opacity of all circles
                 nodes
-                .style('opacity', .2)
+                .style('opacity', .1)
                 .style("cursor", "pointer");
 
                 //Only current circle and all connected circles stay the same color 
                 for(i = 1; i < 8; i++){
-                    d3.select("#id" + id + i + "-" + d.type)
+                    d3.select("#id" + id + i + "-" + (d.type).split(' ').join(''))
                     .style('opacity', 1);
                 }
 
@@ -178,7 +179,7 @@ function arc(){
                 //Color of the link
                 .style('stroke', function (link_d){ 
                     if(link_d.source === d.id || link_d.target === d.id){
-                        return color(d.type); 
+                        return color((d.type).split(' ').join('')); 
                     }
                     else{
                         return '#b8b8b8';
@@ -217,7 +218,7 @@ function arc(){
                 })
                 .style("fill", function(label_d){
                     if(label_d.name === d.name){
-                        return color(d.type);
+                        return color((d.type).split(' ').join(''));
                     }
                 })
 
@@ -255,7 +256,7 @@ function arc(){
             else if(!(clicked == "0") && id == clicked.slice(0,clicked.length-1)){
 
                 //---------------------- Circles ----------------------
-                d3.select("#id" + hover + "-" + d.type)
+                d3.select("#id" + hover + "-" + (d.type).split(' ').join(''))
                 .style("cursor", "pointer");
 
                 //---------------------- Tooltip ----------------------
@@ -299,11 +300,11 @@ function arc(){
                 labels
                 .style("font-size", 0);
             }
-            else if(clicked == "0" && legendClicked == d.type){
+            else if(clicked == "0" && legendClicked == (d.type).split(' ').join('')){
                 
                 for(j = 1; j < allCircles.length; j++){
                     for(i = 1; i < 8; i++){
-                        d3.select("#id" + allCircles[j] + "-" + d.type)
+                        d3.select("#id" + allCircles[j] + "-" + (d.type).split(' ').join(''))
                         .style('opacity', 1);
                     }
                 }
@@ -311,7 +312,8 @@ function arc(){
                 //Reduce opacity of all links
                 links
                 .style('stroke', '#b8b8b8')
-                .style('stroke-opacity',0.2);
+                .style('stroke-opacity',0.2)
+                .style('stroke-width', '1');
 
                 //Labels
                 labels
@@ -329,7 +331,7 @@ function arc(){
         .on('click', function(d){
         
             //IF no circle and nothing on legend was clicked OR IF no circle was clicked but this circle is the same type as the clicked rect
-            if(clicked == "0" && legendClicked == "0" || clicked == "0" && legendClicked == d.type){
+            if(clicked == "0" && legendClicked == "0" || clicked == "0" && legendClicked == (d.type).split(' ').join('')){
 
                 //Mark as clicked
                 clicked = d.id;
@@ -338,11 +340,11 @@ function arc(){
 
                 //Reduce opacity of all circles
                 nodes
-                .style('opacity', .2);
+                .style('opacity', .1);
 
                 //Only current circle and all connected circles stay the same color 
                 for(i = 1; i < 8; i++){
-                    d3.select("#id" + id + i + "-" + d.type)
+                    d3.select("#id" + id + i + "-" + (d.type).split(' ').join(''))
                     .style('opacity', 1);
                 }
 
@@ -352,7 +354,7 @@ function arc(){
                 //Color of the link
                 .style('stroke', function (link_d){ 
                     if(link_d.source === d.id || link_d.target === d.id){
-                    return color(d.type); 
+                    return color((d.type).split(' ').join('')); 
                     }
                     else{
                     return '#b8b8b8';
@@ -392,7 +394,7 @@ function arc(){
                 //Color of the labels
                 .style("fill", function(label_d){
                     if(label_d.name === d.name){
-                        return color(d.type);
+                        return color((d.type).split(' ').join(''));
                     }
                 })
 
@@ -403,7 +405,7 @@ function arc(){
                 .style('opacity', .3);
 
                 //Only rect of current type stays colored 
-                d3.select("#idrect" + d.type)
+                d3.select("#idrect" + (d.type).split(' ').join(''))
                 .style('opacity', 1)
                 .style("stroke",function(d){
                     return color(d);
@@ -415,7 +417,7 @@ function arc(){
                 .style("opacity", 0.3);
                 
                 //Return opacity of current label back to 1
-                d3.select("#idlabel" + d.type)
+                d3.select("#idlabel" + (d.type).split(' ').join(''))
                 .style("opacity", 1);
             }
 
@@ -453,7 +455,7 @@ function arc(){
             }
 
             //ELSE IF circle was selected, it or connected circle is clicked (again) and something on legend is clicked
-            else if(clicked.slice(0,clicked.length-1) == d.id.slice(0,clicked.length-1) && legendClicked == d.type){
+            else if(clicked.slice(0,clicked.length-1) == d.id.slice(0,clicked.length-1) && legendClicked == (d.type).split(' ').join('')){
 
                 //Mark as no longer clicked
                 clicked = "0";
@@ -461,31 +463,13 @@ function arc(){
                 //---------------------- Circles ----------------------
 
                 for(i = 1; i < allCircles.length; i++){
-                    d3.select("#id" + allCircles[i] + "-" + d.type)
+                    d3.select("#id" + allCircles[i] + "-" + (d.type).split(' ').join(''))
                     .style('opacity', 1);
                 }
-
-                //---------------------- Connections ----------------------
-                /*links
-                .style('stroke', 'grey')
-                .style('stroke-opacity', .8)
-                .style('stroke-width', '1');*/
 
                 //---------------------- Labels ----------------------
                 labels
                 .style("font-size", 0); 
-
-                //---------------------- Legend ----------------------
-
-                //Return opacity of all rect back to 1
-                /*legend
-                .style('opacity', 1)
-                .style("stroke","white")
-                .style("stroke-width",0);
-
-                //Return opacity of all labels back to 1
-                legendLabels
-                .style("opacity", 1);*/
             }
         })
 
@@ -618,7 +602,7 @@ function arc(){
 
                 //Reduce opacity of all circles
                 nodes
-                .style('opacity', .2)
+                .style('opacity', .1)
                 .style("cursor", "pointer");
 
                 //Only current circle and all connected circles stay the same color 
@@ -629,8 +613,18 @@ function arc(){
 
                 //Reduce opacity of all links
                 links
-                .style('stroke', '#b8b8b8')
-                .style('stroke-opacity',0.2);
+                //.style('stroke', '#b8b8b8')
+                .style('stroke-opacity', function(link_d){ 
+
+                    for(i = 1; i < allCircles.length; i++){
+                        if(link_d.source === allCircles[i] /*&& d.type == d*/|| link_d.target === allCircles[i]){
+                            return 1;
+                        }
+                        else{
+                            return 0.2;
+                        }
+                    }
+                });
 
                 //---------------------- End Erase ----------------------
 
@@ -669,7 +663,7 @@ function arc(){
 
                 //Return opacity of all links back to 1
                 links
-                .style('stroke', 'grey')
+                //.style('stroke', 'grey')
                 .style('stroke-opacity', .8)
                 .style('stroke-width', '1');
 
@@ -683,7 +677,7 @@ function arc(){
 
             //Reduce opacity of all circles
             nodes
-            .style('opacity', .2)
+            .style('opacity', .1)
             .style("cursor", "pointer");
 
             //Only current circle and all connected circles stay the same color 
@@ -781,7 +775,7 @@ function color(element){
             return ["rgb(0, 136, 255)", "rgba(0, 136, 255, 0.4)"];
         case "Curse":
             //orange
-            return ["rgb(255, 132, 0)", "rgba(255, 132, 0, 0.4)"];
+            return ["#FFAE19", "rgba(255, 132, 0, 0.4)"];
         case "Unforgivable Curse":
             //red
             return ["rgb(184, 12, 12)", "rgba(184, 12, 12, 0.4)"];
