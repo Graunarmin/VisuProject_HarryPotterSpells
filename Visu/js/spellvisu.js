@@ -114,7 +114,6 @@ function arc(){
             .enter()
             .append("circle")
             .attr("id", function(d){
-                console.log("id" + d.id + "-" + d.type)
                 return ("id" + d.id + "-" + d.type);
             })
             .attr("cx", function(d){ 
@@ -575,6 +574,21 @@ function arc(){
                 //Return opacity of current label back to 1
                 d3.select("#idlabel" + d.type)
                 .style("opacity", 1);
+
+                //---------------------- Books ----------------------
+
+                //Lower opacity of all books
+                bookLabels
+                .style("opacity", 0.3);
+
+                //Only books where the spells are from stay at opacity 1
+                for(i = 1; i < 8; i++){
+                    if(!(d3.select("#id" + id + i + "-" + d.type).empty())){
+                        d3.select("#" + d.id.slice(d.id.length-5,d.id.length-1) + i)
+                        .style("opacity", 1)
+                        .style("font-weight", "bold");
+                    }
+                }
             }
 
             //ELSE IF no circle, no rect but a book is clicked and circle out of book is clicked
@@ -699,6 +713,11 @@ function arc(){
                 //Return opacity of all labels back to 1
                 legendLabels
                 .style("opacity", 1);
+
+                //---------------------- Books ----------------------
+                bookLabels
+                .style("opacity", 1)
+                .style("font-weight", "normal");
             }
 
             //ELSE IF circle or connected circle is clicked (again) and rect is clicked
@@ -708,7 +727,6 @@ function arc(){
                 clicked = "0";
 
                 //---------------------- Circles ----------------------
-
                 for(i = 1; i < allCircles.length; i++){
                     d3.select("#id" + allCircles[i] + "-" + d.type)
                     .style('opacity', 1);
@@ -717,6 +735,11 @@ function arc(){
                 //---------------------- Labels ----------------------
                 labels
                 .style("font-size", 0); 
+
+                //---------------------- Books ----------------------
+                bookLabels
+                .style("opacity", 1)
+                .style("font-weight", "normal");
             }
         })
 
@@ -847,7 +870,7 @@ function arc(){
 
                 //---------------------- Erase Circles ----------------------
 
-                //Reduce opacity of all circles to 0
+                //Reduce opacity of all circles to 0.1
                 nodes
                 .style('opacity', 0.1);
 
@@ -866,7 +889,7 @@ function arc(){
                     if(link_d.type === d){
                         return 1;
                     }
-                    //ELSE lower opacity to 0
+                    //ELSE lower opacity to 0.1
                     else{
                         return 0.1;
                     }
@@ -902,14 +925,12 @@ function arc(){
                 //Return opacity of all circles back to 1
                 nodes
                 .style('opacity', 1)
-                //.style("cursor", "pointer");
 
                 //---------------------- Put Links Back ----------------------
 
                 //Return opacity of all links back to 1
                 links
                 .style('stroke-opacity', 1)
-                //.style('stroke-width', '1');
             }
 
             //ELSE IF no rect, no circle but book is clicked
@@ -1009,7 +1030,7 @@ function arc(){
                 return bookId[i];
             })
             .attr("x", 0)
-            .attr("y", 440)
+            .attr("y", 450)
             .text(function(d){
                 return d;
             })
@@ -1025,11 +1046,10 @@ function arc(){
 
         .on("mouseover", function(d,i){
 
-            //console.log(this.id)
-            //console.log(d)
-
             //IF no circle, no rect and no book is clicked
-            if(clicked == "0" && legendClicked == "0" && bookClicked == "0"){
+            //OR IF no circle, no book but rect is clicked
+            if(clicked == "0" && legendClicked == "0" && bookClicked == "0"
+            || clicked == "0" && !(legendClicked == "0") && bookClicked == "0"){
 
                 d3.select(this)
                 .style("font-weight", "bold")
@@ -1043,7 +1063,9 @@ function arc(){
                 .html(bookNames[i]);
             }
             //ELSE IF no circle, no rect but book is clicked an mouse is moving over clicked book
-            else if(clicked == "0" && legendClicked == "0" && bookClicked == d){
+            //OR IF no circle but rect and book is clicked an mouse is moving over clicked book
+            else if(clicked == "0" && legendClicked == "0" && bookClicked == d
+            || clicked == "0" && !(legendClicked == "0") && bookClicked == d){
 
                 d3.select(this)
                 .style("cursor", "pointer");
@@ -1065,7 +1087,10 @@ function arc(){
 
         .on("mouseout", function(d){
 
-            if(legendClicked == "0" && clicked == "0" && bookClicked == "0"){
+            //IF no rect, no circle and no book is clicked 
+            //OR IF no circle and no book but rect is clicked
+            if(legendClicked == "0" && clicked == "0" && bookClicked == "0"
+            || !(legendClicked) == "0" && clicked == "0" && bookClicked == "0"){
 
                 bookLabels
                 .style("font-weight", "normal");
@@ -1119,9 +1144,10 @@ function arc(){
 
                 //Reduce opacity of all links
                 links
-                .style("opacity", 0.1);
+                .style("stroke-opacity", 0.1);
 
             }
+
             //ELSE IF no circle, no rect and but book is clicked and we are clicking on it again
             else if(clicked == "0" && legendClicked == "0" && bookClicked == d){
 
@@ -1139,7 +1165,81 @@ function arc(){
 
                 //---------------------- Links ----------------------
                 links
-                .style("opacity", 1);
+                .style("stroke-opacity", 1);
+            }
+
+            //ELSE IF no circle, no book but rect is clicked
+            else if(bookClicked == "0" && clicked == "0" && !(legendClicked == "0")){
+
+                //Mark as clicked
+                bookClicked = d;
+
+                //---------------------- Books ----------------------
+
+                //Reduce opacity of all books
+                bookLabels
+                .style('opacity', .3);
+
+                //Only current book stays at opacity 1
+                d3.select(this)
+                .style('opacity', 1);
+
+                //---------------------- Circles ----------------------
+
+                //Reduce opacity of all circles
+                nodes
+                .style("opacity", 0.1);
+
+                //Only circles of type and out of clicked book stay at opacity 1
+                for(i = 0; i < allCircles.length; i++){
+
+                    c = allCircles[i].slice(0,allCircles[i].length-1);
+                    b = bookClicked.slice(bookClicked.length-1, bookClicked.length);
+                    
+                    d3.select("#id" + c + b + "-" + legendClicked)
+                    .style("opacity", 1);
+                }
+
+                //---------------------- Links ----------------------
+
+                //Reduce opacity of all links
+                links
+                .style("stroke-opacity", 0.1);
+
+            }
+
+            //ELSE IF no circle but rect and book is clicked (again)
+            else if(clicked == "0" && !(legendClicked == "0") && bookClicked == d){
+
+                //Mark as no longer clicked
+                bookClicked = "0";
+
+                //---------------------- Books ----------------------
+                bookLabels
+                .style('opacity', 1)
+                .style("font-weight", "normal");
+
+                //---------------------- Circles ----------------------
+                
+                //Circles from type get returned to opacity 1
+                for(i = 0; i < allCircles.length; i++){
+
+                    d3.select("#id" + allCircles[i] + "-" + legendClicked)
+                    .style("opacity", 1);
+                }
+
+                //Opacity of the links
+                links
+                .style('stroke-opacity', function(link_d){
+                    //IF link is of same type as clicked rect, leave opacity at 1
+                    if(link_d.type === legendClicked){
+                        return 1;
+                    }
+                    //ELSE lower opacity to 0.1
+                    else{
+                        return 0.1;
+                    }
+                });
             }
         })
     })
