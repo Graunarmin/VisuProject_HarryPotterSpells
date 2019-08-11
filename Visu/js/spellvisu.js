@@ -41,7 +41,7 @@ function arc(){
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    //---------------------- Read Data ----------------------
+    //---------------------- Arc Data ----------------------
 
     d3.json("Data/arcdata.json", function(data){
 
@@ -1020,7 +1020,7 @@ function arc(){
         })
 
         //---------------------- Add Book Lables ----------------------
-
+        
         var bookLabels = svg
             .selectAll("mybookLables")
             .data(allBooks)
@@ -1029,14 +1029,17 @@ function arc(){
             .attr("id", function(d,i){
                 return bookId[i];
             })
-            .attr("x", 0)
-            .attr("y", 450)
+            .attr("x", -50)
+            .attr("y", 460)
             .text(function(d){
                 return d;
             })
             .style("text-anchor", "front")
             .style("font-size", 13)
-            .attr("transform", function(d, i) { return "translate(" + i * width/7 + ",0)"; }); 
+            .attr("transform", function(d,i) { 
+                return "translate(" + i * width/6 + ",0)"; 
+            }); 
+            //.attr("transform", function(d, i) { return "translate(" + i * width/7 + ",0)"; }); 
 
         //---------------------- Add Interactions To Books ----------------------
 
