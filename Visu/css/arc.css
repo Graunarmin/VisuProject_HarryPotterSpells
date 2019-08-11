@@ -54,7 +54,8 @@
   }
   
   .toggleSpells:hover{
-    color : #55d1d3 !important; 
+    font-weight: bold !important;
+    /*color : #55d1d3 !important; 
     /* !important so it still works after using javascript! */
   }
   

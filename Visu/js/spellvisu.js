@@ -238,14 +238,78 @@ function arc(){
                 );
             }
 
-            //ELSE IF no circle but rect is clicked and mouse is over corresponding circle
+            //ELSE IF no circle, no book but rect is clicked and mouse is over corresponding circle
             else if(clicked == "0" && bookClicked == "0" && legendClicked == d.type){
 
                 //---------------------- Circles ----------------------
 
                 nodes
-                .style("Opacity", 0.3)
-                .style("cursor", "pointer");
+                .style("opacity", 0.1);
+
+                //All corresponding circles
+                for(i = 1; i < allCircles.length; i++){
+                    d3.select("#id" + allCircles[i] + "-" + d.type)
+                    .style("opacity", 1)
+                    .style("cursor", "pointer");
+                }
+
+                //---------------------- Connections ----------------------
+
+                links
+                //Color of the link
+                .style('stroke', function (link_d){ 
+                    if(link_d.type === legendClicked){
+                        if(link_d.source === d.id || link_d.target === d.id){
+                            return color(d.type); 
+                        }
+                        else{
+                            return "grey"; 
+                        }
+                    }
+                })
+                //Opacity of the link
+                .style('stroke-opacity', function(link_d){ 
+                    if(link_d.type === legendClicked){
+                        if(link_d.source === d.id || link_d.target === d.id){
+                            return 1;
+                        }
+                        else{
+                            return 0.2;
+                        }
+                    }
+                    else{
+                        return 0.1;
+                    }
+                })
+                //Width of the link
+                .style('stroke-width', function(link_d){ 
+                    if(link_d.type === legendClicked){
+                        if(link_d.source === d.id || link_d.target === d.id){
+                            return 4;
+                        }
+                        else{
+                            return 1;
+                        }
+                    }
+                })
+
+                //---------------------- Labels ----------------------
+
+                labels
+                //Size of the labels
+                .style("font-size", function(label_d){ 
+                    if(label_d.name === d.name){
+                        return 20;
+                    }
+                    else{
+                        return 0;
+                    }
+                })
+                .style("fill", function(label_d){
+                    if(label_d.name === d.name){
+                        return color(d.type);
+                    }
+                })
 
                 //---------------------- Tooltip ----------------------
 
@@ -364,21 +428,33 @@ function arc(){
                 .style("font-size", 0);
             }
 
-            //ELSE IF no circle but rect on legend is clicked and mouse is moving of of corresponding circle  
-            else if(clicked == "0" && legendClicked == d.type){
-                
-                for(j = 1; j < allCircles.length; j++){
-                    for(i = 1; i < 8; i++){
-                        d3.select("#id" + allCircles[j] + "-" + d.type)
-                        .style('opacity', 1);
-                    }
-                }
+            //ELSE IF no circle, no book but rect on legend is clicked and mouse is moving of of corresponding circle  
+            else if(clicked == "0" && bookClicked == "0" && legendClicked == d.type){
 
-                //Reduce opacity of all links
+                //---------------------- Connections ----------------------
+                
                 links
-                .style('stroke', '#b8b8b8')
-                .style('stroke-opacity',0.2)
-                .style('stroke-width', '1');
+                //Color of the link
+                .style('stroke', function (link_d){ 
+                    if(link_d.type === legendClicked){
+                        return "grey"; 
+                    }
+                })
+                //Opacity of the link
+                .style('stroke-opacity', function(link_d){ 
+                    if(link_d.type === legendClicked){
+                        return 1;
+                    }
+                    else{
+                        return 0.1;
+                    }
+                })
+                //Width of the link
+                .style('stroke-width', function(link_d){ 
+                    if(link_d.type === legendClicked){
+                        return 1;
+                    }
+                })
 
                 //Labels
                 labels
@@ -745,8 +821,7 @@ function arc(){
 
                 //Reduce opacity of all circles to 0
                 nodes
-                .style('opacity', 0)
-                //.style("cursor", "pointer");
+                .style('opacity', 0.1);
 
                 //Only current circle and all connected circles stay the same color 
                 for(i = 1; i < allCircles.length; i++){
@@ -765,7 +840,7 @@ function arc(){
                     }
                     //ELSE lower opacity to 0
                     else{
-                        return 0;
+                        return 0.1;
                     }
                 });
 
