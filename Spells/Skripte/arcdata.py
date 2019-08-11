@@ -11,7 +11,6 @@ def create_arcdata():
     years = ['HP_01', 'HP_02', 'HP_03', 'HP_04', 'HP_05', 'HP_06', 'HP_07']
 
     for year in years:
-
         for element in spells:
             if str(element[year]):
                 #add all nodes (each spell per each year)
@@ -32,11 +31,14 @@ def create_arcdata():
         for i in range(len(link)-1):
             for j in range(i+1,len(link)):
                 links.append({"source":link[i],"target":link[j],"type":types[spell]})
-
+    
+    #join data
     data = {"nodes":nodes,"links":links}
-
+    
+    #save as pickle ...
     pickle.dump(data, open("../Pickles/arcdata.p", "wb"))
-
+    
+    #...and as json
     json_string = json.dumps(data)
     json.dump(data, open('../Data/Background/json/arcdata.json', 'w'))
 

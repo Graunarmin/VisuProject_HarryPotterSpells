@@ -48,7 +48,7 @@ def spells_to_html():
         for item in html_list:
             f.write("%s\n" % item)
 
-def csv_to_json(csv_path, json_path):
+def spell_csv_to_json(csv_path, json_path):
     data = []
     with open(csv_path, "r") as csv_file:
         csv_reader = csv.DictReader(csv_file)
@@ -65,8 +65,8 @@ def csv_to_json(csv_path, json_path):
 
 def main():
     
-    csv_to_json("../Data/used/spells.csv",'../Data/used/spells.json')
-    #spells_to_html()
+    #spell_csv_to_json("../Data/used/spells.csv",'../Data/used/spells.json')
+    spells_to_html()
 
 if __name__ == '__main__':
     main()

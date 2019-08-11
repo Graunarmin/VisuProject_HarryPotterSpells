@@ -7,20 +7,13 @@ import json
 import sys
 import os
 from pprint import pprint
+import mylib
 
-def get_json(file):
-    '''loads json from file'''
-
-    with open(file, "r") as jsonfile:
-        data = json.load(jsonfile)
-        #print(data['effect'])
-    
-    #print(data)
-    prepare_data(data)
-
-def prepare_data(data):
+def prepare_data(path):
     '''prepares Data in the Form "Spell | Effect | Type | Category | Dangerousness" '''
     
+    data = mylib.load_json(path)
+
     spelldata = [tuple(["Spell"] + ["Effect"] + ["Type"] + ["Category"] + ["Dangerousness"])]
 
     size = len(data['spell'])
@@ -31,26 +24,12 @@ def prepare_data(data):
         m_type = data["type"][i]
         
         spelldata.append(tuple([m_spell] + [m_effect] + [m_type] + [" "] + [" "]))
-
-    #print (spelldata)
     
-    into_csv(spelldata)
-
-def into_csv(data):
-    '''converts data into csv'''
-    with open("../Data/spells.csv", "w") as csvfile:
-
-        writer = csv.writer(csvfile)
-
-        for element in data:
-            writer.writerow(element)
-
+    mylib.into_csv(spelldata, "../Data/Background/csv/spells.csv")
 
 def main():
     
-    #file = sys.argv[1]
-
-    get_json("../Data/spells.json")
+    prepare_data("../Data/used/spells.json")
 
 if __name__ == '__main__':
     main()

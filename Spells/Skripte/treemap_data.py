@@ -45,10 +45,13 @@ def create_treedata():
 
         books.append({"name":name,"children":categories})
     
+    # join the data    
     json_dict = {"name":"Spells","children":books}
-
+    
+    # save as pickle ...
     pickle.dump(json_dict, open("../Pickles/treemap_data_2.p", "wb"))
 
+    # ... and as json
     json_string = json.dumps(json_dict)
     json.dump(json_dict, open('../Data/Background/json/treemap_data_2.json', 'w'))
 
