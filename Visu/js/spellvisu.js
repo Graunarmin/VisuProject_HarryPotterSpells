@@ -171,12 +171,6 @@ function arc(){
                 nodes
                 .style("cursor", "pointer");
 
-                //Only current circle and all connected circles stay the same color 
-                /*for(i = 1; i < 8; i++){
-                    d3.select("#id" + id + i + "-" + d.type)
-                    .style('opacity', 1)
-                }*/
-
                 //---------------------- Connections ----------------------
 
                 links
@@ -230,11 +224,11 @@ function arc(){
 
                 circleTooltip
                 .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY + 30 + "px")
+                .style("top", d3.event.pageY + 50 + "px")
                 .style("display", "inline-block")
                 .html(
                     d.spell + ":" + "<br>" 
-                    + "Used " + d.size + " times in book " + book
+                    + "Used " + d.size + " times in book " + book 
                 );
             }
 
@@ -315,7 +309,7 @@ function arc(){
 
                 circleTooltip
                 .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY + 30 + "px")
+                .style("top", d3.event.pageY + 50 + "px")
                 .style("display", "inline-block")
                 .html(
                     d.spell + ":" + "<br>" 
@@ -353,7 +347,7 @@ function arc(){
 
                 circleTooltip
                 .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY + 30 + "px")
+                .style("top", d3.event.pageY + 50 + "px")
                 .style("display", "inline-block")
                 .html(
                     d.spell + ":" + "<br>" 
@@ -371,7 +365,7 @@ function arc(){
                 //---------------------- Tooltip ----------------------
                 circleTooltip
                 .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY + 30 + "px")
+                .style("top", d3.event.pageY + 50 + "px")
                 .style("display", "inline-block")
                 .html(
                     d.spell + ":" + "<br>" + "Used " 
@@ -389,7 +383,7 @@ function arc(){
                 //---------------------- Tooltip ----------------------
                 circleTooltip
                 .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY + 30 + "px")
+                .style("top", d3.event.pageY + 50 + "px")
                 .style("display", "inline-block")
                 .html(
                     d.spell + ":" + "<br>" 
