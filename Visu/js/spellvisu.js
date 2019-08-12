@@ -3,8 +3,7 @@ var clickedSpell = "";
 var spellClicked = false;
 
 //in chart:
-//circle clicked
-var clicked = "0";
+var clicked = "0";      //circle clicked
 var bookClicked = "0";
 var legendClicked = "0";
 var selectedType = "none";
@@ -30,6 +29,7 @@ function arc(){
     var id = "0";
     var circleTooltip = d3.select("body").append("div").attr("class", "toolTip");
     var bookTooltip = d3.select("body").append("div").attr("class", "toolTip");
+    var legendTooltip = d3.select("body").append("div").attr("class", "toolTip");
 
     //---------------------- Size ----------------------
 
@@ -54,7 +54,7 @@ function arc(){
     d3.json("Data/arcdata.json", function(data){
 
         //List of all books
-        var allBooks = ["HP1", "HP2", "HP3", "HP4", "HP5", "HP6", "HP7"];
+        var allBooks = ["Book 1", "Book 2", "Book 3", "Book 4", "Book 5", "Book 6", "Book 7"];
         var bookId = ["HP_01", "HP_02", "HP_03", "HP_04", "HP_05", "HP_06", "HP_07"];
         var bookNames = ["The Philosopher's Stone", "The Chamber of Secrets", "The Prisoner of Azkaban", 
         "The Goblet of Fire", "The Order of the Phoenix", "The Half-Blood Prince", "The Deathly Hallows"];
@@ -66,7 +66,11 @@ function arc(){
         var allTypes = data.nodes.map(function(d){return d.type});
         //Somehow changes the size ^^
         allTypes = [...new Set(allTypes)]
-        var typeNames = ["Charm", "Spell", "Curse", "Unforgivable Curse"]
+        var typeNames = ["Charm", "Spell", "Curse", "Unforgivable Curse"];
+        var typeDefiniton = ["A spell that adds or changes the properties <br> of an object",
+        "A controlled manifestation of magic <br> that affects the world in a variety of ways", 
+        "A spell that affects an object in a severely <br> negative way", 
+        "One of the three most powerful and sinister <br> spells there are"];
 
         //Range of colors for the different types 
         var color = d3.scaleOrdinal()
@@ -232,8 +236,9 @@ function arc(){
 
                 circleTooltip
                 .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY + 50 + "px")
+                .style("top", d3.event.pageY - 100 + "px")
                 .style("display", "inline-block")
+                .style("background", "white")
                 .html(
                     d.spell + ":" + "<br>" 
                     + "Used " + d.size + " times in book " + book 
@@ -317,11 +322,12 @@ function arc(){
 
                 circleTooltip
                 .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY + 50 + "px")
+                .style("top", d3.event.pageY - 100 + "px")
                 .style("display", "inline-block")
+                .style("background", "white")
                 .html(
                     d.spell + ":" + "<br>" 
-                    + "Used " + d.size + " times in book " + book
+                    + "Used " + d.size + " times in book " + book 
                 );
             }
 
@@ -355,11 +361,12 @@ function arc(){
 
                 circleTooltip
                 .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY + 50 + "px")
+                .style("top", d3.event.pageY - 100 + "px")
                 .style("display", "inline-block")
+                .style("background", "white")
                 .html(
                     d.spell + ":" + "<br>" 
-                    + "Used " + d.size + " times in book " + book
+                    + "Used " + d.size + " times in book " + book 
                 );
             }
 
@@ -373,11 +380,12 @@ function arc(){
                 //---------------------- Tooltip ----------------------
                 circleTooltip
                 .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY + 50 + "px")
+                .style("top", d3.event.pageY - 100 + "px")
                 .style("display", "inline-block")
+                .style("background", "white")
                 .html(
-                    d.spell + ":" + "<br>" + "Used " 
-                    + d.size + " times in book " + book
+                    d.spell + ":" + "<br>" 
+                    + "Used " + d.size + " times in book " + book 
                 );
             }
 
@@ -391,11 +399,12 @@ function arc(){
                 //---------------------- Tooltip ----------------------
                 circleTooltip
                 .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY + 50 + "px")
+                .style("top", d3.event.pageY - 100 + "px")
                 .style("display", "inline-block")
+                .style("background", "white")
                 .html(
                     d.spell + ":" + "<br>" 
-                    + "Used " + d.size + " times in book " + book
+                    + "Used " + d.size + " times in book " + book 
                 );
             }
 
@@ -495,6 +504,7 @@ function arc(){
 
                 //show infobox in list:
                 show_info(d.id.split("_")[0].toLowerCase())
+                
                 //---------------------- Circles ----------------------
 
                 //Reduce opacity of all circles
@@ -802,7 +812,7 @@ function arc(){
 
         //---------------------- Mouseover ----------------------
 
-        .on("mouseover", function(d){
+        .on("mouseover", function(d,i){
 
             //IF no rect, no circle and no book is clicked
             //OR IF no circle, no rect but book is clicked
@@ -816,6 +826,14 @@ function arc(){
                 })
                 .style("stroke-width",3)
                 .style("cursor", "pointer");
+
+                //---------------------- Tooltip ----------------------
+                legendTooltip
+                .style("left", d3.event.pageX - 300 + "px")
+                .style("top", d3.event.pageY - 20 + "px")
+                .style("display", "inline-block")
+                .style("background", "white")
+                .html(typeDefiniton[i]);
             }  
             //ELSE IF no circle, no book but rect is clicked and we are hovering above it 
             //OR IF no circle but book and rect is clicked and we are hovering again over rect
@@ -824,6 +842,14 @@ function arc(){
 
                 d3.select(this)
                 .style("cursor", "pointer");
+
+                //---------------------- Tooltip ----------------------
+                legendTooltip
+                .style("left", d3.event.pageX - 300 + "px")
+                .style("top", d3.event.pageY - 20 + "px")
+                .style("display", "inline-block")
+                .style("background", "white")
+                .html(typeDefiniton[i]);
             }  
             //ELSE a rect is clicked but we are hovering above a different one
             else{
@@ -846,6 +872,11 @@ function arc(){
                 .style("stroke","white")
                 .style("stroke-width",0);
             }
+
+            //---------------------- Tooltip ----------------------
+
+            legendTooltip
+            .style("display","none");
         })
 
         //---------------------- Click ----------------------
@@ -1061,9 +1092,16 @@ function arc(){
             .style("text-anchor", "front")
             .style("font-size", 13)
             .attr("transform", function(d,i) { 
+                // for(i = 0; i < allCircles; i++){
+                //     for(j = 0; j < allTypes; j++){
+                //         console.log("#id" + allCircles[i].slice(0, allCircles[i].length-1) + d.slice(d.length-1, d.length) + allTypes[j])
+                //         if(!(d3.select("#id" + allCircles[i].slice(0, allCircles[i].length-1) + d.slice(d.length-1, d.length) + allTypes[j]).empty())){
+                //             return "translate(" + x(allCircles[i].slice(0, allCircles[i].length-1) + d.slice(d.length-1, d.length) + allTypes[j]) + ",0)"; 
+                //         }
+                //     }
+                // }
                 return "translate(" + i * width/6 + ",0)"; 
-            }); 
-            //.attr("transform", function(d, i) { return "translate(" + i * width/7 + ",0)"; }); 
+            });  
 
         //---------------------- Add Interactions To Books ----------------------
 
@@ -1085,8 +1123,9 @@ function arc(){
                 //---------------------- Tooltip ----------------------
                 bookTooltip
                 .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY + 30 + "px")
+                .style("top", d3.event.pageY + 25 + "px")
                 .style("display", "inline-block")
+                .style("background", "white")
                 .html(bookNames[i]);
             }
             //ELSE IF no circle, no rect but book is clicked an mouse is moving over clicked book
@@ -1100,8 +1139,9 @@ function arc(){
                 //---------------------- Tooltip ----------------------
                 bookTooltip
                 .style("left", d3.event.pageX - 50 + "px")
-                .style("top", d3.event.pageY + 30 + "px")
+                .style("top", d3.event.pageY + 25 + "px")
                 .style("display", "inline-block")
+                .style("background", "white")
                 .html(bookNames[i]);
             }
             else{
