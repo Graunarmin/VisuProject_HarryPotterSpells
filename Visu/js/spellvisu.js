@@ -1,3 +1,14 @@
+//in list:
+var clickedSpell = "";
+var spellClicked = false;
+
+//in chart:
+//circle clicked
+var clicked = "0";
+var bookClicked = "0";
+var legendClicked = "0";
+var selectedType = "none";
+
 
 function init(){
     document.body.addEventListener("load", arc());
@@ -14,14 +25,11 @@ function arc(){
     
     //---------------------- Variables ----------------------
 
-    var clicked = "0";
     var hover = "0";
     var book = "0";
     var id = "0";
     var circleTooltip = d3.select("body").append("div").attr("class", "toolTip");
-    var legendClicked = "0";
     var bookTooltip = d3.select("body").append("div").attr("class", "toolTip");
-    var bookClicked = "0";
 
     //---------------------- Size ----------------------
 
@@ -485,6 +493,8 @@ function arc(){
                 //Mark as clicked
                 clicked = d.id;
 
+                //show infobox in list:
+                show_info(d.id.split("_")[0].toLowerCase())
                 //---------------------- Circles ----------------------
 
                 //Reduce opacity of all circles
@@ -593,6 +603,8 @@ function arc(){
                 //Mark as clicked
                 clicked = d.id;
 
+                //show infobox in list:
+                show_info(d.id.split("_")[0].toLowerCase())
                 //---------------------- Circles ----------------------
 
                 //Reduce opacity of all circles
@@ -631,6 +643,8 @@ function arc(){
                 //Mark as no longer clicked
                 clicked = "0";
 
+                //hide infobox and reset list
+                hide_info();
                 //---------------------- Circles ----------------------
 
                 //Only circles out of clicked book and of type of clicked rect stay at opacity 1
@@ -649,6 +663,9 @@ function arc(){
                 
                 //Mark as no longer clicked
                 clicked = "0";
+                
+                //hide infobox and reset list
+                hide_info();
 
                 //---------------------- Circles ----------------------
 
@@ -682,6 +699,8 @@ function arc(){
                 //Mark as no longer clicked
                 clicked = "0";
 
+                //hide infobox and reset list
+                hide_info();
                 //---------------------- Circles ----------------------
                 nodes
                 .style('opacity', 1);
@@ -719,7 +738,8 @@ function arc(){
 
                 //Mark as no longer clicked
                 clicked = "0";
-
+                //hide infobox and reset list
+                hide_info();
                 //---------------------- Circles ----------------------
                 for(i = 1; i < allCircles.length; i++){
                     d3.select("#id" + allCircles[i] + "-" + d.type)
@@ -838,6 +858,8 @@ function arc(){
                 //Clicked = true
                 legendClicked = d;
 
+                //grey out all other types in spell list and make them inactive
+                show_types(d);
                 //---------------------- Rectangles ----------------------
 
                 //Lower opacity of all rects
@@ -897,6 +919,8 @@ function arc(){
                 //Clicked = false
                 legendClicked = "0";
 
+                //reset list to normal
+                reset_list();
                 //---------------------- Rectangles ----------------------
 
                 //Every rect
@@ -932,7 +956,11 @@ function arc(){
 
                 //Clicked = true
                 legendClicked = d;
-
+                
+                console.log("Maybe Error in 952", d);
+                
+                //reset list to normal
+                reset_list();
                 //---------------------- Rectangles ----------------------
 
                 //Every rect
@@ -980,6 +1008,8 @@ function arc(){
                 //Clicked = false
                 legendClicked = "0";
 
+                //reset list to normal
+                reset_list();
                 //---------------------- Rectangles ----------------------
 
                 //Every rect
@@ -1245,30 +1275,33 @@ function arc(){
 
 function toggle_info(){
     var id = this.innerHTML.toLowerCase().split(" ")[0];
-    //console.log("toggle: " + this.id);
 
-    var elements = document.querySelectorAll('#'+id);
-    // console.log(elements);
-    var spell = elements[0];
-    var info_box = elements[1];
+    var info_box = document.querySelector('#' + id + "_info");
     
     // if it's already open:
     if(info_box.classList.contains('show')){
-         //close Info, set all font-colors and sizes back to normal
-         hide();
-         reset_list();
-        
+        //close Info, set all font-colors and sizes back to normal
+        hide_info();
+       
     //if it's closed
     }else{
-       //first close other Infobox if open:
-       hide();
-       //then make the other spells grey 
-       //and this one in its color and bigger
-       show(spell, info_box);
+        //first close other Infobox if open:
+        //then make the other spells grey 
+        //and this one in its color and bigger
+        show_info(id);
     }
 }
 
-function show(spell, info){
+function show_info(id){
+    hide_info();
+    //set clicked spell to this one and inform everyone, that it's clicked
+    clickedSpell = id;
+    spellClicked = true;
+
+    //get the spell and it's infobox:
+    var spell = document.querySelector('#' + id + "_spell");
+    var info_box = document.querySelector('#' + id + "_info");
+
     //grey out everything
     var elements = document.querySelectorAll(".spells")
     elements.forEach.call(elements, function(e){
@@ -1276,46 +1309,79 @@ function show(spell, info){
     });
 
     //then color the Spell in its respective color
-    var colour = color(info);
+    var type = String(document.querySelector('#' + id + "_spell").classList.item(1));
+    console.log("type: " + type);
+    var colour = color(type);
     spell.style.color = colour[0];
     spell.style.fontSize = '20px';
+
     //and Show the Infobox
-    info.classList.toggle("show");
-    info.style.backgroundColor = colour[1];
+    info_box.classList.toggle("show");
+    info_box.style.backgroundColor = colour[1];
+
 }
 
-function hide(){
-    //there is ALWAYS only one open Infobox! If not - change the code!
+function hide_info(){
+    clickedSpell = "";
+    spellClicked = false;
+    //there is ALWAYS only one open Infobox! If not the code is wrong!
     var element = document.querySelector('.show');
     if(element){
         element.classList.toggle("show");
     }
-    reset_list();
+
+    //in case there was a type selected in the legend: return to those types
+    //otherwise reset completely
+    if(legendClicked == "0"){
+        reset_list();
+    }else{
+        show_types(selectedType);
+    }
+    
 }
  
 function reset_list(){
+    selectedType = "none";
     var elements = document.querySelectorAll('.spells');
     elements.forEach.call(elements, function(e){
         e.style.fontSize = '15px';
         e.style.color = 'black';
+        e.style.pointerEvents = "auto";
+        e.style.cursor = "pointer";
     });
 }
 
-function color(element){
+function show_types(type){
+    selectedType = type;
+    reset_list();
+    var spells = document.querySelectorAll(".spells");
+    var type = type.toLowerCase();
+    spells.forEach.call(spells, function(e){
+        if(e.classList.contains(type)){
+            e.style.color = color(type)[0];
+            e.style.fontSize = '17px';
+        }else{ 
+            e.style.color = "grey";
+            e.style.pointerEvents = "none";
+            e.style.cursor = "default";
+        }
+    });   
+}
+
+function color(type){
     //choose respective color for each spell type
-    var type = String(element.querySelector('.type .infoContent').innerHTML);
-    
+
     switch(type){
-        case "Charm":
+        case "charm":
             //green
             return ["rgb(100, 183, 17)", "rgba(100, 183, 17, 0.4)"];
-        case "Spell":
+        case "spell":
             //blue
             return ["rgb(0, 136, 255)", "rgba(0, 136, 255, 0.4)"];
-        case "Curse":
+        case "curse":
             //orange
             return ["#FFAE19", "rgba(255, 132, 0, 0.4)"];
-        case "Unforgivable Curse":
+        case "unforgivablecurse":
             //red
             return ["rgb(184, 12, 12)", "rgba(184, 12, 12, 0.4)"];
     }

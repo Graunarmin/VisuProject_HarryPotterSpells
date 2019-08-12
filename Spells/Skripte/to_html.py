@@ -12,9 +12,13 @@ def spells_to_html():
         spell = str(element["Spell"])
         effect = str(element["Effect"])
         typ = str(element["Type"])
+        short_type = typ
+        if(typ == "Unforgivable Curse"):
+            short_type = "UnforgivableCurse"
         category = str(element["Category"])
         danger = str(element["Danger"])
         link = element["Link"]
+        overall = element["overall"]
         
 
         if danger == "0":
@@ -30,18 +34,19 @@ def spells_to_html():
         
         html_id = spell.split(" ")[0].lower()
         tmp = """
-        <li class='spells' id='{}'>
+        <li class='spells {}' id='{}_spell'>
             <a class='toggleSpells'>{}</a>
-            <ul class='info' id='{}'>
-                <li class='effect' id='{}Effect'><span class='infoHead'>Effect </span><span class='infoContent'>{}</span></li>
-                <li class='type' id='{}Type'><span class='infoHead'>Type </span><span class='infoContent'>{}</span></li>
-                <li class='category' id='{}Category'><span class='infoHead'>Category </span><span class='infoContent'>{}</span></li>
-                <li class='danger'id='{}Danger'><span class='infoHead'>Danger </span><span class='infoContent'>{}</span></li>
+            <ul class='info' id='{}_info'>
+                <li class='effect' id='{}_effect'><span class='infoHead'>Effect </span><span class='infoContent'>{}</span></li>
+                <li class='type' id='{}_type'><span class='infoHead'>Type </span><span class='infoContent'>{}</span></li>
+                <li class='category' id='{}_category'><span class='infoHead'>Category </span><span class='infoContent'>{}</span></li>
+                <li class='danger' id='{}_danger'><span class='infoHead'>Danger </span><span class='infoContent'>{}</span></li>
+                <li class='overalluse' id='{}_overall'><span class='useInfo'>Used {} times overall</span></li>
                 <li class='spellLink'><button class='tag link'><a href={} target='_blank'>More Details</a></button></li>
             </ul>
         </li>"""
 
-        html = tmp.format(html_id, spell, html_id, html_id, effect, html_id, typ, html_id, category, html_id, danger, link)
+        html = tmp.format(short_type.lower(), html_id, spell, html_id, html_id, effect, html_id, typ, html_id, category, html_id, danger, html_id, overall, link)
         html_list.append(html)
 
     with open('../Data/Background/html/spell_list.html', 'w') as f:
