@@ -6,6 +6,7 @@ def spells_to_html():
     
     spell_list = []
     html_list = []
+    years = ['HP_01', 'HP_02', 'HP_03', 'HP_04', 'HP_05', 'HP_06', 'HP_07']
 
     spells = pickle.load(open("../Pickles/spells_final.p", "rb"))
     for element in spells:
@@ -19,16 +20,12 @@ def spells_to_html():
         danger = str(element["Danger"])
         link = element["Link"]
         overall = element["overall"]
+        bookTags = ""
         
-
-        if danger == "0":
-            danger = "Harmless"
-        elif danger == "1":
-            danger = "Harmful"
-        elif danger == "2":
-            danger = "Severe"
-        elif danger == "3":
-            danger = "Lethal"
+        #determine in which books the spell appears:
+        for year in years:
+            if element[year]:
+                bookTags += str(year).replace("_0","") + " "
         
         spell_list.append(spell)
         
@@ -43,10 +40,12 @@ def spells_to_html():
                 <li class='danger' id='{}_danger'><span class='infoHead'>Danger </span><span class='infoContent'>{}</span></li>
                 <li class='overalluse' id='{}_overall'><span class='useInfo'>Used {} times overall</span></li>
                 <li class='spellLink'><button class='tag link'><a href={} target='_blank'>More Details</a></button></li>
+                <li class='bookTags'>{}</li>
             </ul>
         </li>"""
 
-        html = tmp.format(short_type.lower(), html_id, spell, html_id, html_id, effect, html_id, typ, html_id, category, html_id, danger, html_id, overall, link)
+        html = tmp.format(short_type.lower(), html_id, spell, html_id, html_id, effect, html_id, typ, html_id, category, 
+                          html_id, danger, html_id, overall, link, bookTags)
         html_list.append(html)
 
     with open('../Data/Background/html/spell_list.html', 'w') as f:
