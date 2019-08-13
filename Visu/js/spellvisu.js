@@ -1442,38 +1442,12 @@ function show_book_spells(book){
     //close (possibly open) infobox
     hide_info();
 
-    //maybe change this in the data, this is ugly ...
-    var selectedBook;
-    switch(book){
-        case "Book 1":
-            selectedBook = "HP1";
-            break;
-        case "Book 2":
-            selectedBook = "HP2";
-            break;
-        case "Book 3":
-            selectedBook = "HP3";
-            break;
-        case "Book 4":
-            selectedBook = "HP4";
-            break;
-        case "Book 5":
-            selectedBook = "HP5";
-            break;
-        case "Book 6":
-            selectedBook = "HP6";
-            break;
-        case "Book 7":
-            selectedBook = "HP7";
-            break;
-    }
-
     //get all spells ...
     var spells = document.querySelectorAll(".spells");
     spells.forEach.call(spells, function(e){
-        var booklist = String(e.querySelector(".bookTags").innerHTML).split(' ');
+        var booklist = String(e.querySelector(".bookTags").innerHTML).split(',');
         //... and hide those that do not appear in the selected book
-        if(!booklist.includes(selectedBook)){
+        if(!booklist.includes(book)){
             e.style.display = "none";
         }else{
             //mark the remaining spells as "selected bc. there is a book selected"

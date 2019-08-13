@@ -25,7 +25,7 @@ def spells_to_html():
         #determine in which books the spell appears:
         for year in years:
             if element[year]:
-                bookTags += str(year).replace("_0","") + " "
+                bookTags += str(year).replace("HP_0","Book ") + ","
         
         spell_list.append(spell)
         
