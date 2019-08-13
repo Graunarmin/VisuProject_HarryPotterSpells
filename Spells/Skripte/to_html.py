@@ -23,6 +23,7 @@ def spells_to_html():
         bookTags = ""
         
         #determine in which books the spell appears:
+        #(Booklabels are 'Book 1', 'Book 2' etc. while atm the are 'HP_01', 'HP_02', etc.)
         for year in years:
             if element[year]:
                 bookTags += str(year).replace("HP_0","Book ") + ","

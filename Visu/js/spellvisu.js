@@ -14,7 +14,6 @@ function init(){
 
     spells.forEach.call(spells, function(e){
         e.addEventListener("click", toggle_info, false);
-        e.addEventListener("click", highlight_path, false);
     });
 
 }
@@ -103,6 +102,10 @@ function arc(){
             .data(data.links)
             .enter()
             .append('path')
+            .attr("class", function(d){
+                return("link_" + (d.source.split("_")[0]).toLowerCase() + "_" + d.type.toLowerCase() 
+                + " linkConnections");
+            })
             .attr('d', function(d){
                 start = x(idToNode[d.source].name)    // X position of start node on the X axis
                 end = x(idToNode[d.target].name)      // X position of end node
@@ -124,7 +127,9 @@ function arc(){
             .data(data.nodes.sort(function(a,b) { return +b.size - +a.size }))
             .enter()
             .append("circle")
+            .attr("class", "circleNodes")
             .attr("id", function(d){
+                // console.log("id" + d.id + "-" + d.type);
                 return ("id" + d.id + "-" + d.type);
             })
             .attr("cx", function(d){ 
@@ -423,8 +428,8 @@ function arc(){
             if(clicked == "0" && legendClicked == "0" && bookClicked == "0"){
 
                 //---------------------- Circles ----------------------
-                nodes
-                .style('opacity', 1);
+                // nodes
+                // .style('opacity', 1);
 
                 //d3.select(this)
                 //.style("stroke", "white");
@@ -1318,6 +1323,10 @@ function arc(){
 }
 
 
+
+// ------------------ SPELL LIST ------------------
+
+
 // ------ Deals with clicks on a spell in the List: --------
 
 function toggle_info(){
@@ -1343,6 +1352,13 @@ function toggle_info(){
 function show_info(id){
     //hide other possibly open info box:
     hide_info();
+    //console.log("id: " + id);
+
+    //determine type of spell
+    var type = String(document.querySelector('#' + id + "_spell").classList.item(1));
+    //console.log("type: " + type);
+    
+    highlight_nodes_and_paths(id, type);
 
     //set clicked spell to this one and inform everyone, that it's clicked
     clickedSpell = id;
@@ -1353,8 +1369,6 @@ function show_info(id){
     var info_box = document.querySelector('#' + id + "_info");
 
     //then color the Spell in its respective color
-    var type = String(document.querySelector('#' + id + "_spell").classList.item(1));
-    console.log("type: " + type);
     var colour = color(type);
     spell.style.color = colour[0];
     spell.style.fontSize = '20px';
@@ -1369,6 +1383,8 @@ function show_info(id){
 function hide_info(){
     clickedSpell = "";
     spellClicked = false;
+
+    deselect_spell_in_chart();
 
     //close the infobox
     var element = document.querySelector('.show');
@@ -1390,9 +1406,6 @@ function default_style(){
     });
 }
 
-
-// ------------------ SPELL LIST ------------------
-
 //----- Deals with Clicks on a Type in the Legend: -------
 
 //only show the spells of the type that was selected in the legend
@@ -1407,7 +1420,6 @@ function show_selected_type(type){
     // ...and hide all that have the wrong type
     spells.forEach.call(spells, function(e){
         if(!e.classList.contains(type)){
-            console.log(e);
             e.style.display = "none";
         }
         else{
@@ -1473,6 +1485,63 @@ function show_all_books(){
     });
 }
 
+
+// --------- Highlight Stuff in Chart on click in List ----------
+
+function highlight_nodes_and_paths(id, type){
+
+    //get the circles that need to be highlighted
+    var years = ['HP_01', 'HP_02', 'HP_03', 'HP_04', 'HP_05', 'HP_06', 'HP_07'];
+    var spellCircles = [];
+    for(y in years){
+        console.log("#id" + capitalize_first_letter(id) + "_" + years[y] + "-" + capitalize_first_letter(type));
+        var circle = document.querySelector("#id" + capitalize_first_letter(id) + "_" + years[y] + "-" + capitalize_first_letter(type));
+        if(circle != null){
+            spellCircles.push(circle);
+        }   
+    }
+
+    highlight_nodes(spellCircles);
+
+    highlight_links(id,type);
+    
+}
+
+function  highlight_nodes(spellCircles){
+    var allCircles = document.querySelectorAll(".circleNodes");
+    //Reduce opacity of all circles
+    allCircles.forEach(function(e){
+        e.style.opacity = .1;
+        e.style.pointerEvents = "none";
+    });
+    
+    spellCircles.forEach(function(e){
+        e.style.opacity = 1;
+        e.style.pointerEvents = "auto";
+    });
+}
+
+function highlight_links(id,type){
+
+    document.querySelectorAll(".linkConnections").forEach(function(link_d){
+        if(link_d.classList[0].split("_")[1] == id){
+            link_d.style.stroke = chart_color(type);
+            link_d.style.strokeOpacity = 1;
+            link_d.style.strokeWidth = 4;
+        }else{
+            link_d.style.stroke = '#b8b8b8';
+            link_d.style.strokeOpacity = 0.2;
+            link_d.style.strokeWidth = 1;
+        }
+    });
+}
+
+function deselect_spell_in_chart(){
+
+}
+
+// ----------- Helpers -----------
+
 function color(type){
     //choose respective color for each spell type
 
@@ -1492,7 +1561,28 @@ function color(type){
     }
 }
 
-function highlight_path(){
-    var id = this.id;
-    // console.log("highlight_path: " + this.id);
+function chart_color(type){
+    switch(type){
+        case "charm":
+            //green
+            return "#A5C78B";
+        case "spell":
+            //blue
+            return "#4E8BD1";
+        case "curse":
+            //orange
+            return "#FFB733";
+        case "unforgivablecurse":
+            //red
+            return "#BE253F";
+
+    }
+}
+
+function capitalize_first_letter(word){
+    //unfortunately we wrote UnforgivableCurse in a very impractical way -.-
+    if(word.length == 17){
+        return(word.charAt(0).toUpperCase() + word.slice(1,12) + word.charAt(12).toUpperCase() + word.slice(13));
+    }
+    return (word.charAt(0).toUpperCase() + word.slice(1));
 }
