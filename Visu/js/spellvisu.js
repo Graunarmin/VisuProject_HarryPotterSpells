@@ -6,7 +6,6 @@ var spellClicked = false;
 var clicked = "0";      //circle clicked
 var bookClicked = "0";
 var legendClicked = "0";
-var selectedType = "none";
 
 
 function init(){
@@ -889,8 +888,8 @@ function arc(){
                 //Clicked = true
                 legendClicked = d;
 
-                //grey out all other types in spell list and make them inactive
-                show_types(d);
+                //only show spells of the selected type in the list
+                show_selected_type(d);
                 //---------------------- Rectangles ----------------------
 
                 //Lower opacity of all rects
@@ -950,8 +949,8 @@ function arc(){
                 //Clicked = false
                 legendClicked = "0";
 
-                //reset list to normal
-                reset_list();
+                //show spells of all types in list
+                show_all_types();
                 //---------------------- Rectangles ----------------------
 
                 //Every rect
@@ -988,10 +987,8 @@ function arc(){
                 //Clicked = true
                 legendClicked = d;
                 
-                console.log("Maybe Error in 952", d);
-                
-                //reset list to normal
-                reset_list();
+                //only show spells of selected type in list
+                show_selected_type(d);
                 //---------------------- Rectangles ----------------------
 
                 //Every rect
@@ -1039,8 +1036,8 @@ function arc(){
                 //Clicked = false
                 legendClicked = "0";
 
-                //reset list to normal
-                reset_list();
+                //bring back spells of all types to the list
+                show_all_types();
                 //---------------------- Rectangles ----------------------
 
                 //Every rect
@@ -1179,6 +1176,8 @@ function arc(){
                 //Mark as clicked
                 bookClicked = d;
 
+                //show only spells in list that appear in selected book
+                show_book_spells(d);
                 //---------------------- Books ----------------------
 
                 //Reduce opacity of all books
@@ -1221,6 +1220,8 @@ function arc(){
                 //Mark as no longer clicked
                 bookClicked = "0";
 
+                //bring back spells of all books to list
+                show_all_books();
                 //---------------------- Books ----------------------
                 bookLabels
                 .style('opacity', 1)
@@ -1240,7 +1241,9 @@ function arc(){
 
                 //Mark as clicked
                 bookClicked = d;
-
+                
+                //show only spells in list that appear in selected book
+                show_book_spells(d);
                 //---------------------- Books ----------------------
 
                 //Reduce opacity of all books
@@ -1281,6 +1284,8 @@ function arc(){
                 //Mark as no longer clicked
                 bookClicked = "0";
 
+                //bring back spells of all books to list
+                show_all_books();
                 //---------------------- Books ----------------------
                 bookLabels
                 .style('opacity', 1)
@@ -1313,6 +1318,8 @@ function arc(){
 }
 
 
+// ------ Deals with clicks on a spell in the List: --------
+
 function toggle_info(){
     var id = this.innerHTML.toLowerCase().split(" ")[0];
 
@@ -1332,8 +1339,11 @@ function toggle_info(){
     }
 }
 
+//show the Infobox:
 function show_info(id){
+    //hide other possibly open info box:
     hide_info();
+
     //set clicked spell to this one and inform everyone, that it's clicked
     clickedSpell = id;
     spellClicked = true;
@@ -1341,12 +1351,6 @@ function show_info(id){
     //get the spell and it's infobox:
     var spell = document.querySelector('#' + id + "_spell");
     var info_box = document.querySelector('#' + id + "_info");
-
-    //grey out everything
-    var elements = document.querySelectorAll(".spells")
-    elements.forEach.call(elements, function(e){
-        e.style.color = 'grey';
-    });
 
     //then color the Spell in its respective color
     var type = String(document.querySelector('#' + id + "_spell").classList.item(1));
@@ -1361,27 +1365,22 @@ function show_info(id){
 
 }
 
+//Hide the infobox:
 function hide_info(){
     clickedSpell = "";
     spellClicked = false;
-    //there is ALWAYS only one open Infobox! If not the code is wrong!
+
+    //close the infobox
     var element = document.querySelector('.show');
     if(element){
         element.classList.toggle("show");
     }
-
-    //in case there was a type selected in the legend: return to those types
-    //otherwise reset completely
-    if(legendClicked == "0"){
-        reset_list();
-    }else{
-        show_types(selectedType);
-    }
-    
+    //then reset the style of all items to default (does NOT include SHOWING all items!)
+    default_style();
 }
- 
-function reset_list(){
-    selectedType = "none";
+
+//bring all Listelements back to their normal style
+function default_style(){
     var elements = document.querySelectorAll('.spells');
     elements.forEach.call(elements, function(e){
         e.style.fontSize = '15px';
@@ -1391,21 +1390,113 @@ function reset_list(){
     });
 }
 
-function show_types(type){
-    selectedType = type;
-    reset_list();
+
+// ------------------ SPELL LIST ------------------
+
+//----- Deals with Clicks on a Type in the Legend: -------
+
+//only show the spells of the type that was selected in the legend
+function show_selected_type(type){
+    //bring back spells of all books (but only of the selected type!)
+    
+    hide_info();
+
+    //then get all spells...
     var spells = document.querySelectorAll(".spells");
     var type = type.toLowerCase();
+    // ...and hide all that have the wrong type
     spells.forEach.call(spells, function(e){
-        if(e.classList.contains(type)){
-            e.style.color = color(type)[0];
-            e.style.fontSize = '17px';
-        }else{ 
-            e.style.color = "grey";
-            e.style.pointerEvents = "none";
-            e.style.cursor = "default";
+        if(!e.classList.contains(type)){
+            console.log(e);
+            e.style.display = "none";
+        }
+        else{
+            //mark those spells as "selected bc. there is a type selected"
+            e.classList.toggle("typeSelected");
         }
     });   
+}
+
+function show_all_types(){
+    //bring back spells of all types (but only of the selected book!)
+
+    hide_info();
+    
+    var spells = document.querySelectorAll(".spells");
+    spells.forEach.call(spells, function(e){
+        //show all spells that are not excluded by a book-selection
+        if((bookClicked != "0" && e.classList.contains("bookSelected")) || (bookClicked == "0")){
+            e.style.display = "block";
+        }
+        //de-mark all spells as "there is no type selected (anymore)"
+        if(e.classList.contains("typeSelected")){
+            e.classList.toggle("typeSelected");
+        }
+    });
+}
+
+
+//----- Deals with Clicks on a Book Label: -------
+
+function show_book_spells(book){
+    //close (possibly open) infobox
+    hide_info();
+
+    //maybe change this in the data, this is ugly ...
+    var selectedBook;
+    switch(book){
+        case "Book 1":
+            selectedBook = "HP1";
+            break;
+        case "Book 2":
+            selectedBook = "HP2";
+            break;
+        case "Book 3":
+            selectedBook = "HP3";
+            break;
+        case "Book 4":
+            selectedBook = "HP4";
+            break;
+        case "Book 5":
+            selectedBook = "HP5";
+            break;
+        case "Book 6":
+            selectedBook = "HP6";
+            break;
+        case "Book 7":
+            selectedBook = "HP7";
+            break;
+    }
+
+    //get all spells ...
+    var spells = document.querySelectorAll(".spells");
+    spells.forEach.call(spells, function(e){
+        var booklist = String(e.querySelector(".bookTags").innerHTML).split(' ');
+        //... and hide those that do not appear in the selected book
+        if(!booklist.includes(selectedBook)){
+            e.style.display = "none";
+        }else{
+            //mark the remaining spells as "selected bc. there is a book selected"
+            e.classList.toggle("bookSelected");
+        }
+    });
+}
+
+function show_all_books(){
+    //close (possibly open) infobox
+    hide_info();
+
+    var spells = document.querySelectorAll(".spells");
+    spells.forEach.call(spells, function(e){
+        //show all spells that are not excluded by a type-selection
+        if((legendClicked != "0" && e.classList.contains("typeSelected")) || (legendClicked == "0")){
+            e.style.display = "block";
+        }
+        //de-mark all previously shown spells as "there is no book selected (anymore)"
+        if(e.classList.contains("bookSelected")){
+            e.classList.toggle("bookSelected");
+        }
+    });
 }
 
 function color(type){
