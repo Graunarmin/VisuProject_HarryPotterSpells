@@ -1,6 +1,8 @@
 //in list:
 var clickedSpell = "";
 var spellClicked = false;
+var selectedType = "none";
+var selectedBook = "none";
 
 //in chart:
 var clicked = "0";      //circle clicked
@@ -127,7 +129,10 @@ function arc(){
             .data(data.nodes.sort(function(a,b) { return +b.size - +a.size }))
             .enter()
             .append("circle")
-            .attr("class", "circleNodes")
+            .attr("class", function(d){
+                return ("circleNodes " + d.id.split("_")[0].toLowerCase()
+                + " " + d.type.toLowerCase());
+            })
             .attr("id", function(d){
                 // console.log("id" + d.id + "-" + d.type);
                 return ("id" + d.id + "-" + d.type);
@@ -1033,6 +1038,8 @@ function arc(){
                     d3.select("#id" + c + b + "-" + d)
                     .style("opacity", 1);
                 }
+
+                
             }
 
             //ELSE IF no circle but rect and book are clicked and rect is clicked again 
@@ -1358,7 +1365,7 @@ function show_info(id){
     var type = String(document.querySelector('#' + id + "_spell").classList.item(1));
     //console.log("type: " + type);
     
-    highlight_nodes_and_paths(id, type);
+    //highlight_nodes_and_paths(id, type);
 
     //set clicked spell to this one and inform everyone, that it's clicked
     clickedSpell = id;
@@ -1384,7 +1391,8 @@ function hide_info(){
     clickedSpell = "";
     spellClicked = false;
 
-    deselect_spell_in_chart();
+
+    // deselect_spell_in_chart();
 
     //close the infobox
     var element = document.querySelector('.show');
@@ -1411,7 +1419,8 @@ function default_style(){
 //only show the spells of the type that was selected in the legend
 function show_selected_type(type){
     //bring back spells of all books (but only of the selected type!)
-    
+    selectedType = type.toLowerCase();
+    console.log("selected type: " + selectedType);
     hide_info();
 
     //then get all spells...
@@ -1431,7 +1440,8 @@ function show_selected_type(type){
 
 function show_all_types(){
     //bring back spells of all types (but only of the selected book!)
-
+    selectedType = "none";
+    console.log("deselected type: " + selectedType);
     hide_info();
     
     var spells = document.querySelectorAll(".spells");
@@ -1453,6 +1463,8 @@ function show_all_types(){
 function show_book_spells(book){
     //close (possibly open) infobox
     hide_info();
+    selectedBook = book;
+    console.log("selected book: " + selectedBook);
 
     //get all spells ...
     var spells = document.querySelectorAll(".spells");
@@ -1471,6 +1483,8 @@ function show_book_spells(book){
 function show_all_books(){
     //close (possibly open) infobox
     hide_info();
+    selectedBook = "none";
+    console.log("deselected book: " + selectedBook);
 
     var spells = document.querySelectorAll(".spells");
     spells.forEach.call(spells, function(e){
@@ -1491,7 +1505,12 @@ function show_all_books(){
 function highlight_nodes_and_paths(id, type){
 
     //get the circles that need to be highlighted
-    var years = ['HP_01', 'HP_02', 'HP_03', 'HP_04', 'HP_05', 'HP_06', 'HP_07'];
+    if(selectedBook != "0"){
+        var years = [selectedBook.replace("Book ","HP_0")];
+    }else{
+        var years = ['HP_01', 'HP_02', 'HP_03', 'HP_04', 'HP_05', 'HP_06', 'HP_07'];
+    }
+    
     var spellCircles = [];
     for(y in years){
         console.log("#id" + capitalize_first_letter(id) + "_" + years[y] + "-" + capitalize_first_letter(type));
@@ -1503,11 +1522,16 @@ function highlight_nodes_and_paths(id, type){
 
     highlight_nodes(spellCircles);
 
-    highlight_links(id,type);
+    if(selectedBook == "0"){
+        highlight_links(id,type);
+    }
+    
     
 }
 
 function  highlight_nodes(spellCircles){
+    clicked = spellCircles[0].id.split("-")[0].replace("id","")
+    console.log(clicked);
     var allCircles = document.querySelectorAll(".circleNodes");
     //Reduce opacity of all circles
     allCircles.forEach(function(e){
@@ -1518,6 +1542,7 @@ function  highlight_nodes(spellCircles){
     spellCircles.forEach(function(e){
         e.style.opacity = 1;
         e.style.pointerEvents = "auto";
+        e.style.cursor = "pointer";
     });
 }
 
@@ -1537,6 +1562,37 @@ function highlight_links(id,type){
 }
 
 function deselect_spell_in_chart(){
+    clicked = "0";
+    console.log("type: " + selectedType + ", book: " + selectedBook);
+    var allCircles = document.querySelectorAll(".circleNodes");
+    //Reduce opacity of all circles
+    allCircles.forEach(function(e){
+        if(legendClicked != "0" || bookClicked != "0"){
+            if(e.classList.contains(selectedType) || e.classList.contains(selectedBook)){
+                e.style.opacity = 1;
+                e.style.pointerEvents = "auto";
+            }
+        }else{
+            e.style.opacity = 1;
+            e.style.pointerEvents = "auto";
+        }
+    });
+
+    document.querySelectorAll(".linkConnections").forEach(function(link_d){
+        // if(legendClicked != "0" || bookClicked != "0"){
+        //     console.log(link_d.classList[0].split("_"));
+        //     if((link_d.classList[0].split("_")[2] == selectedType)|| (link_d.classList[0].split("_")[2] == selectedBook)){
+        //         link_d.style.stroke = 'grey';
+        //         link_d.style.strokeOpacity = 0.8;
+        //         link_d.style.strokeWidth = 1;
+        //     }
+        // }else{
+            // link_d.style.stroke = 'grey';
+            // link_d.style.strokeOpacity = 0.8;
+            // link_d.style.strokeWidth = 1;
+        // }
+                
+    });
 
 }
 
