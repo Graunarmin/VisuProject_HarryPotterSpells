@@ -928,11 +928,15 @@ function arc(){
 
                 //Reduce opacity of all circles to 0.1
                 nodes
+                .transition() 
+                .duration(500) 
                 .style('opacity', 0.1);
 
                 //Only current circle and all connected circles stay the same color 
                 for(i = 1; i < allCircles.length; i++){
                     d3.select("#id" + allCircles[i] + "-" + d)
+                    .transition()
+                    .duration(500) 
                     .style('opacity', 1);
                 }
 
@@ -940,6 +944,8 @@ function arc(){
 
                 //Opacity of the links
                 links
+                .transition()
+                .duration(500)
                 .style('stroke-opacity', function(link_d){
                     //IF link is of same type as clicked rect, leave opacity at 1
                     if(link_d.type === d){
@@ -982,12 +988,16 @@ function arc(){
 
                 //Return opacity of all circles back to 1
                 nodes
+                .transition()
+                .duration(500)
                 .style('opacity', 1)
 
                 //---------------------- Put Links Back ----------------------
 
                 //Return opacity of all links back to 1
                 links
+                .transition()
+                .duration(500)
                 .style('stroke-opacity', 1)
             }
 
@@ -1027,6 +1037,8 @@ function arc(){
 
                 //Reduce opacity of all circles
                 nodes
+                .transition()
+                .duration(500)
                 .style('opacity', 0.1);
 
                 //Only circles out of clicked book and of type of clicked rect stay at opacity 1
@@ -1036,6 +1048,8 @@ function arc(){
                     b = bookClicked.slice(bookClicked.length-1, bookClicked.length);
 
                     d3.select("#id" + c + b + "-" + d)
+                    .transition()
+                    .duration(500)
                     .style("opacity", 1);
                 }
 
@@ -1050,6 +1064,7 @@ function arc(){
 
                 //bring back spells of all types to the list
                 show_all_types();
+
                 //---------------------- Rectangles ----------------------
 
                 //Every rect
@@ -1077,6 +1092,8 @@ function arc(){
 
                     for(j = 0; j < allTypes.length; j++){
                         d3.select("#id" + c + b + "-" + allTypes[j])
+                        .transition()
+                        .duration(500)
                         .style("opacity", 1);
                     }
                 }
@@ -1100,15 +1117,7 @@ function arc(){
             })
             .style("text-anchor", "front")
             .style("font-size", 13)
-            .attr("transform", function(d,i) { 
-                // for(i = 0; i < allCircles; i++){
-                //     for(j = 0; j < allTypes; j++){
-                //         console.log("#id" + allCircles[i].slice(0, allCircles[i].length-1) + d.slice(d.length-1, d.length) + allTypes[j])
-                //         if(!(d3.select("#id" + allCircles[i].slice(0, allCircles[i].length-1) + d.slice(d.length-1, d.length) + allTypes[j]).empty())){
-                //             return "translate(" + x(allCircles[i].slice(0, allCircles[i].length-1) + d.slice(d.length-1, d.length) + allTypes[j]) + ",0)"; 
-                //         }
-                //     }
-                // }
+            .attr("transform", function(d,i){ 
                 return "translate(" + i * width/6 + ",0)"; 
             });  
 
@@ -1204,6 +1213,8 @@ function arc(){
 
                 //Reduce opacity of all circles
                 nodes
+                .transition()
+                .duration(500)
                 .style("opacity", 0.1);
 
                 //Only circles out of clicked book stay at opacity 1
@@ -1214,6 +1225,8 @@ function arc(){
                     for(j = 0; j < allTypes.length; j++){
 
                         d3.select("#id" + c + this.id + "-" + allTypes[j])
+                        .transition()
+                        .duration(500)
                         .style("opacity", 1);
                     }
                 }
@@ -1222,6 +1235,8 @@ function arc(){
 
                 //Reduce opacity of all links
                 links
+                .transition()
+                .duration(500)
                 .style("stroke-opacity", 0.1);
 
             }
@@ -1241,10 +1256,14 @@ function arc(){
 
                 //---------------------- Circles ----------------------
                 nodes
+                .transition()
+                .duration(500)
                 .style("opacity", 1);
 
                 //---------------------- Links ----------------------
                 links
+                .transition()
+                .duration(500)
                 .style("stroke-opacity", 1);
             }
 
@@ -1270,6 +1289,8 @@ function arc(){
 
                 //Reduce opacity of all circles
                 nodes
+                .transition()
+                .duration(500)
                 .style("opacity", 0.1);
 
                 //Only circles of type and out of clicked book stay at opacity 1
@@ -1279,6 +1300,8 @@ function arc(){
                     b = bookClicked.slice(bookClicked.length-1, bookClicked.length);
                     
                     d3.select("#id" + c + b + "-" + legendClicked)
+                    .transition()
+                    .duration(500)
                     .style("opacity", 1);
                 }
 
@@ -1286,6 +1309,8 @@ function arc(){
 
                 //Reduce opacity of all links
                 links
+                .transition()
+                .duration(500)
                 .style("stroke-opacity", 0.1);
 
             }
@@ -1309,11 +1334,15 @@ function arc(){
                 for(i = 0; i < allCircles.length; i++){
 
                     d3.select("#id" + allCircles[i] + "-" + legendClicked)
+                    .transition()
+                    .duration(500)
                     .style("opacity", 1);
                 }
 
                 //Opacity of the links
                 links
+                .transition()
+                .duration(500)
                 .style('stroke-opacity', function(link_d){
                     //IF link is of same type as clicked rect, leave opacity at 1
                     if(link_d.type === legendClicked){
