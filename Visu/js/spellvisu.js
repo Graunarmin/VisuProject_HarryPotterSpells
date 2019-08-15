@@ -1359,7 +1359,6 @@ function arc(){
 }
 
 
-
 // ------------------ SPELL LIST ------------------
 
 
@@ -1386,19 +1385,20 @@ function toggle_info(){
 
 //show the Infobox:
 function show_info(id){
-    //hide other possibly open info box:
-    hide_info();
     //console.log("id: " + id);
+
+    //hide other possibly open info box and deselect possibly selected paths and circels in chart:
+    hide_info();
 
     //determine type of spell
     var type = String(document.querySelector('#' + id + "_spell").classList.item(1));
     //console.log("type: " + type);
     
-    //highlight_nodes_and_paths(id, type);
+    highlight_nodes_and_paths(id,type);
 
     //set clicked spell to this one and inform everyone, that it's clicked
-    clickedSpell = id;
-    spellClicked = true;
+    // clickedSpell = id;
+    // spellClicked = true;
 
     //get the spell and it's infobox:
     var spell = document.querySelector('#' + id + "_spell");
@@ -1417,18 +1417,18 @@ function show_info(id){
 
 //Hide the infobox:
 function hide_info(){
-    clickedSpell = "";
-    spellClicked = false;
+    // clickedSpell = "";
+    // spellClicked = false;
 
-
-    // deselect_spell_in_chart();
+    //bring the chart back to it's status with the spell not selected
+    deselect_spell_in_chart();
 
     //close the infobox
     var element = document.querySelector('.show');
     if(element){
         element.classList.toggle("show");
     }
-    //then reset the style of all items to default (does NOT include SHOWING all items!)
+    //then reset the style of all list items to default (does NOT include SHOWING all items!)
     default_style();
 }
 
@@ -1443,11 +1443,13 @@ function default_style(){
     });
 }
 
+
 //----- Deals with Clicks on a Type in the Legend: -------
 
 //only show the spells of the type that was selected in the legend
+//bring back spells of all books (but only of the selected type!)
 function show_selected_type(type){
-    //bring back spells of all books (but only of the selected type!)
+    
     selectedType = type.toLowerCase();
     console.log("selected type: " + selectedType);
     hide_info();
@@ -1467,8 +1469,8 @@ function show_selected_type(type){
     });   
 }
 
+//bring back spells of all types (but only of the selected book!)
 function show_all_types(){
-    //bring back spells of all types (but only of the selected book!)
     selectedType = "none";
     console.log("deselected type: " + selectedType);
     hide_info();
@@ -1489,6 +1491,7 @@ function show_all_types(){
 
 //----- Deals with Clicks on a Book Label: -------
 
+//only show spells in list that appear in the selected book:
 function show_book_spells(book){
     //close (possibly open) infobox
     hide_info();
@@ -1509,6 +1512,7 @@ function show_book_spells(book){
     });
 }
 
+//show spells from all books again (but only of selected type, if selected)
 function show_all_books(){
     //close (possibly open) infobox
     hide_info();
@@ -1529,38 +1533,53 @@ function show_all_books(){
 }
 
 
-// --------- Highlight Stuff in Chart on click in List ----------
+// ------------- Highlight Stuff in Chart on click in List ----------------
 
+//highlight a spell, that was selected in the list, in the chart:
 function highlight_nodes_and_paths(id, type){
 
     //get the circles that need to be highlighted
-    if(selectedBook != "0"){
-        var years = [selectedBook.replace("Book ","HP_0")];
-    }else{
-        var years = ['HP_01', 'HP_02', 'HP_03', 'HP_04', 'HP_05', 'HP_06', 'HP_07'];
-    }
+    var spellCircles = highlight_specific_spell(id, type);
     
+    highlight_nodes(spellCircles);
+
+    //if a book is selected the connections don't need to be highlighted!
+    if(bookClicked == "0"){
+        highlight_links(id,type);
+    }
+}
+
+ //get the circles that need to be highlighted
+function highlight_specific_spell(id){
+
+    //determine type of spell
+    //id looks like this: #accio_spell
+    var type = String(document.querySelector('#' + id + "_spell").classList.item(1));
+
+    //get the circles that need to be highlighted
+    var years = ['HP_01', 'HP_02', 'HP_03', 'HP_04', 'HP_05', 'HP_06', 'HP_07'];
+
+    //if a book is selected: highlight only the spell-circle from that book
+    //clicked Books now are named like this: "Book 1" but we need it like "HP_01"
+    if(bookClicked != "0"){
+        years = [selectedBook.replace("Book ","HP_0")];
+    }
+
     var spellCircles = [];
-    for(y in years){
-        console.log("#id" + capitalize_first_letter(id) + "_" + years[y] + "-" + capitalize_first_letter(type));
-        var circle = document.querySelector("#id" + capitalize_first_letter(id) + "_" + years[y] + "-" + capitalize_first_letter(type));
+    for(y of years){
+        //circle ids look like this: #idAccio_HP_01-Charm
+        var circle = document.querySelector("#id" + capitalize_first_letter(id) + "_" + y + "-" + capitalize_first_letter(type));
         if(circle != null){
             spellCircles.push(circle);
         }   
     }
-
-    highlight_nodes(spellCircles);
-
-    if(selectedBook == "0"){
-        highlight_links(id,type);
-    }
-    
-    
+    return spellCircles;
 }
 
-function  highlight_nodes(spellCircles){
+//highlight the circles, that need to be highlighted:
+function highlight_nodes(spellCircles){
     clicked = spellCircles[0].id.split("-")[0].replace("id","")
-    console.log(clicked);
+    // console.log(clicked);
     var allCircles = document.querySelectorAll(".circleNodes");
     //Reduce opacity of all circles
     allCircles.forEach(function(e){
@@ -1575,6 +1594,7 @@ function  highlight_nodes(spellCircles){
     });
 }
 
+//highlight the links, that need to be highlighted:
 function highlight_links(id,type){
 
     document.querySelectorAll(".linkConnections").forEach(function(link_d){
@@ -1590,43 +1610,91 @@ function highlight_links(id,type){
     });
 }
 
+
+// ----------- De-Highlight Stuff in Chart after deselecting a spell in the list -------------
+
+//if a spell in the list is deselected: demark it in the chart 
+//but return to the status of the selected type and book, if any
 function deselect_spell_in_chart(){
     clicked = "0";
-    console.log("type: " + selectedType + ", book: " + selectedBook);
+
+    demark_circles();
+    demark_paths();
+}
+
+//determin the spells that need to highlighted after deselecting a spell in the list
+function spells_to_highlight(){
+    //get the circles that need to be highlighted
+    var spellCircles = [];
     var allCircles = document.querySelectorAll(".circleNodes");
-    //Reduce opacity of all circles
+
+    //if a book is selected: highlight only the spell-circle from that book
+    if(bookClicked != "0"){
+        allCircles.forEach(function(e){
+            if(e.id.split("_")[2].split("-")[0] == "0" + selectedBook.split(" ")[1]){
+                spellCircles.push(e);
+            }
+        });
+    }else{
+        spellCircles = allCircles;
+    }
+    return spellCircles;
+}
+
+//demark all circles that do not need to be highlighted after deselecting a spell in the list
+function demark_circles(){
+    var allCircles = document.querySelectorAll(".circleNodes");
+    var spellCircles = spells_to_highlight();
+    
     allCircles.forEach(function(e){
-        if(legendClicked != "0" || bookClicked != "0"){
-            if(e.classList.contains(selectedType) || e.classList.contains(selectedBook)){
+        if((legendClicked != "0" && bookClicked == "0") || (bookClicked != "0" && legendClicked == "0")){
+            if((legendClicked != "0" && e.classList.contains(selectedType)) || (bookClicked != "0" && spellCircles.includes(e))){
                 e.style.opacity = 1;
                 e.style.pointerEvents = "auto";
             }
-        }else{
+        }else if(legendClicked != "0" && bookClicked != "0"){
+            if(e.classList.contains(selectedType) && spellCircles.includes(e)){
+                e.style.opacity = 1;
+                e.style.pointerEvents = "auto";
+            }
+        }
+        else{
             e.style.opacity = 1;
             e.style.pointerEvents = "auto";
         }
     });
+}
 
+//demark all paths that do not need to be highlighted after deselecting a spell in the list
+// -------- I think there might still be an ERROR in here!! -----------
+function demark_paths(){
     document.querySelectorAll(".linkConnections").forEach(function(link_d){
-        // if(legendClicked != "0" || bookClicked != "0"){
-        //     console.log(link_d.classList[0].split("_"));
-        //     if((link_d.classList[0].split("_")[2] == selectedType)|| (link_d.classList[0].split("_")[2] == selectedBook)){
-        //         link_d.style.stroke = 'grey';
-        //         link_d.style.strokeOpacity = 0.8;
-        //         link_d.style.strokeWidth = 1;
-        //     }
-        // }else{
-            // link_d.style.stroke = 'grey';
-            // link_d.style.strokeOpacity = 0.8;
-            // link_d.style.strokeWidth = 1;
-        // }
-                
-    });
+        var spell = link_d.classList[0].split("_")[1];
+        var type = link_d.classList[0].split("_")[2];
+        var booklist = document.querySelector('#' + spell + '_info').querySelector('.bookTags').innerHTML.split(",");
 
+        // console.log(booklist);
+        if(booklist.includes(selectedBook)){
+            //console.log(spell + ": ", booklist);
+        }
+
+        if(legendClicked != "0" || bookClicked != "0"){
+            if((type == selectedType)|| (booklist.includes(selectedBook))){
+                link_d.style.stroke = '#b8b8b8';
+                link_d.style.strokeOpacity = 0.2;
+                link_d.style.strokeWidth = 1;
+            }
+        }else{
+            link_d.style.stroke = '#b8b8b8';
+            link_d.style.strokeOpacity = 0.2;
+            link_d.style.strokeWidth = 1;
+        }
+    });
 }
 
 // ----------- Helpers -----------
 
+//colors for the list
 function color(type){
     //choose respective color for each spell type
 
@@ -1646,6 +1714,7 @@ function color(type){
     }
 }
 
+//colors for the chart
 function chart_color(type){
     switch(type){
         case "charm":
