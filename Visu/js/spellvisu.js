@@ -70,7 +70,7 @@ function arc(){
         var typeDefiniton = ["A spell that adds or changes the properties <br> of an object",
         "A controlled manifestation of magic <br> that affects the world in a variety of ways", 
         "A spell that affects an object in a severely <br> negative way", 
-        "One of the three most powerful and sinister <br> spells there are"];
+        "The worst types of spells there are, they <br> must never be used!"];
 
         //Range of colors for the different types 
         var color = d3.scaleOrdinal()
@@ -201,7 +201,7 @@ function arc(){
                         return color(d.type); 
                     }
                     else{
-                        return "grey"; //"#b8b8b8";
+                        return "grey"; //"grey";
                     }
                 })
                 //Opacity of the link
@@ -210,7 +210,7 @@ function arc(){
                         return 1;
                     }
                     else{
-                        return 0.2;
+                        return 0.3;
                     }
                 })
                 //Width of the link
@@ -290,7 +290,7 @@ function arc(){
                             return 1;
                         }
                         else{
-                            return 0.2;
+                            return 0.3;
                         }
                     }
                     else{
@@ -442,7 +442,7 @@ function arc(){
                 //---------------------- Connections ----------------------
                 links
                 .style('stroke', 'grey')
-                .style('stroke-opacity', .8)
+                .style('stroke-opacity', 1)
                 .style('stroke-width', '1');
 
                 //---------------------- Lables ----------------------
@@ -535,7 +535,7 @@ function arc(){
                     return color(d.type); 
                     }
                     else{
-                    return '#b8b8b8';
+                    return 'grey';
                     }
                 })
                 //Opacity of the link
@@ -928,15 +928,11 @@ function arc(){
 
                 //Reduce opacity of all circles to 0.1
                 nodes
-                .transition() 
-                .duration(500) 
                 .style('opacity', 0.1);
 
                 //Only current circle and all connected circles stay the same color 
                 for(i = 1; i < allCircles.length; i++){
-                    d3.select("#id" + allCircles[i] + "-" + d)
-                    .transition()
-                    .duration(500) 
+                    d3.select("#id" + allCircles[i] + "-" + d) 
                     .style('opacity', 1);
                 }
 
@@ -944,8 +940,6 @@ function arc(){
 
                 //Opacity of the links
                 links
-                .transition()
-                .duration(500)
                 .style('stroke-opacity', function(link_d){
                     //IF link is of same type as clicked rect, leave opacity at 1
                     if(link_d.type === d){
@@ -988,16 +982,12 @@ function arc(){
 
                 //Return opacity of all circles back to 1
                 nodes
-                .transition()
-                .duration(500)
                 .style('opacity', 1)
 
                 //---------------------- Put Links Back ----------------------
 
                 //Return opacity of all links back to 1
                 links
-                .transition()
-                .duration(500)
                 .style('stroke-opacity', 1)
             }
 
@@ -1037,8 +1027,6 @@ function arc(){
 
                 //Reduce opacity of all circles
                 nodes
-                .transition()
-                .duration(500)
                 .style('opacity', 0.1);
 
                 //Only circles out of clicked book and of type of clicked rect stay at opacity 1
@@ -1048,8 +1036,6 @@ function arc(){
                     b = bookClicked.slice(bookClicked.length-1, bookClicked.length);
 
                     d3.select("#id" + c + b + "-" + d)
-                    .transition()
-                    .duration(500)
                     .style("opacity", 1);
                 }
 
@@ -1092,8 +1078,6 @@ function arc(){
 
                     for(j = 0; j < allTypes.length; j++){
                         d3.select("#id" + c + b + "-" + allTypes[j])
-                        .transition()
-                        .duration(500)
                         .style("opacity", 1);
                     }
                 }
@@ -1213,8 +1197,6 @@ function arc(){
 
                 //Reduce opacity of all circles
                 nodes
-                .transition()
-                .duration(500)
                 .style("opacity", 0.1);
 
                 //Only circles out of clicked book stay at opacity 1
@@ -1225,8 +1207,6 @@ function arc(){
                     for(j = 0; j < allTypes.length; j++){
 
                         d3.select("#id" + c + this.id + "-" + allTypes[j])
-                        .transition()
-                        .duration(500)
                         .style("opacity", 1);
                     }
                 }
@@ -1235,8 +1215,6 @@ function arc(){
 
                 //Reduce opacity of all links
                 links
-                .transition()
-                .duration(500)
                 .style("stroke-opacity", 0.1);
 
             }
@@ -1256,14 +1234,10 @@ function arc(){
 
                 //---------------------- Circles ----------------------
                 nodes
-                .transition()
-                .duration(500)
                 .style("opacity", 1);
 
                 //---------------------- Links ----------------------
                 links
-                .transition()
-                .duration(500)
                 .style("stroke-opacity", 1);
             }
 
@@ -1289,8 +1263,6 @@ function arc(){
 
                 //Reduce opacity of all circles
                 nodes
-                .transition()
-                .duration(500)
                 .style("opacity", 0.1);
 
                 //Only circles of type and out of clicked book stay at opacity 1
@@ -1300,8 +1272,6 @@ function arc(){
                     b = bookClicked.slice(bookClicked.length-1, bookClicked.length);
                     
                     d3.select("#id" + c + b + "-" + legendClicked)
-                    .transition()
-                    .duration(500)
                     .style("opacity", 1);
                 }
 
@@ -1309,8 +1279,6 @@ function arc(){
 
                 //Reduce opacity of all links
                 links
-                .transition()
-                .duration(500)
                 .style("stroke-opacity", 0.1);
 
             }
@@ -1334,15 +1302,11 @@ function arc(){
                 for(i = 0; i < allCircles.length; i++){
 
                     d3.select("#id" + allCircles[i] + "-" + legendClicked)
-                    .transition()
-                    .duration(500)
                     .style("opacity", 1);
                 }
 
                 //Opacity of the links
                 links
-                .transition()
-                .duration(500)
                 .style('stroke-opacity', function(link_d){
                     //IF link is of same type as clicked rect, leave opacity at 1
                     if(link_d.type === legendClicked){
@@ -1598,15 +1562,15 @@ function highlight_nodes(spellCircles){
 function highlight_links(id,type){
 
     document.querySelectorAll(".linkConnections").forEach(function(link_d){
-        if(link_d.classList[0].split("_")[1] == id){
-            link_d.style.stroke = chart_color(type);
-            link_d.style.strokeOpacity = 1;
-            link_d.style.strokeWidth = 4;
-        }else{
-            link_d.style.stroke = '#b8b8b8';
-            link_d.style.strokeOpacity = 0.2;
-            link_d.style.strokeWidth = 1;
-        }
+        // if(link_d.classList[0].split("_")[1] == id){
+        //     link_d.style.stroke = chart_color(type);
+        //     link_d.style.strokeOpacity = 1;
+        //     link_d.style.strokeWidth = 4;
+        // }else{
+        //     link_d.style.stroke = 'grey';
+        //     link_d.style.strokeOpacity = 0.2;
+        //     link_d.style.strokeWidth = 1;
+        // }
     });
 }
 
@@ -1680,12 +1644,12 @@ function demark_paths(){
 
         if(legendClicked != "0" || bookClicked != "0"){
             if((type == selectedType)|| (booklist.includes(selectedBook))){
-                link_d.style.stroke = '#b8b8b8';
+                link_d.style.stroke = 'grey';
                 link_d.style.strokeOpacity = 0.2;
                 link_d.style.strokeWidth = 1;
             }
         }else{
-            link_d.style.stroke = '#b8b8b8';
+            link_d.style.stroke = 'grey';
             link_d.style.strokeOpacity = 0.2;
             link_d.style.strokeWidth = 1;
         }
