@@ -1,13 +1,12 @@
 //in list:
 var clickedSpell = "";
 var spellClicked = false;
-var selectedType = "none";
-var selectedBook = "none";
+// var selectedType = "none";
 
 //in chart:
-var clicked = "0";      //Accio
-var bookClicked = "0";  //Book 1
-var legendClicked = "0"; //Charm
+var clicked = "0";           //Accio
+var bookClicked = "0";      //Book 1
+var legendClicked = "0";    //Charm
 
 
 function init(){
@@ -201,7 +200,7 @@ function arc(){
                         return color(d.type); 
                     }
                     else{
-                        return "grey";
+                        return "grey"; //"#b8b8b8";
                     }
                 })
                 //Opacity of the link
@@ -210,7 +209,7 @@ function arc(){
                         return 1;
                     }
                     else{
-                        return 0.3;
+                        return 0.2;
                     }
                 })
                 //Width of the link
@@ -290,7 +289,7 @@ function arc(){
                             return 1;
                         }
                         else{
-                            return 0.3;
+                            return 0.2;
                         }
                     }
                     else{
@@ -396,9 +395,6 @@ function arc(){
                     d.spell + ":" + "<br>" 
                     + "Used " + d.size + " times in book " + book 
                 );
-
-                labels
-                .style("font-size", 0);
             }
 
             //ELSE IF a circle is clicked and we are hovering above a connected circle
@@ -418,9 +414,6 @@ function arc(){
                     d.spell + ":" + "<br>" 
                     + "Used " + d.size + " times in book " + book 
                 );
-
-                labels
-                .style("font-size", 0);
             }
 
             //ELSE a circle is clicked but we are hovering above a different one
@@ -428,9 +421,6 @@ function arc(){
                 //---------------------- Circles ----------------------
                 nodes
                 .style("cursor", "default");
-
-                labels
-                .style("font-size", 0);
             }
         })
 
@@ -451,7 +441,7 @@ function arc(){
                 //---------------------- Connections ----------------------
                 links
                 .style('stroke', 'grey')
-                .style('stroke-opacity', 1)
+                .style('stroke-opacity', .8)
                 .style('stroke-width', '1');
 
                 //---------------------- Lables ----------------------
@@ -544,7 +534,7 @@ function arc(){
                     return color(d.type); 
                     }
                     else{
-                    return 'grey';
+                    return '#b8b8b8';
                     }
                 })
                 //Opacity of the link
@@ -568,25 +558,22 @@ function arc(){
 
                 //---------------------- Labels ----------------------
 
-                // labels
-                // //Size of the labels
-                // .style("font-size", function(label_d){ 
-                //     if(label_d.name === d.name){
-                //     return 20;
-                //     }
-                //     else{
-                //     return 0;
-                //     }
-                // })
-                // //Color of the labels
-                // .style("fill", function(label_d){
-                //     if(label_d.name === d.name){
-                //         return color(d.type);
-                //     }
-                // })
-
                 labels
-                .style("font-size", 0);
+                //Size of the labels
+                .style("font-size", function(label_d){ 
+                    if(label_d.name === d.name){
+                    return 20;
+                    }
+                    else{
+                    return 0;
+                    }
+                })
+                //Color of the labels
+                .style("fill", function(label_d){
+                    if(label_d.name === d.name){
+                        return color(d.type);
+                    }
+                })
 
                 //---------------------- Legend ----------------------
 
@@ -636,7 +623,6 @@ function arc(){
 
                 //show infobox in list:
                 show_info(d.id.split("_")[0].toLowerCase())
-
                 //---------------------- Circles ----------------------
 
                 //Reduce opacity of all circles
@@ -667,11 +653,6 @@ function arc(){
                 //Return opacity of current label back to 1
                 d3.select("#idlabel" + d.type)
                 .style("opacity", 1);
-
-                //---------------------- Labels ----------------------
-
-                labels
-                .style("font-size", 0);
             }
 
             //ELSE IF rect, book and circle is clicked (again)
@@ -948,11 +929,15 @@ function arc(){
 
                 //Reduce opacity of all circles to 0.1
                 nodes
+                .transition() 
+                .duration(500) 
                 .style('opacity', 0.1);
 
                 //Only current circle and all connected circles stay the same color 
                 for(i = 1; i < allCircles.length; i++){
-                    d3.select("#id" + allCircles[i] + "-" + d) 
+                    d3.select("#id" + allCircles[i] + "-" + d)
+                    .transition()
+                    .duration(500) 
                     .style('opacity', 1);
                 }
 
@@ -960,6 +945,8 @@ function arc(){
 
                 //Opacity of the links
                 links
+                .transition()
+                .duration(500)
                 .style('stroke-opacity', function(link_d){
                     //IF link is of same type as clicked rect, leave opacity at 1
                     if(link_d.type === d){
@@ -1002,12 +989,16 @@ function arc(){
 
                 //Return opacity of all circles back to 1
                 nodes
+                .transition()
+                .duration(500)
                 .style('opacity', 1)
 
                 //---------------------- Put Links Back ----------------------
 
                 //Return opacity of all links back to 1
                 links
+                .transition()
+                .duration(500)
                 .style('stroke-opacity', 1)
             }
 
@@ -1047,6 +1038,8 @@ function arc(){
 
                 //Reduce opacity of all circles
                 nodes
+                .transition()
+                .duration(500)
                 .style('opacity', 0.1);
 
                 //Only circles out of clicked book and of type of clicked rect stay at opacity 1
@@ -1056,6 +1049,8 @@ function arc(){
                     b = bookClicked.slice(bookClicked.length-1, bookClicked.length);
 
                     d3.select("#id" + c + b + "-" + d)
+                    .transition()
+                    .duration(500)
                     .style("opacity", 1);
                 }
 
@@ -1098,6 +1093,8 @@ function arc(){
 
                     for(j = 0; j < allTypes.length; j++){
                         d3.select("#id" + c + b + "-" + allTypes[j])
+                        .transition()
+                        .duration(500)
                         .style("opacity", 1);
                     }
                 }
@@ -1218,6 +1215,8 @@ function arc(){
 
                 //Reduce opacity of all circles
                 nodes
+                .transition()
+                .duration(500)
                 .style("opacity", 0.1);
 
                 //Only circles out of clicked book stay at opacity 1
@@ -1228,6 +1227,8 @@ function arc(){
                     for(j = 0; j < allTypes.length; j++){
 
                         d3.select("#id" + c + this.id + "-" + allTypes[j])
+                        .transition()
+                        .duration(500)
                         .style("opacity", 1);
                     }
                 }
@@ -1236,7 +1237,10 @@ function arc(){
 
                 //Reduce opacity of all links
                 links
+                .transition()
+                .duration(500)
                 .style("stroke-opacity", 0.1);
+
             }
 
             //ELSE IF no circle, no rect and but book is clicked and we are clicking on it again
@@ -1254,10 +1258,14 @@ function arc(){
 
                 //---------------------- Circles ----------------------
                 nodes
+                .transition()
+                .duration(500)
                 .style("opacity", 1);
 
                 //---------------------- Links ----------------------
                 links
+                .transition()
+                .duration(500)
                 .style("stroke-opacity", 1);
             }
 
@@ -1283,6 +1291,8 @@ function arc(){
 
                 //Reduce opacity of all circles
                 nodes
+                .transition()
+                .duration(500)
                 .style("opacity", 0.1);
 
                 //Only circles of type and out of clicked book stay at opacity 1
@@ -1292,6 +1302,8 @@ function arc(){
                     b = bookClicked.slice(bookClicked.length-1, bookClicked.length);
                     
                     d3.select("#id" + c + b + "-" + legendClicked)
+                    .transition()
+                    .duration(500)
                     .style("opacity", 1);
                 }
 
@@ -1299,6 +1311,8 @@ function arc(){
 
                 //Reduce opacity of all links
                 links
+                .transition()
+                .duration(500)
                 .style("stroke-opacity", 0.1);
 
             }
@@ -1322,11 +1336,15 @@ function arc(){
                 for(i = 0; i < allCircles.length; i++){
 
                     d3.select("#id" + allCircles[i] + "-" + legendClicked)
+                    .transition()
+                    .duration(500)
                     .style("opacity", 1);
                 }
 
                 //Opacity of the links
                 links
+                .transition()
+                .duration(500)
                 .style('stroke-opacity', function(link_d){
                     //IF link is of same type as clicked rect, leave opacity at 1
                     if(link_d.type === legendClicked){
@@ -1342,7 +1360,10 @@ function arc(){
     })
 }
 
+
 // ------------------ SPELL LIST ------------------
+
+
 // ------ Deals with clicks on a spell in the List: --------
 
 function toggle_info(){
@@ -1376,7 +1397,7 @@ function show_info(id){
     //console.log("type: " + type);
     
     highlight_nodes_and_paths(id,type);
-    highlight_legend_type(id);
+    highlight_legend_type(id, type);
     highlight_books_of_spell(id);
 
     //set clicked spell to this one and inform everyone, that it's clicked
@@ -1406,6 +1427,8 @@ function hide_info(){
 
     //bring the chart back to it's status with the spell not selected
     deselect_spell_in_chart();
+    deselect_type_in_legend();
+    deselect_booklabels();
 
     //close the infobox
     var element = document.querySelector('.show');
@@ -1421,48 +1444,57 @@ function default_style(){
     var elements = document.querySelectorAll('.spells');
     elements.forEach.call(elements, function(e){
         e.style.fontSize = '15px';
-        spell.style.fontWeight = 'normal';
+        e.style.fontWeight = 'normal';
         e.style.color = 'black';
         e.style.pointerEvents = "auto";
         e.style.cursor = "pointer";
     });
 }
 
-
-function highlight_legend_type(spell){
+function highlight_legend_type(spell, type){
     //Rectangle ids: #idrectCharm
     //Rectangle class: .legendRect
 
     //Label ids: #idlabelCharm
     //Label class: .legendLabel
 
-    var legendRects = document.querySelector(".legendRect");
+    //!! if type selected
 
-    for(rect of legendRects){
+    //highlight the type of the selected spell in the legend:
 
-    }
+    var legendRects = document.querySelectorAll(".legendRect");
+    legendRects.forEach(function(e){
+        e.style.opacity = 0.3;
+        if(e.id.slice(6,e.id.length).toLowerCase() == type){
+            e.style.opacity = 1.0;
+            e.style.stroke = chart_color(type);
+            e.style.strokeWidth = 3.0;
+        }
+    });
 
-    //Reduce opacity of all rect
-    legend
-    .style('opacity', .3);
+    var legendLabels = document.querySelectorAll(".legendLabel");
+    legendLabels.forEach(function(e){
+        e.style.opacity = 0.3;
+        if(e.id.slice(7,e.id.length).toLowerCase() == type){
+            e.style.opacity = 1.0;
+        }
+    });
+}
 
-    //Only rect of current type stays colored 
-    d3.select("#idrect" + d.type)
-    .style('opacity', 1)
-    .style("stroke",function(d){
-        return color(d);
-    })
-    .style("stroke-width",3);
+function deselect_type_in_legend(){
+    //set legend back to normal
+    //if type selected!!
+    var legendRects = document.querySelectorAll(".legendRect");
+    legendRects.forEach(function(e){
+        e.style.opacity = 1.0;
+        e.style.stroke = "white";
+        e.style.strokeWidth = 0.0;
+    });
 
-    //Lower opacity of all labels
-    legendLabels
-    .style("opacity", 0.3);
-    
-    //Return opacity of current label back to 1
-    d3.select("#idlabel" + d.type)
-    .style("opacity", 1);
-
-
+    var legendLabels = document.querySelectorAll(".legendLabel");
+    legendLabels.forEach(function(e){
+        e.style.opacity = 1.0;
+    });
 
 }
 
@@ -1470,19 +1502,51 @@ function highlight_books_of_spell(spell){
     //Booklabel class: .bookLabel
     //Booklabel ids: #HP_0x
 
+    var bookTags = get_books(spell);
+    var bookLabels = document.querySelectorAll(".bookLabel");
+
+    if(bookClicked == "0"){
+        bookLabels.forEach(function(e){
+            e.style.opacity = 0.3;
+            if(bookTags.includes(e.id.replace("HP_0", "Book "))){
+                e.style.opacity = 1.0;
+                e.style.fontWeight = "bold";
+            }
+        });
+    }else{
+        bookLabels.forEach(function(e){
+            e.style.opacity = 0.3;
+        });
+        var label = document.querySelector("#" + bookClicked.replace("Book ", "HP_0"));
+        label.style.opacity = 1.0;
+        label.style.fontWeight = "bold";
+
+    }
 }
 
+function deselect_booklabels(){
 
+    var bookLabels = document.querySelectorAll(".bookLabel");
+    if(bookClicked == "0"){
+        bookLabels.forEach(function(e){
+            e.style.opacity = 1.0;
+            e.style.fontWeight = "normal";
+        });
+    }else{
+        console.log("Book clicked: " + bookClicked);
+        var label = document.querySelector("#" + bookClicked.replace("Book ", "HP_0"));
+        label.style.opacity = 1.0;
+        label.style.fontWeight = "bold";
+    }
+    
 
+}
 
 //----- Deals with Clicks on a Type in the Legend: -------
 
 //only show the spells of the type that was selected in the legend
 //bring back spells of all books (but only of the selected type!)
 function show_selected_type(type){
-    
-    selectedType = type.toLowerCase();
-    console.log("selected type: " + selectedType);
     hide_info();
 
     //then get all spells...
@@ -1502,8 +1566,6 @@ function show_selected_type(type){
 
 //bring back spells of all types (but only of the selected book!)
 function show_all_types(){
-    selectedType = "none";
-    console.log("deselected type: " + selectedType);
     hide_info();
     
     var spells = document.querySelectorAll(".spells");
@@ -1526,8 +1588,6 @@ function show_all_types(){
 function show_book_spells(book){
     //close (possibly open) infobox
     hide_info();
-    selectedBook = book;
-    console.log("selected book: " + selectedBook);
 
     //get all spells ...
     var spells = document.querySelectorAll(".spells");
@@ -1547,8 +1607,6 @@ function show_book_spells(book){
 function show_all_books(){
     //close (possibly open) infobox
     hide_info();
-    selectedBook = "none";
-    console.log("deselected book: " + selectedBook);
 
     var spells = document.querySelectorAll(".spells");
     spells.forEach.call(spells, function(e){
@@ -1585,7 +1643,7 @@ function highlight_specific_spell(id){
 
     //determine type of spell
     //id looks like this: #accio_spell
-    var type = String(document.querySelector('#' + id + "_spell").classList.item(1));
+    var type = get_type(id);
 
     //get the circles that need to be highlighted
     var years = ['HP_01', 'HP_02', 'HP_03', 'HP_04', 'HP_05', 'HP_06', 'HP_07'];
@@ -1593,7 +1651,7 @@ function highlight_specific_spell(id){
     //if a book is selected: highlight only the spell-circle from that book
     //clicked Books now are named like this: "Book 1" but we need it like "HP_01"
     if(bookClicked != "0"){
-        years = [selectedBook.replace("Book ","HP_0")];
+        years = [bookClicked.replace("Book ","HP_0")];
     }
 
     var spellCircles = [];
@@ -1634,7 +1692,7 @@ function highlight_links(id,type){
             link_d.style.strokeOpacity = 1;
             link_d.style.strokeWidth = 4;
         }else{
-            link_d.style.stroke = '#b8b8b8';
+            link_d.style.stroke = 'grey';
             link_d.style.strokeOpacity = 0.2;
             link_d.style.strokeWidth = 1;
         }
@@ -1662,7 +1720,7 @@ function spells_to_highlight(){
     //if a book is selected: highlight only the spell-circle from that book
     if(bookClicked != "0"){
         allCircles.forEach(function(e){
-            if(e.id.split("_")[2].split("-")[0] == "0" + selectedBook.split(" ")[1]){
+            if(e.id.split("_")[2].split("-")[0] == "0" + bookClicked.split(" ")[1]){
                 spellCircles.push(e);
             }
         });
@@ -1679,12 +1737,12 @@ function demark_circles(){
     
     allCircles.forEach(function(e){
         if((legendClicked != "0" && bookClicked == "0") || (bookClicked != "0" && legendClicked == "0")){
-            if((legendClicked != "0" && e.classList.contains(selectedType)) || (bookClicked != "0" && spellCircles.includes(e))){
+            if((legendClicked != "0" && e.classList.contains(legendClicked.toLowerCase())) || (bookClicked != "0" && spellCircles.includes(e))){
                 e.style.opacity = 1;
                 e.style.pointerEvents = "auto";
             }
         }else if(legendClicked != "0" && bookClicked != "0"){
-            if(e.classList.contains(selectedType) && spellCircles.includes(e)){
+            if(e.classList.contains(legendClicked.toLowerCase()) && spellCircles.includes(e)){
                 e.style.opacity = 1;
                 e.style.pointerEvents = "auto";
             }
@@ -1709,7 +1767,7 @@ function demark_paths(){
             // if a type was selected in the legend:
             if(legendClicked != "0"){
                 //if the type of the spell matches the selected Type: those get back to "normal"
-                if(type == selectedType){
+                if(type == legendClicked.toLowerCase()){
                     link_d.style.stroke = 'grey';
                     link_d.style.strokeOpacity = 1;
                     link_d.style.strokeWidth = 1;
@@ -1777,4 +1835,15 @@ function capitalize_first_letter(word){
         return(word.charAt(0).toUpperCase() + word.slice(1,12) + word.charAt(12).toUpperCase() + word.slice(13));
     }
     return (word.charAt(0).toUpperCase() + word.slice(1));
+}
+
+//get a list of all books a spell appears in as a string
+function get_books(spell){
+    var spellElement = document.querySelector("#"+spell+"_spell");
+    return String(spellElement.querySelector(".bookTags").innerHTML).split(',');
+}
+
+//get the type of a spell as string
+function get_type(spell){
+    return String(document.querySelector('#' + spell + "_spell").classList.item(1));
 }
