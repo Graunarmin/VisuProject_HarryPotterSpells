@@ -1323,9 +1323,6 @@ function arc(){
 }
 
 
-// ------------------ SPELL LIST ------------------
-
-
 // ------ Deals with clicks on a spell in the List: --------
 
 function toggle_info(){
@@ -1562,15 +1559,15 @@ function highlight_nodes(spellCircles){
 function highlight_links(id,type){
 
     document.querySelectorAll(".linkConnections").forEach(function(link_d){
-        // if(link_d.classList[0].split("_")[1] == id){
-        //     link_d.style.stroke = chart_color(type);
-        //     link_d.style.strokeOpacity = 1;
-        //     link_d.style.strokeWidth = 4;
-        // }else{
-        //     link_d.style.stroke = 'grey';
-        //     link_d.style.strokeOpacity = 0.2;
-        //     link_d.style.strokeWidth = 1;
-        // }
+        if(link_d.classList[0].split("_")[1] == id){
+            link_d.style.stroke = chart_color(type);
+            link_d.style.strokeOpacity = 1;
+            link_d.style.strokeWidth = 4;
+        }else{
+            link_d.style.stroke = '#b8b8b8';
+            link_d.style.strokeOpacity = 0.2;
+            link_d.style.strokeWidth = 1;
+        }
     });
 }
 
@@ -1638,20 +1635,28 @@ function demark_paths(){
         var booklist = document.querySelector('#' + spell + '_info').querySelector('.bookTags').innerHTML.split(",");
 
         // console.log(booklist);
-        if(booklist.includes(selectedBook)){
-            //console.log(spell + ": ", booklist);
+        // if(booklist.includes(selectedBook)){
+        //     //console.log(spell + ": ", booklist);
+        // }
+
+        if(legendClicked != "0"){
+            if(type == selectedType)
+            link_d.style.stroke = 'grey';
+            link_d.style.strokeOpacity = 1;
+            link_d.style.strokeWidth = 1;
         }
 
+        //if legend clicked or book clicked:
         if(legendClicked != "0" || bookClicked != "0"){
-            if((type == selectedType)|| (booklist.includes(selectedBook))){
-                link_d.style.stroke = 'grey';
-                link_d.style.strokeOpacity = 0.2;
-                link_d.style.strokeWidth = 1;
+            if((legendClicked != "0" && type == selectedType) || (bookClicked != "0" && booklist.includes(selectedBook))){
+                
+        
             }
+        //if neither legend clicked nor book clicked: return to normal
         }else{
-            link_d.style.stroke = 'grey';
-            link_d.style.strokeOpacity = 0.2;
-            link_d.style.strokeWidth = 1;
+            // link_d.style.stroke = 'grey';
+            // link_d.style.strokeOpacity = 1;
+            // link_d.style.strokeWidth = 1;
         }
     });
 }
