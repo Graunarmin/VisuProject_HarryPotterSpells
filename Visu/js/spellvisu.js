@@ -5,9 +5,9 @@ var selectedType = "none";
 var selectedBook = "none";
 
 //in chart:
-var clicked = "0";      //circle clicked
-var bookClicked = "0";
-var legendClicked = "0";
+var clicked = "0";      //Accio
+var bookClicked = "0";  //Book 1
+var legendClicked = "0"; //Charm
 
 
 function init(){
@@ -70,7 +70,7 @@ function arc(){
         var typeDefiniton = ["A spell that adds or changes the properties <br> of an object",
         "A controlled manifestation of magic <br> that affects the world in a variety of ways", 
         "A spell that affects an object in a severely <br> negative way", 
-        "The worst types of spells there are, they <br> must never be used!"];
+        "One of the three most powerful and sinister <br> spells there are"];
 
         //Range of colors for the different types 
         var color = d3.scaleOrdinal()
@@ -201,7 +201,7 @@ function arc(){
                         return color(d.type); 
                     }
                     else{
-                        return "grey"; //"grey";
+                        return "grey";
                     }
                 })
                 //Opacity of the link
@@ -802,6 +802,7 @@ function arc(){
             .enter()
             .append("rect") 
             //"#idrect" + type
+            .attr("class","legendRect")
             .attr("id", function(d){
                 return ("idrect" + d);
             })
@@ -821,6 +822,7 @@ function arc(){
             .data(typeNames)
             .enter()
             .append("text")
+            .attr("class", "legendLabel")
             .attr("id", function(d,i){
                 return ("idlabel" + allTypes[i]);
             })
@@ -1109,6 +1111,7 @@ function arc(){
             .data(allBooks)
             .enter()
             .append("text")
+            .attr("class", "bookLabel")
             .attr("id", function(d,i){
                 return bookId[i];
             })
@@ -1339,7 +1342,7 @@ function arc(){
     })
 }
 
-
+// ------------------ SPELL LIST ------------------
 // ------ Deals with clicks on a spell in the List: --------
 
 function toggle_info(){
@@ -1373,6 +1376,8 @@ function show_info(id){
     //console.log("type: " + type);
     
     highlight_nodes_and_paths(id,type);
+    highlight_legend_type(id);
+    highlight_books_of_spell(id);
 
     //set clicked spell to this one and inform everyone, that it's clicked
     // clickedSpell = id;
@@ -1386,6 +1391,7 @@ function show_info(id){
     var colour = color(type);
     spell.style.color = colour[0];
     spell.style.fontSize = '20px';
+    spell.style.fontWeight = 'bold';
 
     //and Show the Infobox
     info_box.classList.toggle("show");
@@ -1415,11 +1421,58 @@ function default_style(){
     var elements = document.querySelectorAll('.spells');
     elements.forEach.call(elements, function(e){
         e.style.fontSize = '15px';
+        spell.style.fontWeight = 'normal';
         e.style.color = 'black';
         e.style.pointerEvents = "auto";
         e.style.cursor = "pointer";
     });
 }
+
+
+function highlight_legend_type(spell){
+    //Rectangle ids: #idrectCharm
+    //Rectangle class: .legendRect
+
+    //Label ids: #idlabelCharm
+    //Label class: .legendLabel
+
+    var legendRects = document.querySelector(".legendRect");
+
+    for(rect of legendRects){
+
+    }
+
+    //Reduce opacity of all rect
+    legend
+    .style('opacity', .3);
+
+    //Only rect of current type stays colored 
+    d3.select("#idrect" + d.type)
+    .style('opacity', 1)
+    .style("stroke",function(d){
+        return color(d);
+    })
+    .style("stroke-width",3);
+
+    //Lower opacity of all labels
+    legendLabels
+    .style("opacity", 0.3);
+    
+    //Return opacity of current label back to 1
+    d3.select("#idlabel" + d.type)
+    .style("opacity", 1);
+
+
+
+}
+
+function highlight_books_of_spell(spell){
+    //Booklabel class: .bookLabel
+    //Booklabel ids: #HP_0x
+
+}
+
+
 
 
 //----- Deals with Clicks on a Type in the Legend: -------
@@ -1651,29 +1704,28 @@ function demark_paths(){
         var type = link_d.classList[0].split("_")[2];
         var booklist = document.querySelector('#' + spell + '_info').querySelector('.bookTags').innerHTML.split(",");
 
-        // console.log(booklist);
-        // if(booklist.includes(selectedBook)){
-        //     //console.log(spell + ": ", booklist);
-        // }
-
-        if(legendClicked != "0"){
-            if(type == selectedType)
-            link_d.style.stroke = 'grey';
-            link_d.style.strokeOpacity = 1;
-            link_d.style.strokeWidth = 1;
-        }
-
-        //if legend clicked or book clicked:
-        if(legendClicked != "0" || bookClicked != "0"){
-            if((legendClicked != "0" && type == selectedType) || (bookClicked != "0" && booklist.includes(selectedBook))){
-                
-        
+        //if no book is selected, there are paths to see
+        if(bookClicked == "0"){
+            // if a type was selected in the legend:
+            if(legendClicked != "0"){
+                //if the type of the spell matches the selected Type: those get back to "normal"
+                if(type == selectedType){
+                    link_d.style.stroke = 'grey';
+                    link_d.style.strokeOpacity = 1;
+                    link_d.style.strokeWidth = 1;
+                //the others are not selected bc. the types do not match
+                }else{
+                    //nothing
+                }
+            //else if no type was selected: all paths go back to normal
+            }else{
+                link_d.style.stroke = 'grey';
+                link_d.style.strokeOpacity = 1;
+                link_d.style.strokeWidth = 1;
             }
-        //if neither legend clicked nor book clicked: return to normal
+        //else if a book was selected: there are no paths to see
         }else{
-            // link_d.style.stroke = 'grey';
-            // link_d.style.strokeOpacity = 1;
-            // link_d.style.strokeWidth = 1;
+            //nothing
         }
     });
 }
