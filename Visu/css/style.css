@@ -54,25 +54,25 @@
   }
   
   .charm .toggleSpells:hover{
-    /* font-weight: bold !important; */
+    font-weight: bold !important; 
     color :rgb(100, 183, 17) !important; 
     /* !important so it still works after using javascript! */
   }
 
   .spell .toggleSpells:hover{
-    /* font-weight: bold !important; */
+    font-weight: bold !important; 
     color :rgb(0, 136, 255) !important; 
     /* !important so it still works after using javascript! */
   }
 
   .curse .toggleSpells:hover{
-    /* font-weight: bold !important; */
+    font-weight: bold !important; 
     color :#FFAE19 !important; 
     /* !important so it still works after using javascript! */
   }
 
   .unforgivablecurse .toggleSpells:hover{
-    /* font-weight: bold !important; */
+    font-weight: bold !important; 
     color :rgb(184, 12, 12) !important; 
     /* !important so it still works after using javascript! */
   }

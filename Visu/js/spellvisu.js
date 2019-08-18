@@ -396,6 +396,9 @@ function arc(){
                     d.spell + ":" + "<br>" 
                     + "Used " + d.size + " times in book " + book 
                 );
+
+                labels
+                .style("font-size", 0);
             }
 
             //ELSE IF a circle is clicked and we are hovering above a connected circle
@@ -415,6 +418,9 @@ function arc(){
                     d.spell + ":" + "<br>" 
                     + "Used " + d.size + " times in book " + book 
                 );
+
+                labels
+                .style("font-size", 0);
             }
 
             //ELSE a circle is clicked but we are hovering above a different one
@@ -422,6 +428,9 @@ function arc(){
                 //---------------------- Circles ----------------------
                 nodes
                 .style("cursor", "default");
+
+                labels
+                .style("font-size", 0);
             }
         })
 
@@ -559,22 +568,25 @@ function arc(){
 
                 //---------------------- Labels ----------------------
 
+                // labels
+                // //Size of the labels
+                // .style("font-size", function(label_d){ 
+                //     if(label_d.name === d.name){
+                //     return 20;
+                //     }
+                //     else{
+                //     return 0;
+                //     }
+                // })
+                // //Color of the labels
+                // .style("fill", function(label_d){
+                //     if(label_d.name === d.name){
+                //         return color(d.type);
+                //     }
+                // })
+
                 labels
-                //Size of the labels
-                .style("font-size", function(label_d){ 
-                    if(label_d.name === d.name){
-                    return 20;
-                    }
-                    else{
-                    return 0;
-                    }
-                })
-                //Color of the labels
-                .style("fill", function(label_d){
-                    if(label_d.name === d.name){
-                        return color(d.type);
-                    }
-                })
+                .style("font-size", 0);
 
                 //---------------------- Legend ----------------------
 
@@ -624,6 +636,7 @@ function arc(){
 
                 //show infobox in list:
                 show_info(d.id.split("_")[0].toLowerCase())
+
                 //---------------------- Circles ----------------------
 
                 //Reduce opacity of all circles
@@ -654,6 +667,11 @@ function arc(){
                 //Return opacity of current label back to 1
                 d3.select("#idlabel" + d.type)
                 .style("opacity", 1);
+
+                //---------------------- Labels ----------------------
+
+                labels
+                .style("font-size", 0);
             }
 
             //ELSE IF rect, book and circle is clicked (again)
@@ -1216,7 +1234,6 @@ function arc(){
                 //Reduce opacity of all links
                 links
                 .style("stroke-opacity", 0.1);
-
             }
 
             //ELSE IF no circle, no rect and but book is clicked and we are clicking on it again
