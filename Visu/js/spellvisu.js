@@ -773,6 +773,7 @@ function arc(){
                 .style("opacity", 1)
                 .style("font-weight", "normal");
             }
+            update_headline();
         })
 
         //---------------------- Add Legend ----------------------
@@ -1099,6 +1100,7 @@ function arc(){
                     }
                 }
             }
+            update_headline();
         })
 
         //---------------------- Add Book Lables ----------------------
@@ -1356,7 +1358,9 @@ function arc(){
                     }
                 });
             }
+            update_headline();
         })
+       
     })
 }
 
@@ -1451,6 +1455,7 @@ function default_style(){
     });
 }
 
+//when a spell in the list is clicked: highlight it's type in the legend
 function highlight_legend_type(spell, type){
     //Rectangle ids: #idrectCharm
     //Rectangle class: .legendRect
@@ -1481,6 +1486,7 @@ function highlight_legend_type(spell, type){
     });
 }
 
+//when a spell in the list gets deselected: reset the legend to normal
 function deselect_type_in_legend(){
     //set legend back to normal
     //if type selected!!
@@ -1498,6 +1504,7 @@ function deselect_type_in_legend(){
 
 }
 
+//when a spell in the list is clicked: highlight the books it appears in
 function highlight_books_of_spell(spell){
     //Booklabel class: .bookLabel
     //Booklabel ids: #HP_0x
@@ -1524,6 +1531,7 @@ function highlight_books_of_spell(spell){
     }
 }
 
+//when a spell in the list gets deselected: reset the books to normal
 function deselect_booklabels(){
 
     var bookLabels = document.querySelectorAll(".bookLabel");
@@ -1533,13 +1541,62 @@ function deselect_booklabels(){
             e.style.fontWeight = "normal";
         });
     }else{
-        console.log("Book clicked: " + bookClicked);
         var label = document.querySelector("#" + bookClicked.replace("Book ", "HP_0"));
         label.style.opacity = 1.0;
         label.style.fontWeight = "bold";
     }
     
 
+}
+
+function update_headline(){
+    var headline = document.querySelector(".listHeadline");
+    var type = "";
+    var book = "";
+    if(/*clicked == "0" && */legendClicked == "0" && bookClicked == "0"){
+        headline.innerHTML = "All Spells";
+    }
+    else if(legendClicked != "0" && bookClicked != "0"){
+        
+        headline.innerHTML = set_book(bookClicked) + " - " + set_type(legendClicked);
+    }else if(legendClicked != "0" && bookClicked == "0"){
+        headline.innerHTML = set_type(legendClicked);
+    }else if(legendClicked == "0" && bookClicked != "0"){
+        headline.innerHTML = set_book(bookClicked);
+    }
+
+}
+
+function set_type(selected){
+    switch(selected){
+        case("Charm"):
+            return "Charms";
+        case("Spell"):
+            return "Spells";
+        case("Curse"):
+            return "Curses";
+        case("UnforgivableCurse"):
+            return "Unforgivable Curses";
+    }
+}
+
+function set_book(selected){
+    switch(selected){
+        case("Book 1"):
+            return "Philosophers Stone";
+        case("Book 2"):
+            return "Chamber of Secrets";
+        case("Book 3"):
+            return "Prizoner of Aszkaban";
+        case("Book 4"):
+            return "Goblet of Fire";
+        case("Book 5"):
+            return "Order of the Phoenix";
+        case("Book 6"):
+            return "Halfblood Prince";
+        case("Book 7"):
+            return "Deathly Hallows";
+    }
 }
 
 //----- Deals with Clicks on a Type in the Legend: -------
