@@ -1401,7 +1401,7 @@ function show_info(id){
     //console.log("type: " + type);
     
     highlight_nodes_and_paths(id,type);
-    highlight_legend_type(id, type);
+    highlight_legend_type(type);
     highlight_books_of_spell(id);
 
     //set clicked spell to this one and inform everyone, that it's clicked
@@ -1456,52 +1456,86 @@ function default_style(){
 }
 
 //when a spell in the list is clicked: highlight it's type in the legend
-function highlight_legend_type(spell, type){
+function highlight_legend_type(type){
+    //highlight the type of the selected spell in the legend:
+
     //Rectangle ids: #idrectCharm
     //Rectangle class: .legendRect
+    var legendRects = document.querySelectorAll(".legendRect");
 
     //Label ids: #idlabelCharm
     //Label class: .legendLabel
-
-    //!! if type selected
-
-    //highlight the type of the selected spell in the legend:
-
-    var legendRects = document.querySelectorAll(".legendRect");
-    legendRects.forEach(function(e){
-        e.style.opacity = 0.3;
-        if(e.id.slice(6,e.id.length).toLowerCase() == type){
-            e.style.opacity = 1.0;
-            e.style.stroke = chart_color(type);
-            e.style.strokeWidth = 3.0;
-        }
-    });
-
     var legendLabels = document.querySelectorAll(".legendLabel");
-    legendLabels.forEach(function(e){
-        e.style.opacity = 0.3;
-        if(e.id.slice(7,e.id.length).toLowerCase() == type){
-            e.style.opacity = 1.0;
-        }
-    });
+
+    if(legendClicked == "0"){
+        legendRects.forEach(function(e){
+            e.style.opacity = 0.3;
+            if(e.id.slice(6,e.id.length).toLowerCase() == type){
+                e.style.opacity = 1.0;
+                e.style.stroke = chart_color(type);
+                e.style.strokeWidth = 3.0;
+            }
+        });
+        legendLabels.forEach(function(e){
+            e.style.opacity = 0.3;
+            if(e.id.slice(7,e.id.length).toLowerCase() == type){
+                e.style.opacity = 1.0;
+            }
+        });
+
+    }else{
+        legendRects.forEach(function(e){
+            e.style.opacity = 0.3;
+        });
+        var rect = document.querySelector("#idrect"+legendClicked);
+        rect.style.opacity = 1.0;
+        rect.style.stroke = chart_color(type);
+        rect.style.strokeWidth = 3.0;
+
+        legendLabels.forEach(function(e){
+            e.style.opacity = 0.3;
+        });
+
+        var label = document.querySelector("#idlabel"+legendClicked);
+        label.style.opacity = 1.0
+    }
+
+   
+    
 }
 
 //when a spell in the list gets deselected: reset the legend to normal
 function deselect_type_in_legend(){
     //set legend back to normal
-    //if type selected!!
     var legendRects = document.querySelectorAll(".legendRect");
-    legendRects.forEach(function(e){
-        e.style.opacity = 1.0;
-        e.style.stroke = "white";
-        e.style.strokeWidth = 0.0;
-    });
-
     var legendLabels = document.querySelectorAll(".legendLabel");
-    legendLabels.forEach(function(e){
-        e.style.opacity = 1.0;
-    });
 
+    if(legendClicked == "0"){
+        legendRects.forEach(function(e){
+            e.style.opacity = 1.0;
+            e.style.stroke = "white";
+            e.style.strokeWidth = 0.0;
+        });
+
+        legendLabels.forEach(function(e){
+            e.style.opacity = 1.0;
+        });
+    }else{
+        legendRects.forEach(function(e){
+            e.style.opacity = 0.3;
+        });
+        var rect = document.querySelector("#idrect"+legendClicked);
+        rect.style.opacity = 1.0;
+        rect.style.stroke = chart_color(legendClicked);
+        rect.style.strokeWidth = 3.0;
+        
+        legendLabels.forEach(function(e){
+            e.style.opacity = 0.3;
+        });
+
+        var label = document.querySelector("#idlabel"+legendClicked);
+        label.style.opacity = 1.0;
+    }
 }
 
 //when a spell in the list is clicked: highlight the books it appears in
@@ -1564,7 +1598,6 @@ function update_headline(){
     }else if(legendClicked == "0" && bookClicked != "0"){
         headline.innerHTML = set_book(bookClicked);
     }
-
 }
 
 function set_type(selected){
