@@ -11,314 +11,318 @@
 /* ------- Main Container --------- */
 
 .Container{
-    overflow: visible;
+  overflow: visible;
 }
 
 .Headline{
-    text-align: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 25px;
-  }
-  
-  /*------------- Spell list ----------- */
-  
-  /* Padding: Inhalt bis zur Border, 
-  Margin: Border bis Dokumentrand */
-  
-  .spellList {
-    position: absolute;
-    scrollbar-width: none;
-  }
-  
-  .list {
-    display: block;
-    margin-top: 15px;
-    margin-left: 10px;
-    scrollbar-width: none;
-    max-height: 600px;
-    max-width: 200px;
-    overflow: scroll;
-  }
-  
-  .spells{
-    display: block;
-    border-style: none;
-    background-color: transparent;
-    color: black;
-    font-family: 'Playfair Display', serif;
-    font-size: 15px;
-  }
-  
-  .toggleSpells{
-    cursor: pointer;
-  }
-  
-  .charm .toggleSpells:hover{
-    font-weight: bold !important; 
-    color :rgb(100, 183, 17) !important; 
-    /* !important so it still works after using javascript! */
-  }
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+}
 
-  .spell .toggleSpells:hover{
-    font-weight: bold !important; 
-    color :rgb(0, 136, 255) !important; 
-    /* !important so it still works after using javascript! */
-  }
+/*------------- Spell list ----------- */
 
-  .curse .toggleSpells:hover{
-    font-weight: bold !important; 
-    color :#FFAE19 !important; 
-    /* !important so it still works after using javascript! */
-  }
+/* Padding: Inhalt bis zur Border, 
+Margin: Border bis Dokumentrand */
 
-  .unforgivablecurse .toggleSpells:hover{
-    font-weight: bold !important; 
-    color :rgb(184, 12, 12) !important; 
-    /* !important so it still works after using javascript! */
-  }
-  
-  /* ------ Pop-up / Infokasten ------ */
-  /* Popup container */
-  .spells {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  /* The actual popup */
-  .spells .info {
-    display: none;
-    list-style-type: none;
-    margin-top: 15px;
-    margin-left: -5px;
-    margin-bottom: 10px;
-    font-family: 'Playfair Display', serif;
-    text-align: center;
-    width: 160px;
-    color: rgb(72, 72, 72);
-    border-radius: 6px;
-    padding: 8px 10px;
-    position: relative;
-  }
-  
-  /* Toggle this class - hide and show the popup */
-  .spells .show {
-    display: block;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s;
-  }
-  
-  /* Add animation (fade in the popup) */
-  @-webkit-keyframes fadeIn {
-    from {opacity: 0;} 
-    to {opacity: 0.8;}
-  }
-  
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:0.8 ;}
-  }
-  
-  
-  /*--- Tags ----*/
-  
-  .info{
-    cursor: auto;
-  }
+.listHeadline{
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+}
+.spellList {
+  position: absolute;
+  scrollbar-width: none;
+}
 
-  .infoHead{
-    font-size: 14px;
-    color: gray;
-  }
+.list {
+  display: block;
+  margin-top: 15px;
+  margin-left: 10px;
+  scrollbar-width: none;
+  max-height: 500px;
+  max-width: 200px;
+  overflow: scroll;
+}
 
-  .infoContent{
-      font-size: 13px;
-      color:black;
-  }
+.spells{
+  display: block;
+  border-style: none;
+  background-color: transparent;
+  color: black;
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+}
 
-  .useInfo{
-    font-size: 12px;
-    color:black;
-  }
-  
-  .tag{
-    font-family: 'Playfair Display', serif;
-    font-size: 12px;
-    color: rgb(72, 72, 72);
-    border-style: none;
-    opacity: 0.7;
-    cursor: pointer;
-    border: none;
-    border-radius: 10px;
-    padding: 7px 10px; /* oben-unten / links-rechts */
-    margin: 10px;
-    text-align: center;
-    text-decoration: none;
-  }
+.toggleSpells{
+  cursor: pointer;
+}
 
-  .bookTags{
-    display: none;
-  }
-  
-  a:link{
-    text-decoration: none;
-    color: rgb(72, 72, 72);
-  }
-  
-  a:visited{
-    text-decoration: none;
-    color: rgb(72, 72, 72);
-  }
-  
-  .tag:hover{
-    /* background-color:  */
-    opacity: 0.9;
-    border-radius: 15px;
-    padding: 12px 15px; /* oben-unten / links-rechts */
-    margin: 5px;
-  }
-  
-  
-  /* ------------------------ ChartContainer -------------------------*/
-  
-  /* -------- Arc Chart --------- */
-  
-  .Chart{
-    padding-top:40px;
-    margin-top:20px;
-    text-align: center;
-  }
-  
-  #Visu {
-    font-family: 'Playfair Display', serif;
-    font-size: 10px;
-    background:transparent !important;
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-    color: transparent;
-  }
-  
-  .toolTip{
-    position: absolute;
-    font-family: 'Playfair Display', serif;
+.charm .toggleSpells:hover{
+  font-weight: bold !important; 
+  color :rgb(100, 183, 17) !important; 
+  /* !important so it still works after using javascript! */
+}
+
+.spell .toggleSpells:hover{
+  font-weight: bold !important; 
+  color :rgb(0, 136, 255) !important; 
+  /* !important so it still works after using javascript! */
+}
+
+.curse .toggleSpells:hover{
+  font-weight: bold !important; 
+  color :#FFAE19 !important; 
+  /* !important so it still works after using javascript! */
+}
+
+.unforgivablecurse .toggleSpells:hover{
+  font-weight: bold !important; 
+  color :rgb(184, 12, 12) !important; 
+  /* !important so it still works after using javascript! */
+}
+
+/* ------ Pop-up / Infokasten ------ */
+/* Popup container */
+.spells {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.spells .info {
+  display: none;
+  list-style-type: none;
+  margin-top: 15px;
+  margin-left: -5px;
+  margin-bottom: 10px;
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  width: 160px;
+  color: rgb(72, 72, 72);
+  border-radius: 6px;
+  padding: 8px 10px;
+  position: relative;
+}
+
+/* Toggle this class - hide and show the popup */
+.spells .show {
+  display: block;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 0.8;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:0.8 ;}
+}
+
+
+/*--- Tags ----*/
+
+.info{
+  cursor: auto;
+}
+
+.infoHead{
+  font-size: 14px;
+  color: gray;
+}
+
+.infoContent{
     font-size: 13px;
-    display: none;
-    min-width: 50px;
-    height: auto;
-    background: none; 
-    border: 1px solid grey;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  /* --------------------------- Sidebar ---------------------------- */
-   
-  #SidebarContainer a{
-      text-align: left;
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      text-decoration: none;
-      color: black;
-      width: 300px;
-      height: 50px;
-      position: fixed;
-      transition: 0.3s;
-      /* z-index: 1; */
-      top: 200px;
-      right: -200px;
-      background: #eee;
-      overflow-x: hidden;
-      padding: 10px;
-      padding-left: 5px;
-      padding-right: 20px;
-      border-radius: 10px;
-      cursor:default;
-    }
-  
-  #SidebarContainer a:hover{
-    right: 10px;
-    height: 300px;
-  }
-  
-  .SidebarList{
-    list-style: none;
-  }
-  
-  #SidebarHeadline{
-      font-size: 13px;
-  }
-  
-  
-  .filterelement{
-    display:none;
-    font-size: 18px;
-    border-style: none;
-    background-color:  #5c6bc0;
-    opacity: 1;
-    cursor: pointer;
-    border: none;
-    border-radius: 20px;
-    color: white;
-    padding: 10px 15px;
-    margin: 15px;
-    text-align: center;
-    text-decoration: none;
-  }
-  
-  .filterelement:hover{
-      opacity: 0.6;
-  }
-  
-  .filterelement .tooltiptext{
+    color:black;
+}
 
-    visibility: hidden;
-    /* width: 80px; */
-    background-color: #5c6bc0;
-    color: #fff;
-    font-size: 18px;
-    text-align: center;
-    border-radius: 20px;
-    padding: 5px;
-  
-    /* Position the tooltip */
-    position: absolute;
-      z-index: 1;
-  }
-  
-  .filterelement:hover .tooltiptext{
-      visibility: visible;
-  }
-  
-  #resetButton{
+.useInfo{
+  font-size: 12px;
+  color:black;
+}
 
-    visibility: hidden;
+.tag{
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  color: rgb(72, 72, 72);
+  border-style: none;
+  opacity: 0.7;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 10px; /* oben-unten / links-rechts */
+  margin: 10px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.bookTags{
+  display: none;
+}
+
+a:link{
+  text-decoration: none;
+  color: rgb(72, 72, 72);
+}
+
+a:visited{
+  text-decoration: none;
+  color: rgb(72, 72, 72);
+}
+
+.tag:hover{
+  /* background-color:  */
+  opacity: 0.9;
+  border-radius: 15px;
+  padding: 12px 15px; /* oben-unten / links-rechts */
+  margin: 5px;
+}
+
+
+/* ------------------------ ChartContainer -------------------------*/
+
+/* -------- Arc Chart --------- */
+
+.Chart{
+  padding-top:40px;
+  margin-top:20px;
+  text-align: center;
+}
+
+#Visu {
+  font-family: 'Playfair Display', serif;
+  font-size: 10px;
+  background:transparent !important;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  color: transparent;
+}
+
+.toolTip{
+  position: absolute;
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  display: none;
+  min-width: 50px;
+  height: auto;
+  background: none; 
+  border: 1px solid grey;
+  padding: 10px;
+  text-align: center;
+}
+
+/* --------------------------- Sidebar ---------------------------- */
+ 
+#SidebarContainer a{
+    text-align: left;
     font-family: 'Playfair Display', serif;
-    font-size: 14px;
-    border-style: none;
-    background-color: #04e5f5;
-    opacity: 1;
-    cursor: pointer;
-    border: none;
-    border-radius: 25px;
-    color: white;
-    padding: 7px 10px;
-    margin: 15px;
-    text-align: center;
+    font-size: 20px;
     text-decoration: none;
+    color: black;
+    width: 300px;
+    height: 50px;
+    position: fixed;
+    transition: 0.3s;
+    /* z-index: 1; */
+    top: 200px;
+    right: -200px;
+    background: #eee;
+    overflow-x: hidden;
+    padding: 10px;
+    padding-left: 5px;
+    padding-right: 20px;
+    border-radius: 10px;
+    cursor:default;
   }
-  
-  #resetButton:hover{
+
+#SidebarContainer a:hover{
+  right: 10px;
+  height: 300px;
+}
+
+.SidebarList{
+  list-style: none;
+}
+
+#SidebarHeadline{
+    font-size: 13px;
+}
+
+
+.filterelement{
+  display:none;
+  font-size: 18px;
+  border-style: none;
+  background-color:  #5c6bc0;
+  opacity: 1;
+  cursor: pointer;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 10px 15px;
+  margin: 15px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.filterelement:hover{
     opacity: 0.6;
-    padding: 12px 15px;
-    margin: 10px;
-  }
-  
-  @media screen and (max-height: 450px) {
-      #sidenav {padding-top: 15px;}
-  }
+}
+
+.filterelement .tooltiptext{
+
+  visibility: hidden;
+  /* width: 80px; */
+  background-color: #5c6bc0;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 20px;
+  padding: 5px;
+
+  /* Position the tooltip */
+  position: absolute;
+    z-index: 1;
+}
+
+.filterelement:hover .tooltiptext{
+    visibility: visible;
+}
+
+#resetButton{
+
+  visibility: hidden;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  border-style: none;
+  background-color: #04e5f5;
+  opacity: 1;
+  cursor: pointer;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  padding: 7px 10px;
+  margin: 15px;
+  text-align: center;
+  text-decoration: none;
+}
+
+#resetButton:hover{
+  opacity: 0.6;
+  padding: 12px 15px;
+  margin: 10px;
+}
+
+@media screen and (max-height: 450px) {
+    #sidenav {padding-top: 15px;}
+}
 /* 
-  .labels{
-      color: transparent;
-  } */
+.labels{
+    color: transparent;
+} */

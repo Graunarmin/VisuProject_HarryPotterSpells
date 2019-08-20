@@ -663,6 +663,7 @@ function arc(){
 
                 //hide infobox and reset list
                 hide_info();
+                bring_back_spells();
                 //---------------------- Circles ----------------------
 
                 //Only circles out of clicked book and of type of clicked rect stay at opacity 1
@@ -684,6 +685,7 @@ function arc(){
                 
                 //hide infobox and reset list
                 hide_info();
+                bring_back_spells();
 
                 //---------------------- Circles ----------------------
 
@@ -719,6 +721,7 @@ function arc(){
 
                 //hide infobox and reset list
                 hide_info();
+                bring_back_spells();
                 //---------------------- Circles ----------------------
                 nodes
                 .style('opacity', 1);
@@ -1379,12 +1382,11 @@ function toggle_info(){
     if(info_box.classList.contains('show')){
         //close Info, set all font-colors and sizes back to normal
         hide_info();
+        bring_back_spells();
        
     //if it's closed
     }else{
         //first close other Infobox if open:
-        //then make the other spells grey 
-        //and this one in its color and bigger
         show_info(id);
     }
 }
@@ -1395,6 +1397,7 @@ function show_info(id){
 
     //hide other possibly open info box and deselect possibly selected paths and circels in chart:
     hide_info();
+    hide_spells(id);
 
     //determine type of spell
     var type = String(document.querySelector('#' + id + "_spell").classList.item(1));
@@ -1453,6 +1456,66 @@ function default_style(){
         e.style.pointerEvents = "auto";
         e.style.cursor = "pointer";
     });
+}
+
+function hide_spells(id){
+    //get all spells ...
+    var spells = document.querySelectorAll(".spells");
+    spells.forEach.call(spells, function(e){
+        if(e.id != id + "_spell"){
+            e.style.display = "none";
+        }else{
+            // //mark the remaining spell as "selected"
+            // e.classList.toggle("spellSelected");
+        }
+    });
+}
+
+//bring all spells back to the list
+function bring_back_spells(){
+    if(bookClicked != "0" && legendClicked != "0"){
+        show_all_selected_spells(true, true);
+    }else if(bookClicked != "0" && legendClicked == "0"){
+        show_all_selected_spells(true, false)
+    }else if(bookClicked == "0" && legendClicked != "0"){
+        show_all_selected_spells(false,true);
+    }else{
+        show_all_selected_spells(false,false);
+    }
+}
+
+function show_all_selected_spells(book, type){
+    hide_info();
+
+    var spells = document.querySelectorAll(".spells");
+    //if book and type selected:
+    if(book && type){
+        spells.forEach(function(e){
+            if(e.classList.contains("bookSelected") && e.classList.contains("typeSelected")){
+                e.style.display = "block";
+            }
+        });
+    //if only book selected:
+    }else if(book && !type){
+        spells.forEach(function(e){
+            if(e.classList.contains("bookSelected") && !e.classList.contains("typeSelected")){
+                e.style.display = "block";
+            }
+        });
+    //if only type selected:
+    }else if(!book && type){
+        spells.forEach(function(e){
+            if(!e.classList.contains("bookSelected") && e.classList.contains("typeSelected")){
+                e.style.display = "block";
+            }
+        });
+    //if neither book nor type selected:
+    }else{
+        var spells = document.querySelectorAll(".spells");
+        spells.forEach.call(spells, function(e){
+            e.style.display = "block";
+        });
+    }
 }
 
 //when a spell in the list is clicked: highlight it's type in the legend
@@ -1710,7 +1773,6 @@ function show_all_books(){
         }
     });
 }
-
 
 // ------------- Highlight Stuff in Chart on click in List ----------------
 
