@@ -57,6 +57,7 @@ function arc(){
         var bookId = ["HP_01", "HP_02", "HP_03", "HP_04", "HP_05", "HP_06", "HP_07"];
         var bookNames = ["The Philosopher's Stone", "The Chamber of Secrets", "The Prisoner of Azkaban", 
         "The Goblet of Fire", "The Order of the Phoenix", "The Half-Blood Prince", "The Deathly Hallows"];
+        var numerOfSpells = [7,12,63,67,96,69,108];
 
         //List of all circles
         var allCircles = data.nodes.map(function(d){return d.name});
@@ -200,7 +201,7 @@ function arc(){
                         return color(d.type); 
                     }
                     else{
-                        return "grey"; //"#b8b8b8";
+                        return "grey";
                     }
                 })
                 //Opacity of the link
@@ -209,7 +210,7 @@ function arc(){
                         return 1;
                     }
                     else{
-                        return 0.2;
+                        return 0.3;
                     }
                 })
                 //Width of the link
@@ -254,7 +255,7 @@ function arc(){
             }
 
             //ELSE IF no circle, no book but rect is clicked and mouse is over corresponding circle
-            else if(clicked == "0" && bookClicked == "0" && legendClicked == d.type){
+            else if(clicked == "0" && bookClicked == "0" && legendClicked == d.type){
 
                 //---------------------- Circles ----------------------
 
@@ -289,7 +290,7 @@ function arc(){
                             return 1;
                         }
                         else{
-                            return 0.2;
+                            return 0.3;
                         }
                     }
                     else{
@@ -395,6 +396,9 @@ function arc(){
                     d.spell + ":" + "<br>" 
                     + "Used " + d.size + " times in book " + book 
                 );
+
+                labels
+                .style("font-size", 0);
             }
 
             //ELSE IF a circle is clicked and we are hovering above a connected circle
@@ -414,6 +418,9 @@ function arc(){
                     d.spell + ":" + "<br>" 
                     + "Used " + d.size + " times in book " + book 
                 );
+
+                labels
+                .style("font-size", 0);
             }
 
             //ELSE a circle is clicked but we are hovering above a different one
@@ -421,6 +428,9 @@ function arc(){
                 //---------------------- Circles ----------------------
                 nodes
                 .style("cursor", "default");
+
+                labels
+                .style("font-size", 0);
             }
         })
 
@@ -441,7 +451,7 @@ function arc(){
                 //---------------------- Connections ----------------------
                 links
                 .style('stroke', 'grey')
-                .style('stroke-opacity', .8)
+                .style('stroke-opacity', 1)
                 .style('stroke-width', '1');
 
                 //---------------------- Lables ----------------------
@@ -505,7 +515,7 @@ function arc(){
             //IF no circle, no rect and no book is clicked 
             //OR IF no circle and no book is clicked but this circle is the same type as the clicked rect
             if(clicked == "0" && legendClicked == "0" && bookClicked == "0"
-            || clicked == "0" && bookClicked == "0" && legendClicked == d.type){
+            || clicked == "0" && bookClicked == "0" && legendClicked == d.type){
 
                 //Mark as clicked
                 clicked = d.id;
@@ -534,7 +544,7 @@ function arc(){
                     return color(d.type); 
                     }
                     else{
-                    return '#b8b8b8';
+                    return 'grey';
                     }
                 })
                 //Opacity of the link
@@ -558,22 +568,25 @@ function arc(){
 
                 //---------------------- Labels ----------------------
 
+                // labels
+                // //Size of the labels
+                // .style("font-size", function(label_d){ 
+                //     if(label_d.name === d.name){
+                //     return 20;
+                //     }
+                //     else{
+                //     return 0;
+                //     }
+                // })
+                // //Color of the labels
+                // .style("fill", function(label_d){
+                //     if(label_d.name === d.name){
+                //         return color(d.type);
+                //     }
+                // })
+
                 labels
-                //Size of the labels
-                .style("font-size", function(label_d){ 
-                    if(label_d.name === d.name){
-                    return 20;
-                    }
-                    else{
-                    return 0;
-                    }
-                })
-                //Color of the labels
-                .style("fill", function(label_d){
-                    if(label_d.name === d.name){
-                        return color(d.type);
-                    }
-                })
+                .style("font-size", 0);
 
                 //---------------------- Legend ----------------------
 
@@ -623,6 +636,7 @@ function arc(){
 
                 //show infobox in list:
                 show_info(d.id.split("_")[0].toLowerCase())
+
                 //---------------------- Circles ----------------------
 
                 //Reduce opacity of all circles
@@ -653,6 +667,11 @@ function arc(){
                 //Return opacity of current label back to 1
                 d3.select("#idlabel" + d.type)
                 .style("opacity", 1);
+
+                //---------------------- Labels ----------------------
+
+                labels
+                .style("font-size", 0);
             }
 
             //ELSE IF rect, book and circle is clicked (again)
@@ -686,7 +705,6 @@ function arc(){
                 //hide infobox and reset list
                 hide_info();
                 bring_back_spells();
-
                 //---------------------- Circles ----------------------
 
                 for(i = 0; i < allCircles.length; i++){
@@ -761,6 +779,7 @@ function arc(){
                 clicked = "0";
                 //hide infobox and reset list
                 hide_info();
+                bring_back_spells();
                 //---------------------- Circles ----------------------
                 for(i = 1; i < allCircles.length; i++){
                     d3.select("#id" + allCircles[i] + "-" + d.type)
@@ -933,15 +952,11 @@ function arc(){
 
                 //Reduce opacity of all circles to 0.1
                 nodes
-                .transition() 
-                .duration(500) 
                 .style('opacity', 0.1);
 
                 //Only current circle and all connected circles stay the same color 
                 for(i = 1; i < allCircles.length; i++){
-                    d3.select("#id" + allCircles[i] + "-" + d)
-                    .transition()
-                    .duration(500) 
+                    d3.select("#id" + allCircles[i] + "-" + d) 
                     .style('opacity', 1);
                 }
 
@@ -949,8 +964,6 @@ function arc(){
 
                 //Opacity of the links
                 links
-                .transition()
-                .duration(500)
                 .style('stroke-opacity', function(link_d){
                     //IF link is of same type as clicked rect, leave opacity at 1
                     if(link_d.type === d){
@@ -993,16 +1006,12 @@ function arc(){
 
                 //Return opacity of all circles back to 1
                 nodes
-                .transition()
-                .duration(500)
                 .style('opacity', 1)
 
                 //---------------------- Put Links Back ----------------------
 
                 //Return opacity of all links back to 1
                 links
-                .transition()
-                .duration(500)
                 .style('stroke-opacity', 1)
             }
 
@@ -1042,8 +1051,6 @@ function arc(){
 
                 //Reduce opacity of all circles
                 nodes
-                .transition()
-                .duration(500)
                 .style('opacity', 0.1);
 
                 //Only circles out of clicked book and of type of clicked rect stay at opacity 1
@@ -1053,8 +1060,6 @@ function arc(){
                     b = bookClicked.slice(bookClicked.length-1, bookClicked.length);
 
                     d3.select("#id" + c + b + "-" + d)
-                    .transition()
-                    .duration(500)
                     .style("opacity", 1);
                 }
 
@@ -1097,8 +1102,6 @@ function arc(){
 
                     for(j = 0; j < allTypes.length; j++){
                         d3.select("#id" + c + b + "-" + allTypes[j])
-                        .transition()
-                        .duration(500)
                         .style("opacity", 1);
                     }
                 }
@@ -1117,15 +1120,16 @@ function arc(){
             .attr("id", function(d,i){
                 return bookId[i];
             })
-            .attr("x", -50)
-            .attr("y", 460)
+            .attr("x", 100)
+            .attr("y", 500)
             .text(function(d){
                 return d;
             })
-            .style("text-anchor", "front")
+            .style("text-anchor", "center")
             .style("font-size", 13)
+            
             .attr("transform", function(d,i){ 
-                return "translate(" + i * width/6 + ",0)"; 
+                return "translate(" + i * width/10 + ",0)"; 
             });  
 
         //---------------------- Add Interactions To Books ----------------------
@@ -1143,6 +1147,7 @@ function arc(){
 
                 d3.select(this)
                 .style("font-weight", "bold")
+                .style("font-size", "15")
                 .style("cursor", "pointer");
 
                 //---------------------- Tooltip ----------------------
@@ -1151,7 +1156,7 @@ function arc(){
                 .style("top", d3.event.pageY + 25 + "px")
                 .style("display", "inline-block")
                 .style("background", "white")
-                .html(bookNames[i]);
+                .html(bookNames[i] + " – " + numerOfSpells[i] + " spells");
             }
             //ELSE IF no circle, no rect but book is clicked an mouse is moving over clicked book
             //OR IF no circle but rect and book is clicked an mouse is moving over clicked book
@@ -1167,7 +1172,7 @@ function arc(){
                 .style("top", d3.event.pageY + 25 + "px")
                 .style("display", "inline-block")
                 .style("background", "white")
-                .html(bookNames[i]);
+                .html(bookNames[i] + " – " + numerOfSpells[i] + " spells");
             }
             else{
                 bookLabels
@@ -1185,7 +1190,8 @@ function arc(){
             || !(legendClicked) == "0" && clicked == "0" && bookClicked == "0"){
 
                 bookLabels
-                .style("font-weight", "normal");
+                .style("font-weight", "normal")
+                .style("font-size", "13");
             }
             
             //---------------------- Tooltip ----------------------
@@ -1220,8 +1226,6 @@ function arc(){
 
                 //Reduce opacity of all circles
                 nodes
-                .transition()
-                .duration(500)
                 .style("opacity", 0.1);
 
                 //Only circles out of clicked book stay at opacity 1
@@ -1232,8 +1236,6 @@ function arc(){
                     for(j = 0; j < allTypes.length; j++){
 
                         d3.select("#id" + c + this.id + "-" + allTypes[j])
-                        .transition()
-                        .duration(500)
                         .style("opacity", 1);
                     }
                 }
@@ -1242,10 +1244,7 @@ function arc(){
 
                 //Reduce opacity of all links
                 links
-                .transition()
-                .duration(500)
                 .style("stroke-opacity", 0.1);
-
             }
 
             //ELSE IF no circle, no rect and but book is clicked and we are clicking on it again
@@ -1263,14 +1262,10 @@ function arc(){
 
                 //---------------------- Circles ----------------------
                 nodes
-                .transition()
-                .duration(500)
                 .style("opacity", 1);
 
                 //---------------------- Links ----------------------
                 links
-                .transition()
-                .duration(500)
                 .style("stroke-opacity", 1);
             }
 
@@ -1296,8 +1291,6 @@ function arc(){
 
                 //Reduce opacity of all circles
                 nodes
-                .transition()
-                .duration(500)
                 .style("opacity", 0.1);
 
                 //Only circles of type and out of clicked book stay at opacity 1
@@ -1307,8 +1300,6 @@ function arc(){
                     b = bookClicked.slice(bookClicked.length-1, bookClicked.length);
                     
                     d3.select("#id" + c + b + "-" + legendClicked)
-                    .transition()
-                    .duration(500)
                     .style("opacity", 1);
                 }
 
@@ -1316,8 +1307,6 @@ function arc(){
 
                 //Reduce opacity of all links
                 links
-                .transition()
-                .duration(500)
                 .style("stroke-opacity", 0.1);
 
             }
@@ -1341,15 +1330,11 @@ function arc(){
                 for(i = 0; i < allCircles.length; i++){
 
                     d3.select("#id" + allCircles[i] + "-" + legendClicked)
-                    .transition()
-                    .duration(500)
                     .style("opacity", 1);
                 }
 
                 //Opacity of the links
                 links
-                .transition()
-                .duration(500)
                 .style('stroke-opacity', function(link_d){
                     //IF link is of same type as clicked rect, leave opacity at 1
                     if(link_d.type === legendClicked){
@@ -1363,9 +1348,9 @@ function arc(){
             }
             update_headline();
         })
-       
     })
 }
+
 
 
 // ------------------ SPELL LIST ------------------
@@ -1389,6 +1374,7 @@ function toggle_info(){
         //first close other Infobox if open:
         show_info(id);
     }
+    update_headline();
 }
 
 //show the Infobox:
@@ -1650,7 +1636,10 @@ function update_headline(){
     var headline = document.querySelector(".listHeadline");
     var type = "";
     var book = "";
-    if(/*clicked == "0" && */legendClicked == "0" && bookClicked == "0"){
+    if(clicked != "0"){
+        headline.innerHTML = "";
+    }
+    else if(legendClicked == "0" && bookClicked == "0"){
         headline.innerHTML = "All Spells";
     }
     else if(legendClicked != "0" && bookClicked != "0"){
@@ -1683,13 +1672,13 @@ function set_book(selected){
         case("Book 2"):
             return "Chamber of Secrets";
         case("Book 3"):
-            return "Prizoner of Aszkaban";
+            return "Prizoner of Azkaban";
         case("Book 4"):
             return "Goblet of Fire";
         case("Book 5"):
             return "Order of the Phoenix";
         case("Book 6"):
-            return "Halfblood Prince";
+            return "Half-Blood Prince";
         case("Book 7"):
             return "Deathly Hallows";
     }

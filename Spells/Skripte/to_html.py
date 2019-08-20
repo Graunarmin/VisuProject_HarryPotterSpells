@@ -39,7 +39,7 @@ def spells_to_html():
                 <li class='type' id='{}_type'><span class='infoHead'>Type </span><span class='infoContent'>{}</span></li>
                 <li class='category' id='{}_category'><span class='infoHead'>Category </span><span class='infoContent'>{}</span></li>
                 <li class='danger' id='{}_danger'><span class='infoHead'>Danger </span><span class='infoContent'>{}</span></li>
-                <li class='overalluse' id='{}_overall'><span class='useInfo'>Used {} times overall</span></li>
+                <li class='overalluse' id='{}_overall'><span class='useInfo'>- Used {} times overall -</span></li>
                 <li class='spellLink'><button class='tag link'><a href={} target='_blank'>More Details</a></button></li>
                 <li class='bookTags'>{}</li>
             </ul>
