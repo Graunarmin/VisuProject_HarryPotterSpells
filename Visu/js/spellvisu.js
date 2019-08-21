@@ -262,7 +262,7 @@ function arc(){
                 .style("opacity", 0.1);
 
                 //All corresponding circles
-                for(i = 1; i < allCircles.length; i++){
+                for(i = 0; i < allCircles.length; i++){
                     d3.select("#id" + allCircles[i] + "-" + d.type)
                     .style("opacity", 1)
                     .style("cursor", "pointer");
@@ -928,7 +928,7 @@ function arc(){
                 .style('opacity', 0.1);
 
                 //Only current circle and all connected circles stay the same color 
-                for(i = 1; i < allCircles.length; i++){
+                for(i = 0; i < allCircles.length; i++){
                     d3.select("#id" + allCircles[i] + "-" + d) 
                     .style('opacity', 1);
                 }
@@ -1093,8 +1093,8 @@ function arc(){
             .attr("id", function(d,i){
                 return bookId[i];
             })
-            .attr("x", 100)
-            .attr("y", 500)
+            .attr("x", -70 /*100*/)
+            .attr("y", 460 /*500*/)
             .text(function(d){
                 return d;
             })
@@ -1102,7 +1102,8 @@ function arc(){
             .style("font-size", 13)
             
             .attr("transform", function(d,i){ 
-                return "translate(" + i * width/10 + ",0)"; 
+                return "translate(" + i * width/6 + ",0)"; 
+                //return "translate(" + i * width/10 + ",0)"; 
             });  
 
         //---------------------- Add Interactions To Books ----------------------
@@ -1129,7 +1130,7 @@ function arc(){
                 .style("top", d3.event.pageY + 25 + "px")
                 .style("display", "inline-block")
                 .style("background", "white")
-                .html(bookNames[i] + " – " + numerOfSpells[i] + " spells");
+                .html(bookNames[i] + " – " + numerOfSpells[i] + " different spells");
             }
             //ELSE IF no circle, no rect but book is clicked an mouse is moving over clicked book
             //OR IF no circle but rect and book is clicked an mouse is moving over clicked book
