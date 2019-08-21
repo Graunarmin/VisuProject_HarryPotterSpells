@@ -104,6 +104,7 @@ Margin: Border bis Dokumentrand */
   border-radius: 6px;
   padding: 8px 10px;
   position: relative;
+  font-weight: normal !important; 
 }
 
 /* Toggle this class - hide and show the popup */

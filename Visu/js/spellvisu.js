@@ -57,7 +57,7 @@ function arc(){
         var bookId = ["HP_01", "HP_02", "HP_03", "HP_04", "HP_05", "HP_06", "HP_07"];
         var bookNames = ["The Philosopher's Stone", "The Chamber of Secrets", "The Prisoner of Azkaban", 
         "The Goblet of Fire", "The Order of the Phoenix", "The Half-Blood Prince", "The Deathly Hallows"];
-        var numerOfSpells = [7,12,63,67,96,69,108];
+        var numerOfSpells = [4,9,13,26,29,29,40];
 
         //List of all circles
         var allCircles = data.nodes.map(function(d){return d.name});
@@ -70,7 +70,7 @@ function arc(){
         var typeDefiniton = ["A spell that adds or changes the properties <br> of an object",
         "A controlled manifestation of magic <br> that affects the world in a variety of ways", 
         "A spell that affects an object in a severely <br> negative way", 
-        "One of the three most powerful and sinister <br> spells there are"];
+        "The worst types of spells there are, they <br> must never be used!"];
 
         //Range of colors for the different types 
         var color = d3.scaleOrdinal()
@@ -134,7 +134,6 @@ function arc(){
                 + " " + d.type.toLowerCase());
             })
             .attr("id", function(d){
-                // console.log("id" + d.id + "-" + d.type);
                 return ("id" + d.id + "-" + d.type);
             })
             .attr("cx", function(d){ 
@@ -441,13 +440,6 @@ function arc(){
             //IF no circle, no rect and no book is clicked
             if(clicked == "0" && legendClicked == "0" && bookClicked == "0"){
 
-                //---------------------- Circles ----------------------
-                // nodes
-                // .style('opacity', 1);
-
-                //d3.select(this)
-                //.style("stroke", "white");
-
                 //---------------------- Connections ----------------------
                 links
                 .style('stroke', 'grey')
@@ -565,25 +557,6 @@ function arc(){
                     return 1;
                     }
                 })
-
-                //---------------------- Labels ----------------------
-
-                // labels
-                // //Size of the labels
-                // .style("font-size", function(label_d){ 
-                //     if(label_d.name === d.name){
-                //     return 20;
-                //     }
-                //     else{
-                //     return 0;
-                //     }
-                // })
-                // //Color of the labels
-                // .style("fill", function(label_d){
-                //     if(label_d.name === d.name){
-                //         return color(d.type);
-                //     }
-                // })
 
                 labels
                 .style("font-size", 0);
