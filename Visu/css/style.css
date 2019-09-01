@@ -60,24 +60,28 @@ Margin: Border bis Dokumentrand */
 .charm .toggleSpells:hover{
   font-weight: bold !important; 
   color :rgb(100, 183, 17) !important; 
+  font-size: 16px;
   /* !important so it still works after using javascript! */
 }
 
 .spell .toggleSpells:hover{
   font-weight: bold !important; 
   color :rgb(0, 136, 255) !important; 
+  font-size: 16px;
   /* !important so it still works after using javascript! */
 }
 
 .curse .toggleSpells:hover{
   font-weight: bold !important; 
   color :#FFAE19 !important; 
+  font-size: 16px;
   /* !important so it still works after using javascript! */
 }
 
 .unforgivablecurse .toggleSpells:hover{
   font-weight: bold !important; 
   color :rgb(184, 12, 12) !important; 
+  font-size: 16px;
   /* !important so it still works after using javascript! */
 }
 

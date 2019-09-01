@@ -109,18 +109,32 @@ function arc(){
                 + " linkConnections");
             })
             .attr('d', function(d){
-                start = x(idToNode[d.source].name)    // X position of start node on the X axis
-                end = x(idToNode[d.target].name)      // X position of end node
-                return ['M', start, height-30,    // the arc starts at the coordinate x=start, y=height-30 (where the starting node is)
-                    'A',                            // This means we're gonna build an elliptical arc
-                    (start - end)/2, ',',    // Next 2 lines are the coordinates of the inflexion point. Height of this point is proportional with start - end distance
-                    (start - end)/2, 0, 0, ',',
-                    start < end ? 1 : 0, end, ',', height-30] // We always want the arc on top. So if end is before start, putting 0 here turn the arc upside down.
+
+                start = x(idToNode[d.source].name)    //x position of start node
+                end = x(idToNode[d.target].name)      //x position of end node
+
+                //Source: https://css-tricks.com/svg-path-syntax-illustrated-guide/
+
+                return ['M', start, height-30,          //M = move start of arc to x = start, y = height-30 (where the starting node is)
+                    'A',                                //A = elliptical arc
+                    (start - end)/2, ',',               //rX = x radius of the ellipse 
+                    (start - end)/2, 0, 0, ',',         //rY = y radius of the ellipse, rotation = 0, arc = 0
+                    arc_on_top(start, end), end, ',',   //sweep = 0 or 1, eX = end 
+                    height-30]                          //eY = height-30 
                     .join(' ');
             })
             .style("fill", "none")
             .attr("stroke", "grey")
             .style("stroke-width", 1);
+
+            //The arc is supposed to be above everything else, if end is before start the arc would be upside down, so we return 0 
+            function arc_on_top(start, end){
+                if(start < end){
+                    return 1;
+                }else{
+                    return 0;
+                }
+            }
 
         //---------------------- Add Circles ----------------------
         
@@ -1093,8 +1107,8 @@ function arc(){
             .attr("id", function(d,i){
                 return bookId[i];
             })
-            .attr("x", -70 /*100*/)
-            .attr("y", 460 /*500*/)
+            .attr("x", /*-70*/ 100)
+            .attr("y", /*460*/ 500)
             .text(function(d){
                 return d;
             })
@@ -1102,8 +1116,8 @@ function arc(){
             .style("font-size", 13)
             
             .attr("transform", function(d,i){ 
-                return "translate(" + i * width/6 + ",0)"; 
-                //return "translate(" + i * width/10 + ",0)"; 
+                //return "translate(" + i * width/6 + ",0)"; 
+                return "translate(" + i * width/10 + ",0)"; 
             });  
 
         //---------------------- Add Interactions To Books ----------------------
