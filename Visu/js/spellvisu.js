@@ -1395,6 +1395,8 @@ function show_info(id){
     spell.style.fontSize = '20px';
     spell.style.fontWeight = 'bold';
 
+    spell.firstElementChild.classList.toggle("spellShown");
+    
     //and Show the Infobox
     info_box.classList.toggle("show");
     info_box.style.backgroundColor = colour[1];
@@ -1415,6 +1417,10 @@ function hide_info(){
     var element = document.querySelector('.show');
     if(element){
         element.classList.toggle("show");
+    }
+    var spell = document.querySelector('.spellShown');
+    if(spell){
+        spell.classList.toggle("spellShown");
     }
     //then reset the style of all list items to default (does NOT include SHOWING all items!)
     default_style();

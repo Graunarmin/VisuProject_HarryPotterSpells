@@ -118,6 +118,10 @@ Margin: Border bis Dokumentrand */
   animation: fadeIn 1s;
 }
 
+.spellShown:hover{
+  font-size: 20px !important;
+}
+
 /* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
   from {opacity: 0;} 
@@ -220,4 +224,5 @@ a:visited{
   border: 1px solid grey;
   padding: 10px;
   text-align: center;
+  margin-top: -5px;
 }
