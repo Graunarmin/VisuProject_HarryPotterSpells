@@ -1108,7 +1108,7 @@ function arc(){
                 return bookId[i];
             })
             .attr("x", /*-70*/ 100)
-            .attr("y", /*460*/ 500)
+            .attr("y", /*460*/ 480)
             .text(function(d){
                 return d;
             })
