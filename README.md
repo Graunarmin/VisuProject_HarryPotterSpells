@@ -1,6 +1,11 @@
-# VisuProject HarryPotter
-A Visualization of spells in the Wizarding World™
+## The Spells of the Wizarding World
 
-See the Wiki for Ideas: https://github.com/Graunarmin/VisuProject_HarryPotterSpells/wiki
+You can use the [editor on GitHub](https://github.com/Graunarmin/VisuProject_HarryPotterSpells/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
-And here the Visualization: https://github.com/Graunarmin/VisuProject_HarryPotterSpells/blob/master/Visu/spellvisu.html
+[Wiki](https://github.com/Graunarmin/VisuProject_HarryPotterSpells/wiki)
+
+[Visu](url)
+
+
+
+
