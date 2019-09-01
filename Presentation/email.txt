@@ -1,16 +1,11 @@
-- Idea: The spells of the Harry Potter Books, a Visu on when they got introduced for the first time, 
-        how often they were used in which year and additional information on how dangerous they are
-- there was no useful dataset, so we created one ourselves:
-    - collected all the Harry Potter Books as txt files and got a list of all the spells from [here](https://www.pojo.com/harry-potter-spell-list/), 
-    which we sortet by hand (eliminated spells with unknown incantation and all those that do not appear in the books -> knowledge)
-    - then we used python to search all the books for all the spells and to create a [Dataset](https://github.com/Graunarmin/VisuProject_HarryPotterSpells/blob/master/Spells/Data/used/spells.csv) 
-    with the spells as keys, and information on how often each spell appears in each book, what it does, 
-    how dangerous it is, it's type and category and a link to [Pottermore](https://www.pottermore.com/) or the [Harry Potter Wiki](https://harrypotter.fandom.com/wiki/Main_Page) for further reference.
+- Anmerkungen: 
+  - Die Visu funktioniert am besten in Chrome, ggf. auch in Safari 
+    (wir haben immer einen lokalen server über python aufgemacht mit 'python3 -m http.server 8000')
+  - Element anklicken = selektieren, nochmal anklicken = deselektieren
 
-- Anmerkung: Die Visu funktioniert am besten in Chrome, ggf. auch in Safari 
-  (wir haben immer einen lokalen server über python aufgemacht mit 'python -m http.server 8000')
 
-- Idee: Die Zaubersprüche aus den Harry Potter Büchern visualisieren, wann welcher Spruch zuerst vorkam, was er bewirkt und wie gefährlich er ist. 
+- Idee: Die Zaubersprüche aus den Harry Potter Büchern visualisieren, wann welcher Spruch zuerst vorkam, wie oft er benutzt wird, 
+    was er bewirkt und wie gefährlich er ist. 
     -> um zu sehen, ob mit dem Fortschritt der Jahre auch mehr Sprüche benutzt werden und ob sie im Anspruch/ der Gefährlichkeit steigen, 
         da sich ja auch die Situation mit der Rückkehr Voldemorts im 4. Buch zunehmend verschärft.
 
@@ -23,36 +18,74 @@
     -> anschließend mit javascript (und d3) die Visualisierung erstellt
 
 - Komponenten:
-  - Zeitstrahl:
-    - Haben ein Arc Diagramm gewählt um die zeitliche und thematische Verbindung zwischen Sprüchen darzustellen, 
-      da dies uns am besten hilft unsere Fragestellung zu beantworten
-    - Ein Spruch aus einem bestimmten Buch ist dargestellt als Kreis
-    - Die Größe gibt an, wie oft der Spruch in dem Buch vorkommt
-    - Die Farbe steht für den Spruchtypen (Charm, Spell, Curse, Unforgivable Curse)
-    - Verbunden ist ein Kreis mit allen anderen Vorkommnissen desselben Spruchs in den anderen Büchern
-    - Der Zeitstrahl verläuft vom 1. bis zum 7. Buch
-    - Beim Hovern:
-      - Der Name des Spruchs und wie oft er in dem bestimmten Buch vorkommt wird als Tooltip angezeigt
-      - Die Pfade, die den Kreis mit allen anderen verbinden, ebenso wie die entsprechenden verbundenen Kreise, werden in der Farbe des Spruchtyps hervorgehoben 
-    - Beim Klicken:
-      - Der geklickte Kreis, die Pfade und die Kreise mit denen er verbunden ist werden in der Farbe des Spruchtyps hervorgehoben 
-      - Alle anderen Kreise und Pfade werden ausgegraut, bleiben aber sichtbar, damit der Kontext nicht verloren geht
-      - In der Legende wird der Spruchtyp des Kreises ebenfalls farbig hervorgehoben und die anderen werden ausgegraut 
-      - In der Liste wird der Info-Kasten des entsprechenden Spruchs ausgeklappt, dort befinden sich noch weitere Informationen, 
-        alle anderen Sprüche werden ausgeblendet
-      - Bei den Büchern werden die Bücher dunkel hervorgehoben, in denen der Spruch vorkommt, die anderen werden ausgegraut  
 
-  - Liste:
-    - Die Überschrift gibt an, auf welcher Filterebene der Nutzer ist (Buch - Typ)
-    - Pro Spruch gibt es einen Eintrag in der Liste 
-    - Beim Hovern:
-      - Der Name des Spruchs wird in der Farbe des Spruchtyps hervorgehoben 
-    - Beim Klicken: 
-      - Ein Kasten mit weiteren Informationen über den Spruch öffnet sich und alle anderen Sprüche der Liste verschwinden
-      - Durch erneutes klicken auf den Spruchnamen schließt sich der Kasten wieder und alle anderen Sprüche kommen zurück
+    - Zeitstrahl:
+        - Wir haben ein Arc Diagramm gewählt um die zeitliche und thematische Verbindung zwischen Sprüchen darzustellen, 
+          da dies uns am besten hilft unsere Fragestellung zu beantworten.
+        - Der Zeitstrahl verläuft vom 1. bis zum 7. Buch
+        - Ein Spruch aus einem bestimmten Buch ist als Kreis dargestellt
+        - Die Größe gibt an, wie oft der Spruch in dem Buch vorkommt
+        - Die Farbe steht für den Spruchtypen (Charm, Spell, Curse, Unforgivable Curse)
+        - Verbunden ist ein Kreis mit allen anderen Vorkommnissen desselben Spruchs in den anderen Büchern
+        - Beim Hovern über einen Kreis:
+            - Der Name des Spruchs und wie oft er in dem bestimmten Buch vorkommt wird als Tooltip angezeigt
+            - Die Pfade, die den Kreis mit allen anderen verbinden, ebenso wie die entsprechenden verbundenen Kreise, werden in der Farbe des Spruchtyps hervorgehoben 
+        - Beim Klicken auf einen Kreis:
+            - Der geklickte Kreis, die Pfade und die Kreise mit denen er verbunden ist, werden in der Farbe des Spruchtyps hervorgehoben 
+            - Alle anderen Kreise und Pfade werden ausgegraut, bleiben aber sichtbar, damit der Kontext nicht verloren geht
+            - In der Legende wird der Spruchtyp des Kreises ebenfalls farbig hervorgehoben und die anderen werden ausgegraut 
+            - In der Liste wird der Info-Kasten des entsprechenden Spruchs ausgeklappt, dort befinden sich noch weitere Informationen, 
+              alle anderen Sprüche werden ausgeblendet
+            - Bei den Büchern werden die Bücher dunkel hervorgehoben, in denen der Spruch vorkommt, die anderen werden ausgegraut 
+        - Durch erneutes Klicken auf den ausgewählten Kreis kehrt alles zum Ursprung zurück 
+
+    - Liste:
+        - Die Überschrift gibt an, auf welcher Filterebene der Nutzer ist (Buch - Typ)
+        - Pro Spruch gibt es einen Eintrag in der Liste 
+        - Beim Hovern über einen Spruch:
+            - Der Name des Spruchs wird in der Farbe des Spruchtyps hervorgehoben 
+        - Beim Klicken auf einen Spruch: 
+            - Ein Kasten mit weiteren Informationen über den Spruch öffnet sich und alle anderen Sprüche der Liste verschwinden
+            - Im Infokasten gibt es außerdem einen Link zu einer detaillierteren Beschreibung des Spruches
+        - Im Diagramm wird jedes Vorkommen des Spruchs (die Kreise) und die jeweiligen Pfade farbig hervorgehoben 
+        - In der Legende wird der jeweilige Spruchtyp farbig hervorgehoben und die anderen werden ausgegraut
+        - Bei den Büchern werden die Bücher dunkel hervorgehoben, in denen der Spruch vorkommt, die anderen werden ausgegraut 
+        - Durch erneutes Klicken auf den ausgewählten Spruchnamen schließt sich der Kasten wieder und alles kehrt zum Ursprung zurück
+
+  - Legende:
+    - Die Legende zeigt die vier verschiedenen Spruchtypen (Charm, Spell, Curse, Unforgivable Curse) und die zugehörigen Farben
+    - Beim Hovern über ein Rechteck:
+      - Das Rechteck wird größer 
+      - Ein Tooltip mit Informationen über den entsprechenden Spruchtypen erscheint 
+    - Beim Klicken auf ein Rechteck:
+      - Das Rechteck bleibt größer und die Rechtecken der anderen Typen sowie die Namen werden ausgegraut 
+      - Im Diagramm bleiben nur die Sprüche desselben Typs und ihre Pfade, der Rest wird ausgegraut 
+      - In der Liste bleiben nur die Sprüche desselben Typs zurück, der Rest verschwindet
+      - Die Bücher bleiben unverändert, nach ihnen kann weiter gefiltert werden (siehe Interaktionen)
+      - Durch erneutes Klicken auf das ausgewählte Rechteck kehrt alles zum Ursprung zurück
+
+  - Bücher:
+    - Alle 7 Bücher werden der Reihe nach aufgeführt; sie stehen nicht unter "ihrem" jeweiligen Gebiet des Zeitstrahls,
+        das zu unübersichtlich wäre. Die ersten Bücher enthalten zu wenige Sprüche und die letzten zu viele, um die Bücher als 
+        klickbare, übersichtliche "Beschriftung" des Zeitstrahls zu nutzen.
+    - Der Zusammenhang wird hier durch die Verlinkung der Bücher mit ihren jeweiligen Sprüchen realisiert
+    - Beim Hovern über einen Buchtitel:
+        - Als Tooltip wird der Name des Buches und wie viele unterschiedliche Zaubersprüche darin vorkommen angezeigt
+    - Beim Klicken auf einen Buchtitel:
+        - Der Part des Zeitstrahls mit den Sprüchen, die in diesem Buch vorkommen, werden farbig hervorgehoben, alle anderen werden ausgegraut
+        - Die Liste mit den Sprüchen wird gefiltert, so dass hier nur noch die Sprüche stehen, die im ausgewählten Buch vorkommen
+        - Sprüche können weiterhin ausgewählt werden
+        - Auch nach Typen kann weiterhin gefiltert werden
+        - Durch erneutes Klicken auf das ausgewählte Buch kehrt alles zum Ursprung zurück
 
 - Interaktionen:
+    - Hovern über Elemente (Siehe Beschreibungen oben)
+    - Klicken auf Elemente (Siehe Beschreibungen oben)
+    - Sprüche auswählen und genauere Infos anzeigen
     - In der Legende nach Spruchtyp filtern -> nur noch Sprüche dieses Typs werden angezeigt (Filter-Kombination mit Buch und Spruch möglich)
     - Unterhalb des Zeitstrahls nach Buch filtern -> nur noch Sprüche aus diesem Buch werden angezeigt(Kombination mit Spruch und Spruchtyp möglich)
-    - In Diagramm nach Spruch filtern (entsprechende Bücher und der Spruchtyp werden ausgewählt bzw. markiert, zusätzliche Information in Liste öffnet sich)
-    - In Liste nach Spruch filtern (entsprechende Bücher und der Spruchtyp werden ausgewählt bzw. markiert, zusätzliche Information in Liste öffnet sich)
+    - Im Diagramm einen Spruch auswählen (entsprechende Bücher und der Spruchtyp werden ausgewählt bzw. markiert, zusätzliche Information in Liste öffnet sich)
+    - In Liste den Spruch auswählen (entsprechende Bücher und der Spruchtyp werden ausgewählt bzw. markiert, zusätzliche Information in Liste öffnet sich)
+    - Zoomen haben wir bewusst nicht ermöglicht. Der einzig mögliche Zoom wäre der pro Buch gewesen, aber den haben wir nach einigem Ausprobieren wieder 
+      verworfen, da er keine neuen Informationen bringt, sondern nur verwirrt und gewisse Filter- bzw. Interaktionsmöglichkeiten verhindert.
+      Außerdem ginge dadurch auch der Diagrammtyp komplett verloren, da innerhalb eines Buches ja keine Verbindungen bestehen.
