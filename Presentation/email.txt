@@ -1,0 +1,58 @@
+- Idea: The spells of the Harry Potter Books, a Visu on when they got introduced for the first time, 
+        how often they were used in which year and additional information on how dangerous they are
+- there was no useful dataset, so we created one ourselves:
+    - collected all the Harry Potter Books as txt files and got a list of all the spells from [here](https://www.pojo.com/harry-potter-spell-list/), 
+    which we sortet by hand (eliminated spells with unknown incantation and all those that do not appear in the books -> knowledge)
+    - then we used python to search all the books for all the spells and to create a [Dataset](https://github.com/Graunarmin/VisuProject_HarryPotterSpells/blob/master/Spells/Data/used/spells.csv) 
+    with the spells as keys, and information on how often each spell appears in each book, what it does, 
+    how dangerous it is, it's type and category and a link to [Pottermore](https://www.pottermore.com/) or the [Harry Potter Wiki](https://harrypotter.fandom.com/wiki/Main_Page) for further reference.
+
+- Anmerkung: Die Visu funktioniert am besten in Chrome, ggf. auch in Safari 
+  (wir haben immer einen lokalen server über python aufgemacht mit 'python -m http.server 8000')
+
+- Idee: Die Zaubersprüche aus den Harry Potter Büchern visualisieren, wann welcher Spruch zuerst vorkam, was er bewirkt und wie gefährlich er ist. 
+    -> um zu sehen, ob mit dem Fortschritt der Jahre auch mehr Sprüche benutzt werden und ob sie im Anspruch/ der Gefährlichkeit steigen, 
+        da sich ja auch die Situation mit der Rückkehr Voldemorts im 4. Buch zunehmend verschärft.
+
+- Datensatz: es gab keinen Datensatz, der unseren Bedürfnissen entsprach, also haben wir selbst einen erstellt:
+    -> alle Potter Bücher als txt-Dateien zusammengesucht, eine Liste aller Zaubersprüche inkl. Wirkung von hier geholt: https://www.pojo.com/harry-potter-spell-list/,
+        diese dann per Hand aussortiert (Sprüche, die nicht in den Büchern vorkommen, oder deren "Formel" unbekannt ist, gelöscht),
+        dann die Bücher mit Python nach diesen Sprüchen durchsucht und den Datensatz spells.csv erstellt (links, category, danger wurden per
+        Hand eingefügt)
+    -> daraus dann mit python die spellvisu.html Datei erstellt
+    -> anschließend mit javascript (und d3) die Visualisierung erstellt
+
+- Komponenten:
+  - Zeitstrahl:
+    - Haben ein Arc Diagramm gewählt um die zeitliche und thematische Verbindung zwischen Sprüchen darzustellen, 
+      da dies uns am besten hilft unsere Fragestellung zu beantworten
+    - Ein Spruch aus einem bestimmten Buch ist dargestellt als Kreis
+    - Die Größe gibt an, wie oft der Spruch in dem Buch vorkommt
+    - Die Farbe steht für den Spruchtypen (Charm, Spell, Curse, Unforgivable Curse)
+    - Verbunden ist ein Kreis mit allen anderen Vorkommnissen desselben Spruchs in den anderen Büchern
+    - Der Zeitstrahl verläuft vom 1. bis zum 7. Buch
+    - Beim Hovern:
+      - Der Name des Spruchs und wie oft er in dem bestimmten Buch vorkommt wird als Tooltip angezeigt
+      - Die Pfade, die den Kreis mit allen anderen verbinden, ebenso wie die entsprechenden verbundenen Kreise, werden in der Farbe des Spruchtyps hervorgehoben 
+    - Beim Klicken:
+      - Der geklickte Kreis, die Pfade und die Kreise mit denen er verbunden ist werden in der Farbe des Spruchtyps hervorgehoben 
+      - Alle anderen Kreise und Pfade werden ausgegraut, bleiben aber sichtbar, damit der Kontext nicht verloren geht
+      - In der Legende wird der Spruchtyp des Kreises ebenfalls farbig hervorgehoben und die anderen werden ausgegraut 
+      - In der Liste wird der Info-Kasten des entsprechenden Spruchs ausgeklappt, dort befinden sich noch weitere Informationen, 
+        alle anderen Sprüche werden ausgeblendet
+      - Bei den Büchern werden die Bücher dunkel hervorgehoben, in denen der Spruch vorkommt, die anderen werden ausgegraut  
+
+  - Liste:
+    - Die Überschrift gibt an, auf welcher Filterebene der Nutzer ist (Buch - Typ)
+    - Pro Spruch gibt es einen Eintrag in der Liste 
+    - Beim Hovern:
+      - Der Name des Spruchs wird in der Farbe des Spruchtyps hervorgehoben 
+    - Beim Klicken: 
+      - Ein Kasten mit weiteren Informationen über den Spruch öffnet sich und alle anderen Sprüche der Liste verschwinden
+      - Durch erneutes klicken auf den Spruchnamen schließt sich der Kasten wieder und alle anderen Sprüche kommen zurück
+
+- Interaktionen:
+    - In der Legende nach Spruchtyp filtern -> nur noch Sprüche dieses Typs werden angezeigt (Filter-Kombination mit Buch und Spruch möglich)
+    - Unterhalb des Zeitstrahls nach Buch filtern -> nur noch Sprüche aus diesem Buch werden angezeigt(Kombination mit Spruch und Spruchtyp möglich)
+    - In Diagramm nach Spruch filtern (entsprechende Bücher und der Spruchtyp werden ausgewählt bzw. markiert, zusätzliche Information in Liste öffnet sich)
+    - In Liste nach Spruch filtern (entsprechende Bücher und der Spruchtyp werden ausgewählt bzw. markiert, zusätzliche Information in Liste öffnet sich)

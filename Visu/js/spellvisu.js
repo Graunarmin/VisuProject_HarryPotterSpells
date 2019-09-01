@@ -1,14 +1,14 @@
+//--------------- global variables -----------------
 //in list:
 var clickedSpell = "";
 var spellClicked = false;
-// var selectedType = "none";
 
 //in chart:
-var clicked = "0";           //Accio
-var bookClicked = "0";      //Book 1
-var legendClicked = "0";    //Charm
+var clicked = "0";           // z.B. Accio
+var bookClicked = "0";       // z.B. Book 1
+var legendClicked = "0";     // z.B. Charm
 
-
+//initialise page
 function init(){
     document.body.addEventListener("load", arc());
     var spells = document.querySelectorAll('.toggleSpells');
@@ -64,7 +64,6 @@ function arc(){
 
         //List of all types
         var allTypes = data.nodes.map(function(d){return d.type});
-        //Somehow changes the size ^^
         allTypes = [...new Set(allTypes)]
         var typeNames = ["Charm", "Spell", "Curse", "Unforgivable Curse"];
         var typeDefiniton = ["A spell that adds or changes the properties <br> of an object",
@@ -1348,7 +1347,6 @@ function arc(){
 
 function toggle_info(){
     var id = this.innerHTML.toLowerCase().split(" ")[0];
-
     var info_box = document.querySelector('#' + id + "_info");
     
     // if it's already open:
@@ -1381,10 +1379,6 @@ function show_info(id){
     highlight_legend_type(type);
     highlight_books_of_spell(id);
 
-    //set clicked spell to this one and inform everyone, that it's clicked
-    // clickedSpell = id;
-    // spellClicked = true;
-
     //get the spell and it's infobox:
     var spell = document.querySelector('#' + id + "_spell");
     var info_box = document.querySelector('#' + id + "_info");
@@ -1395,6 +1389,7 @@ function show_info(id){
     spell.style.fontSize = '20px';
     spell.style.fontWeight = 'bold';
 
+    //toggle the class of the a-Tag, so the spell can be hovered
     spell.firstElementChild.classList.toggle("spellShown");
     
     //and Show the Infobox
@@ -1405,8 +1400,6 @@ function show_info(id){
 
 //Hide the infobox:
 function hide_info(){
-    // clickedSpell = "";
-    // spellClicked = false;
 
     //bring the chart back to it's status with the spell not selected
     deselect_spell_in_chart();
@@ -1604,7 +1597,6 @@ function highlight_books_of_spell(spell){
         var label = document.querySelector("#" + bookClicked.replace("Book ", "HP_0"));
         label.style.opacity = 1.0;
         label.style.fontWeight = "bold";
-
     }
 }
 
@@ -1621,9 +1613,7 @@ function deselect_booklabels(){
         var label = document.querySelector("#" + bookClicked.replace("Book ", "HP_0"));
         label.style.opacity = 1.0;
         label.style.fontWeight = "bold";
-    }
-    
-
+    } 
 }
 
 function update_headline(){
@@ -1635,9 +1625,7 @@ function update_headline(){
     }
     else if(legendClicked == "0" && bookClicked == "0"){
         headline.innerHTML = "All Spells";
-    }
-    else if(legendClicked != "0" && bookClicked != "0"){
-        
+    }else if(legendClicked != "0" && bookClicked != "0"){
         headline.innerHTML = set_book(bookClicked) + " - " + set_type(legendClicked);
     }else if(legendClicked != "0" && bookClicked == "0"){
         headline.innerHTML = set_type(legendClicked);
