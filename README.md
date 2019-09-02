@@ -44,7 +44,7 @@ After several experiments with other forms, we decided on using an [arc diagram]
 - which spells are common and which are not
 - links between the same spell used in different books
 
-![Visualization](https://github.com/Graunarmin/VisuProject_HarryPotterSpells/blob/master/Presentation/Screenshots/Visu_Default.png)
+![[Picture of Visualization]](https://github.com/Graunarmin/VisuProject_HarryPotterSpells/blob/master/Presentation/Screenshots/Visu_Default.png)
 
 ### List
 - Contains all the spells from the books, sorted alphabetically
