@@ -39,7 +39,7 @@ After several experiments with other forms, we decided on using an [arc diagram]
 - which spells are common and which are not
 - links between the same spell used in different books
 
-![Visu-Default](https://github.com/Graunarmin/VisuProject_HarryPotterSpells/blob/master/Presentation/Screenshots/Visu_Default.png)
+![Visu-Default](https://drive.google.com/file/d/1V5ZeNz0_TvKS4k5E5n_S5kwqKQb1J1zC/view?usp=sharing)
 
 ### List
 - Contains all the spells from the books, sorted alphabetically
@@ -80,7 +80,7 @@ The basic interactions all work the same:
 
 ##### Hovering over an entry:
 - Spell name gets highlighted in color of corresponding spell type
-
+###
 ##### Clicking on an entry:
 - **List:** Info-box of the spell opens, all other entries disappear 
 - **Timeline:** every appearance of the spell (the circles) and the paths are highlighted in the colour their spell type
