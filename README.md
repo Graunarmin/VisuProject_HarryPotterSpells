@@ -2,7 +2,13 @@
 Find the Visualization here: [The Spells of the Wizarding World](https://webuser.uni-weimar.de/~hete0356/Visu_Project/spellvisu.html)
 
 ***
+## Content
 
+- [First Steps](https://github.com/Graunarmin/VisuProject_HarryPotterSpells#first-steps)
+- [Layout](https://github.com/Graunarmin/VisuProject_HarryPotterSpells#layout-of-the-visualization)
+- [Interactions](https://github.com/Graunarmin/VisuProject_HarryPotterSpells#interactions)
+
+***
 ## First Steps
 
 ### Idea 
@@ -133,15 +139,13 @@ There are also more complex interactions where a filter can be applied over a cu
 
 ### Combinations 
 
-- Clicked legend: 
+**Clicked legend:**
   - select spell of selected spell type
   - select book to further filter
     - select spell of selected spell type and book
-- Clicked book:
+   
+   
+**Clicked book:**
   - select spell of selected book
   - select spell type in legend to further filter
     - select spell of selected book and spell type
-
-
-
-
