@@ -17,11 +17,11 @@ There was no useful dataset, so we created one ourselves:
 - then we used python to 
   - search all the books for all the spells 
   - create a [Dataset](https://github.com/Graunarmin/VisuProject_HarryPotterSpells/blob/master/Spells/Data/used/spells.csv) with the spells as keys, and information on 
-    - how often each spell appears in each book 
-    - what it does
-    - how dangerous it is 
-    - it's type
-    - it's category 
+    - how often each spell appears in each book
+    - what it does (Effect)
+    - how dangerous it is (Harmless, Harful, Severe, Lethal)
+    - it's type (Charm, Spell, Curse, Unforgivable Curse)
+    - it's category (Fight, Tools, Healing, Mind[e.g. Legilimens, Obliviate], Protection, Counter)
     - a link to [Pottermore](https://www.pottermore.com/) or the [Harry Potter Wiki](https://harrypotter.fandom.com/wiki/Main_Page) for further reference.
   - create the [spellvisu.html](https://github.com/Graunarmin/VisuProject_HarryPotterSpells/blob/master/Visu/spellvisu.html) 
 - after that we started creating a visualization based on this html file in javascript, using [D3](https://d3js.org/)
