@@ -41,7 +41,7 @@ After several experiments with other forms, we decided on using an [arc diagram]
 
 ![Visu-Default](https://github.com/Graunarmin/VisuProject_HarryPotterSpells/blob/master/Presentation/Screenshots/Visu_Default.png)
 
-### Spell-List
+### List
 - Contains all the spells from the books, sorted alphabetically
 - The headline shows, on which filter level you are at the moment (which book and/or type is selected or if you are at the default list with "All Spells")
 - Reveals further details on each spell (on selecting a spell)
@@ -77,8 +77,10 @@ The basic interactions all work the same:
 - Clicking on one element always has an effect on the other components, they adapt to show more specific information
 
 ### List
+
 ##### Hovering over an entry:
 - Spell name gets highlighted in color of corresponding spell type
+
 ##### Clicking on an entry:
 - **List:** Info-box of the spell opens, all other entries disappear 
 - **Timeline:** every appearance of the spell (the circles) and the paths are highlighted in the colour their spell type
@@ -87,10 +89,12 @@ The basic interactions all work the same:
 - **Deselect:** to deselect click on selected spell, either in list (entry) or diagram (circle)
 
 ### Timeline
+
 ##### Hovering over a circle
 - **Tooltip** with name of the spell and how often it appears in this book
-- The paths that connect this circle with the corresponding circles get highlighted in the color of the spell type 
-  - -> To give a first idea of how often the spell appeared throughout the series
+- The paths that connect this circle with the corresponding circles get highlighted in the color of the spell type
+  - To give a first idea of how often the spell appeared throughout the series
+  
 ##### Clicking on a circle
 - The paths that connect this circle with the corresponding circles and the circles themselves get highlighted in the color of the spell type
 - **Timeline:** All other circles and paths get greyed out
@@ -101,9 +105,11 @@ The basic interactions all work the same:
 
 
 ### Legend
+
 ##### Hovering over a rectangle:
 - **Tooltip:** with information about specific spell type
 - The rectangle gets bigger 
+
 ##### Clicking on a rectangle:
 - **Legend:** Clicked rectangle stays bigger (highlighted), others get greyed out
 - **Timeline:** only circles with same spell type and their paths stay coloured 
@@ -112,8 +118,10 @@ The basic interactions all work the same:
 - **Deselect:** to deselect click on selected rectangle again 	
 
 ### Books
+
 ##### Hovering over a book:
 - **Tooltip:** with name of the book and amount of different spells 
+
 ##### Clicking on a book:
 - **Books:** Book gets highlighted, others get greyed out
 - **Timeline:** only the circles of the spells that appear in this book stay coloured, others get greyed out (there are no paths, since they are over different books), circles can still get selected
@@ -122,6 +130,7 @@ The basic interactions all work the same:
 - **Deselect:** to deselect click on selected book again
 
 There are also more complex interactions where a filter can be applied over a current filter 	
+
 
 ### Combinations 
 
