@@ -4,9 +4,9 @@ Find the Visualization here: [The Spells of the Wizarding World](https://webuser
 ***
 ## Content
 
-- [First Steps](https://github.com/Graunarmin/VisuProject_HarryPotterSpells#first-steps)
-- [Layout](https://github.com/Graunarmin/VisuProject_HarryPotterSpells#layout-of-the-visualization)
-- [Interactions](https://github.com/Graunarmin/VisuProject_HarryPotterSpells#interactions)
+- [First Steps](#first-steps)
+- [Layout](#layout-of-the-visualization)
+- [Interactions](#interactions)
 
 ***
 ## First Steps
