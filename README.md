@@ -1,6 +1,6 @@
 # The Spells of the Wizarding Word
 
-Find the Visualization here: [The Spells of the Wizarding World](url)
+Find the Visualization here: [The Spells of the Wizarding World](https://webuser.uni-weimar.de/~hete0356/Visu_Project/spellvisu.html)
 
 ***
 
