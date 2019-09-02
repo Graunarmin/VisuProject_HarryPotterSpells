@@ -1,5 +1,5 @@
 
-Find the Visualization here: [The Spells of the Wizarding World](https://webuser.uni-weimar.de/~hete0356/Visu_Project/spellvisu.html)
+# Find the Visualization [Here](https://webuser.uni-weimar.de/~hete0356/Visu_Project/spellvisu.html)
 
 ***
 ## Content
