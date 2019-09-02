@@ -1,4 +1,3 @@
-# The Spells of the Wizarding Word
 
 Find the Visualization here: [The Spells of the Wizarding World](https://webuser.uni-weimar.de/~hete0356/Visu_Project/spellvisu.html)
 
@@ -39,7 +38,7 @@ After several experiments with other forms, we decided on using an [arc diagram]
 - which spells are common and which are not
 - links between the same spell used in different books
 
-![Visu-Default](https://drive.google.com/file/d/1V5ZeNz0_TvKS4k5E5n_S5kwqKQb1J1zC/view?usp=sharing)
+![Visu-Default](https://github.com/Graunarmin/VisuProject_HarryPotterSpells/blob/master/Presentation/Screenshots/Visu_Default.png)
 
 ### List
 - Contains all the spells from the books, sorted alphabetically
@@ -78,10 +77,10 @@ The basic interactions all work the same:
 
 ### List
 
-##### Hovering over an entry:
+**Hovering over an entry:**
 - Spell name gets highlighted in color of corresponding spell type
-###
-##### Clicking on an entry:
+
+**Clicking on an entry:**
 - **List:** Info-box of the spell opens, all other entries disappear 
 - **Timeline:** every appearance of the spell (the circles) and the paths are highlighted in the colour their spell type
 - **Legend:** corresponding spell type is highlighted, others are greyed out
@@ -90,12 +89,12 @@ The basic interactions all work the same:
 
 ### Timeline
 
-##### Hovering over a circle
+**Hovering over a circle:**
 - **Tooltip** with name of the spell and how often it appears in this book
 - The paths that connect this circle with the corresponding circles get highlighted in the color of the spell type
   - To give a first idea of how often the spell appeared throughout the series
   
-##### Clicking on a circle
+**Clicking on a circle:**
 - The paths that connect this circle with the corresponding circles and the circles themselves get highlighted in the color of the spell type
 - **Timeline:** All other circles and paths get greyed out
 - **Legend:** corresponding spell type is highlighted, others are greyed out
@@ -106,11 +105,11 @@ The basic interactions all work the same:
 
 ### Legend
 
-##### Hovering over a rectangle:
+**Hovering over a rectangle:**
 - **Tooltip:** with information about specific spell type
 - The rectangle gets bigger 
 
-##### Clicking on a rectangle:
+**Clicking on a rectangle:**
 - **Legend:** Clicked rectangle stays bigger (highlighted), others get greyed out
 - **Timeline:** only circles with same spell type and their paths stay coloured 
 - **List:** only entries with same spell type remain in list, headline adapts
@@ -119,10 +118,10 @@ The basic interactions all work the same:
 
 ### Books
 
-##### Hovering over a book:
+**Hovering over a book:**
 - **Tooltip:** with name of the book and amount of different spells 
 
-##### Clicking on a book:
+**Clicking on a book:**
 - **Books:** Book gets highlighted, others get greyed out
 - **Timeline:** only the circles of the spells that appear in this book stay coloured, others get greyed out (there are no paths, since they are over different books), circles can still get selected
 - **List:** only entries of spells that appear in this book remain in list, headline adapts, entries can still get selected 
