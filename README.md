@@ -4,9 +4,9 @@
 ***
 ## Content
 
-- [First Steps](#first-steps)
-- [Layout](#layout-of-the-visualization)
-- [Interactions](#interactions)
+1. [First Steps](#first-steps)
+2. [Layout](#layout-of-the-visualization)
+3. [Interactions](#interactions)
 
 ***
 ## First Steps
