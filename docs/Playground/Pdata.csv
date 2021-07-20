@@ -1,0 +1,16 @@
+id,parentId,size
+spells,
+year1,spells
+year2,spells
+year3,spells
+charm,year1
+spell1,year1
+spell2,year2
+charm2,year2
+curse3,year3
+spell3,year3
+accio,spell1,3
+confundo,curse3,10
+expecto,spell1,6
+alohomora,spell1,7
+engorgio,charm2,9
